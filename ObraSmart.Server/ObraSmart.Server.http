@@ -1,0 +1,6 @@
+@ObraSmart.Server_HostAddress = http://localhost:5275
+
+GET {{ObraSmart.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

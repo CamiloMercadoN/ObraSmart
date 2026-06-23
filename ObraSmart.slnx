@@ -1,0 +1,10 @@
+<Solution>
+  <Project Path="ObraSmart.Application/ObraSmart.Application.csproj" Id="cc85cd87-c71c-49e2-a3d7-ca8f8a50a970" />
+  <Project Path="obrasmart.client/obrasmart.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="ObraSmart.Domain/ObraSmart.Domain.csproj" Id="2c0eb257-9db4-4520-9bee-e230353df79f" />
+  <Project Path="ObraSmart.Infraestructure/ObraSmart.Infraestructure.csproj" Id="7e253a70-64be-4c45-b695-6eafca9b5dbf" />
+  <Project Path="ObraSmart.Server/ObraSmart.Server.csproj" />
+</Solution>
