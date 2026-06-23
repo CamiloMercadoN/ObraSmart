@@ -16,13 +16,20 @@
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy">
       <Version>10.*-*</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ObraSmart.Application\ObraSmart.Application.csproj" />
     <ProjectReference Include="..\obrasmart.client\obrasmart.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\ObraSmart.Domain\ObraSmart.Domain.csproj" />
+    <ProjectReference Include="..\ObraSmart.Infrastructure\ObraSmart.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

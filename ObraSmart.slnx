@@ -5,6 +5,6 @@
     <Deploy />
   </Project>
   <Project Path="ObraSmart.Domain/ObraSmart.Domain.csproj" Id="2c0eb257-9db4-4520-9bee-e230353df79f" />
-  <Project Path="ObraSmart.Infraestructure/ObraSmart.Infraestructure.csproj" Id="7e253a70-64be-4c45-b695-6eafca9b5dbf" />
+  <Project Path="ObraSmart.Infrastructure/ObraSmart.Infrastructure.csproj" Id="123b5d95-083e-42f2-958c-70bc47bd84bc" />
   <Project Path="ObraSmart.Server/ObraSmart.Server.csproj" />
 </Solution>
