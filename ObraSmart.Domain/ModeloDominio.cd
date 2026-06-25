@@ -1,49 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="ObraSmart.Domain.Entities.Cliente">
-    <Position X="13.75" Y="1.25" Width="3" />
+    <Position X="4.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIACAAAAAAAAAAAAACAAgAAAAIAAAAAAAAAEAgAAAAI=</HashCode>
       <FileName>Entities\Cliente.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Presupuestos" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="ObraSmart.Domain.Entities.ComponenteAPU">
-    <Position X="6.5" Y="1.5" Width="2.25" />
+    <Position X="16.75" Y="6" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAACBAEAAAAAAAAAAAAAAAAAAAAAAIABAAAAACAAAAA=</HashCode>
       <FileName>Entities\ComponenteAPU.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Insumo" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="ObraSmart.Domain.Entities.Cotizacion">
-    <Position X="1.25" Y="6.5" Width="2.25" />
+    <Position X="12.25" Y="7.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AIACAAIAAAAAAAAAAAIAAAAAAAAAQAAAAAAAAAAAIQg=</HashCode>
       <FileName>Entities\Cotizacion.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ObraSmart.Domain.Entities.EstructuraAPU">
-    <Position X="2.5" Y="1" Width="3.25" />
+    <Position X="14.25" Y="3.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAgAAAAggAAAIAAAAAAAEAEAAAAAAA=</HashCode>
       <FileName>Entities\EstructuraAPU.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Componentes" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="ObraSmart.Domain.Entities.Insumo">
-    <Position X="0.75" Y="3.75" Width="2" />
+    <Position X="17" Y="1.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAACAAEAAAAAAAAgAEAAAgABAIAAAAAAAAAEAAAAAAA=</HashCode>
       <FileName>Entities\Insumo.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ObraSmart.Domain.Entities.ItemPresupuesto">
-    <Position X="7.25" Y="4.75" Width="3.5" />
+    <Position X="9" Y="7" Width="2.75" />
     <TypeIdentifier>
       <HashCode>CIADAAAAAAAEAAAAAAAEIAABAAAAAAAAAAAAAAAAIAA=</HashCode>
       <FileName>Entities\ItemPresupuesto.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Recursos" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="ObraSmart.Domain.Entities.Presupuesto">
-    <Position X="4.25" Y="4.25" Width="2.75" />
+    <Position X="9.75" Y="3.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AgACAAAAIAAECAAAABCAAAAAAIAAQAAAAAAEQAAQAAg=</HashCode>
       <FileName>Entities\Presupuesto.cs</FileName>
@@ -51,16 +63,19 @@
     <ShowAsAssociation>
       <Property Name="Cotizacion" />
     </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Items" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="ObraSmart.Domain.Entities.RecursoItemPresupuesto">
-    <Position X="11" Y="5" Width="2.75" />
+    <Position X="9" Y="10.25" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAACgAEAAAQAAAAAAEAAgAAAAAAAAAIAAAAAAAAAAEA=</HashCode>
       <FileName>Entities\RecursoItemPresupuesto.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ObraSmart.Domain.Entities.Usuario">
-    <Position X="9.75" Y="0.75" Width="3.25" />
+    <Position X="4" Y="1.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AIKCAgAAAAgAAAIAACAAAAAAAIAAAAAAAABAAgABAAI=</HashCode>
       <FileName>Entities\Usuario.cs</FileName>
@@ -69,6 +84,7 @@
       <Property Name="Clientes" />
       <Property Name="Insumos" />
       <Property Name="Presupuestos" />
+      <Property Name="EstructurasAPU" />
     </ShowAsCollectionAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
