@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ObraSmart.Domain.Interfaces.Repositories;
 using ObraSmart.Infrastructure.Data;
-using ObraSmart.Infrastructure.Repositories;
 using System.Reflection;
 
 namespace ObraSmart.Infrastructure
@@ -17,16 +15,14 @@ namespace ObraSmart.Infrastructure
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             // Registro de Repositorios
-            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            //services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.Scan(scan => scan
-            .FromAssemblies(Assembly.GetExecutingAssembly())// 1. Busca en este proyecto (Infrastructure)
+            .FromAssemblies(Assembly.GetExecutingAssembly())// Busca en este proyecto (Infrastructure)
             .AddClasses(classes =>
-                classes.Where(type => type.Name.EndsWith("Repository")), // 2. Filtro: que terminen en "Repository"
-                publicOnly: false) // 3. IMPORTANTE: false para incluir tus repos 'internal' también
-            .AsImplementedInterfaces() // 4. Los vincula: Repository -> IRepository
-            .WithScopedLifetime());    // 5. Ciclo de vida: Scoped (por petición HTTP)
-
-            // A medida que crees nuevos repositorios (ej. IInsumoRepository), los agregas aquí.
+                classes.Where(type => type.Name.EndsWith("Repository") || type.Name.EndsWith("Service")), // Filtro: que terminen en "Repository" y "Service"
+                publicOnly: false) // false para incluir tus repos 'internal' también
+            .AsImplementedInterfaces() // Los vincula: Repository -> IRepository
+            .WithScopedLifetime());    // Ciclo de vida: Scoped (por petición HTTP)
 
             return services;
         }
