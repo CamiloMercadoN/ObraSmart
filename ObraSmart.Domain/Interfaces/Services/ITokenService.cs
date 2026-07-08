@@ -4,6 +4,6 @@ namespace ObraSmart.Domain.Interfaces.Services
 {
     public interface ITokenService
     {
-        string GenerarToken(Guid usuarioId, string correo);
+        string GenerarToken(Guid usuarioId, string correo, string razonSocial);
     }
 }

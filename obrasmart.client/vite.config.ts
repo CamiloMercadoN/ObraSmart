@@ -2,6 +2,7 @@ import { fileURLToPath, URL } from 'node:url';
 
 import { defineConfig } from 'vite';
 import plugin from '@vitejs/plugin-vue';
+import { VitePWA } from 'vite-plugin-pwa';
 import fs from 'fs';
 import path from 'path';
 import child_process from 'child_process';
@@ -35,11 +36,28 @@ if (!fs.existsSync(certFilePath) || !fs.existsSync(keyFilePath)) {
 }
 
 const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_HTTPS_PORT}` :
-    env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'https://localhost:32769';
+    env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'https://localhost:32771';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [plugin()],
+  plugins: [
+    plugin(),
+    VitePWA({
+      registerType: 'autoUpdate',
+      devOptions: {
+        enabled: true
+      },
+      manifest: {
+        name: 'ObraSmart',
+        short_name: 'ObraSmart',
+        description: 'Herramienta de presupuestos para contratistas',
+        theme_color: '#ffffff',
+        background_color: '#ffffff',
+        display: 'standalone',
+        icons: []
+      }
+    })
+  ],
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url))
@@ -47,7 +65,7 @@ export default defineConfig({
     },
     server: {
         proxy: {
-            '^/weatherforecast': {
+          '^/api': {
                 target,
                 secure: false
             }

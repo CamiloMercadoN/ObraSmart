@@ -1,8 +1,10 @@
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using ObraSmart.Application;
 using ObraSmart.Infrastructure;
+using ObraSmart.Server.Validators;
 using Scalar.AspNetCore;
 using System.Text;
 
@@ -67,6 +69,9 @@ builder.Services.AddOpenApi(options =>
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplicationServices(builder.Configuration);
 
+// Escanea el ensamblado y registra todos los validadores automáticamente como Scoped
+builder.Services.AddValidatorsFromAssemblyContaining<RegistroUsuarioValidator>();
+
 // Configuración de JWT
 var jwtKey = builder.Configuration["Jwt:Key"];
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -94,7 +99,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 if (authHeader.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
                 {
                     context.Token = authHeader.Substring("Bearer ".Length).Trim();
-                }u
+                }
 
                 return Task.CompletedTask;
             },

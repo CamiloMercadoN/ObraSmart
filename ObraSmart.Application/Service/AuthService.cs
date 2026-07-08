@@ -51,7 +51,7 @@ namespace ObraSmart.Application.Service
             if (usuario == null || !BCrypt.Net.BCrypt.Verify(dto.Password, usuario.PasswordHash))
                 return Result<string>.Failure("Credenciales inválidas.", "CREDENTIALS_INVALID");
 
-            var token = _tokenService.GenerarToken(usuario.Id, usuario.Correo);
+            var token = _tokenService.GenerarToken(usuario.Id, usuario.Correo, usuario.RazonSocial);
 
             return Result<string>.Success(token);
         }

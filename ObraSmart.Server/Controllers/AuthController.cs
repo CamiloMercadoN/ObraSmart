@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ObraSmart.Application.DTOs;
 using ObraSmart.Application.Interfaces;
@@ -17,8 +19,16 @@ namespace ObraSmart.Server.Controllers
         }
 
         [HttpPost("registro")]
-        public async Task<IActionResult> Registrar([FromBody] RegistroUsuarioDto dto)
+        public async Task<IActionResult> Registrar([FromBody] RegistroUsuarioDto dto, [FromServices] IValidator<RegistroUsuarioDto> validator)
         {
+            ValidationResult validationResult = await validator.ValidateAsync(dto);
+
+            if (!validationResult.IsValid)
+            {
+                var primerError = validationResult.Errors.First().ErrorMessage;
+                return BadRequest(new { error = primerError, code = "FORMATO_INVALIDO" });
+            }
+
             var resultado = await _authService.RegistrarAsync(dto);
 
             if (!resultado.IsSuccess)

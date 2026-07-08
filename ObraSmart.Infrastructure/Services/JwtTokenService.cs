@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using ObraSmart.Domain.Entities;
 using ObraSmart.Domain.Interfaces.Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -16,7 +17,7 @@ namespace ObraSmart.Infrastructure.Services
             _configuration = configuration;
         }
 
-        public string GenerarToken(Guid usuarioId, string correo)
+        public string GenerarToken(Guid usuarioId, string correo, string razonSocial)
         {
             var jwtSettings = _configuration.GetSection("Jwt");
             var key = Encoding.ASCII.GetBytes(jwtSettings["Key"]!);
@@ -24,7 +25,8 @@ namespace ObraSmart.Infrastructure.Services
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, usuarioId.ToString()),
-                new Claim(JwtRegisteredClaimNames.Email, correo)
+                new Claim(JwtRegisteredClaimNames.Email, correo),
+                new Claim("RazonSocial", razonSocial)
             };
 
             var tokenDescriptor = new SecurityTokenDescriptor
