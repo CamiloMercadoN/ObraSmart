@@ -14,9 +14,9 @@
       </div>
     </div>
 
-    <Sidebar v-model:visible="menuVisible" header="Menú Principal" class="w-20rem">
+    <Drawer v-model:visible="menuVisible" header="Menú Principal" class="w-20rem">
       <Menu :model="menuItems" class="w-full border-none" />
-    </Sidebar>
+    </Drawer>
 
     <div class="flex-grow-1 p-3 md:p-4">
       <router-view />
@@ -26,58 +26,59 @@
 </template>
 
 <script setup lang="ts">import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { useAuthStore } from '../stores/authStore';
+  import { useRouter } from 'vue-router';
+  import { useAuthStore } from '../stores/authStore';
 
-import Sidebar from 'primevue/sidebar';
-import Menu from 'primevue/menu';
-import Button from 'primevue/button';
+  import Drawer from 'primevue/drawer';
+  import Menu from 'primevue/menu';
+  import Button from 'primevue/button';
 
-const router = useRouter();
-const authStore = useAuthStore();
-const menuVisible = ref(false);
+  const router = useRouter();
+  const authStore = useAuthStore();
+  const menuVisible = ref(false);
 
-  const isDark = ref(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const isDark = ref(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
-  // Si el sistema está en oscuro, inyectamos la clase inmediatamente
-  if (isDark.value) {
-    document.documentElement.classList.add('app-dark');
-  }
-
-  // Función para alternar manualmente
-  const toggleTheme = () => {
-    isDark.value = !isDark.value;
-    document.documentElement.classList.toggle('app-dark');
-  };
-
-// Definición de las opciones del menú
-const menuItems = ref([
-    {
-        label: 'Inicio',
-        icon: 'pi pi-home',
-        command: () => { router.push('/'); menuVisible.value = false; }
-    },
-    {
-        label: 'Presupuestos',
-        icon: 'pi pi-file-edit',
-        command: () => { router.push('/presupuestos'); menuVisible.value = false; }
-    },
-    {
-        label: 'Clientes',
-        icon: 'pi pi-users',
-        command: () => { router.push('/clientes'); menuVisible.value = false; }
-    },
-    { separator: true }, // Línea divisoria visual
-    {
-        label: 'Configuración',
-        icon: 'pi pi-cog',
-        command: () => { router.push('/configuracion'); menuVisible.value = false; }
+    // Si el sistema está en oscuro, inyectamos la clase inmediatamente
+    if (isDark.value) {
+      document.documentElement.classList.add('app-dark');
     }
-]);
 
-const cerrarSesion = () => {
-    authStore.logout();
-};</script>
+    // Función para alternar manualmente
+    const toggleTheme = () => {
+      isDark.value = !isDark.value;
+      document.documentElement.classList.toggle('app-dark');
+    };
+
+  // Definición de las opciones del menú
+  const menuItems = ref([
+      {
+          label: 'Inicio',
+          icon: 'pi pi-home',
+          command: () => { router.push('/'); menuVisible.value = false; }
+      },
+      {
+          label: 'Presupuestos',
+          icon: 'pi pi-file-edit',
+          command: () => { router.push('/presupuestos'); menuVisible.value = false; }
+      },
+      {
+          label: 'Clientes',
+          icon: 'pi pi-users',
+          command: () => { router.push('/clientes'); menuVisible.value = false; }
+      },
+      { separator: true }, // Línea divisoria visual
+      {
+          label: 'Configuración',
+          icon: 'pi pi-cog',
+          command: () => { router.push('/configuracion'); menuVisible.value = false; }
+      }
+  ]);
+
+  const cerrarSesion = () => {
+      authStore.logout();
+  };
+</script>
 
 <style scoped>
   /* Removemos bordes extraños que el Menu de PrimeVue trae por defecto */

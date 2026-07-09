@@ -26,4 +26,10 @@
     <ProjectReference Include="..\ObraSmart.Domain\ObraSmart.Domain.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<None Update="Data\SeedData\territorios.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
 </Project>

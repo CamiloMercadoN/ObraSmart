@@ -11,9 +11,11 @@ namespace ObraSmart.Domain.Entities
         public string Correo { get; set; } = string.Empty;
         public string Telefono { get; set; } = string.Empty;
         public string Direccion { get; set; } = string.Empty;
+        public int? CiudadId { get; set; }
 
         // Propiedades de Navegación
         public virtual Usuario? Usuario { get; set; }
+        public virtual Ciudad? Ciudad { get; set; }
         public virtual ICollection<Presupuesto> Presupuestos { get; set; } = new List<Presupuesto>();
     }
 }

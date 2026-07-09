@@ -20,6 +20,9 @@ namespace ObraSmart.Infrastructure.Data
         public DbSet<ItemPresupuesto> ItemsPresupuesto { get; set; }
         public DbSet<RecursoItemPresupuesto> RecursosItemPresupuesto { get; set; }
         public DbSet<Cotizacion> Cotizaciones { get; set; }
+        public DbSet<Pais> Paises { get; set; }
+        public DbSet<EstadoProvincia> EstadoProvincias { get; set; }
+        public DbSet<Ciudad> Ciudades { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

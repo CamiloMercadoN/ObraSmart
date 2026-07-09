@@ -18,15 +18,17 @@ namespace ObraSmart.Infrastructure.Repositories
         public async Task<IEnumerable<Cliente>> ObtenerTodosAsync(Guid usuarioId)
         {
             return await _context.Clientes
-                .AsNoTracking()
-                .Where(c => c.UsuarioId == usuarioId)
-                .ToListAsync();
+                            .Include(c => c.Ciudad)
+                            .AsNoTracking()
+                            .Where(c => c.UsuarioId == usuarioId)
+                            .ToListAsync();
         }
 
         public async Task<Cliente?> ObtenerPorIdAsync(Guid id, Guid usuarioId)
         {
             return await _context.Clientes
-                .FirstOrDefaultAsync(c => c.Id == id && c.UsuarioId == usuarioId);
+                            .Include(c => c.Ciudad)
+                            .FirstOrDefaultAsync(c => c.Id == id && c.UsuarioId == usuarioId);
         }
 
         public async Task AgregarAsync(Cliente cliente)

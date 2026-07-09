@@ -24,12 +24,11 @@ const router = createRouter({
           name: 'Dashboard',
           component: () => import('../views/dashboard/Dashboard.vue'),
         },
-        // {
-        //   // A futuro: /presupuestos
-        //   path: 'presupuestos',
-        //   name: 'Presupuestos',
-        //   component: () => import('../views/Dashboard.vue'), // Placeholder por ahora
-        // }
+        {
+          path: 'clientes',
+          name: 'Clientes',
+          component: () => import('../views/clientes/Clientes.vue'),
+        }
       ]
     },
   ]

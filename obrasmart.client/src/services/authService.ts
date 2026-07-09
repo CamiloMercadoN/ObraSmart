@@ -1,4 +1,5 @@
 import { useAuthStore } from '../stores/authStore';
+
 const API_URL = '/api/Auth';
 
 export interface LoginResponse {
@@ -35,6 +36,7 @@ export const authService = {
       throw new Error(errorMessage);
     }
   },
+
   async login(correo: string, password: string): Promise<LoginResponse> {
     const response = await fetch(`${API_URL}/login`, {
       method: 'POST',
@@ -50,21 +52,10 @@ export const authService = {
 
     const data: LoginResponse = await response.json();
 
+    // Delegamos el almacenamiento y estado a Pinia
     const authStore = useAuthStore();
     authStore.setToken(data.token);
 
     return data;
-  },
-
-  logout(): void {
-    localStorage.removeItem('jwt_token');
-  },
-
-  getToken(): string | null {
-    return localStorage.getItem('jwt_token');
-  },
-
-  isAuthenticated(): boolean {
-    return this.getToken() !== null;
   }
 };

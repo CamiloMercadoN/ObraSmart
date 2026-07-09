@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using ObraSmart.Application;
 using ObraSmart.Infrastructure;
+using ObraSmart.Infrastructure.Data;
 using ObraSmart.Server.Validators;
 using Scalar.AspNetCore;
 using System.Text;
@@ -137,6 +138,18 @@ if (app.Environment.IsDevelopment())
             PreferredSecuritySchemes = ["Bearer"]
         };
     });
+}
+
+if (args.Contains("--seed"))
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<ObraSmartDbContext>();
+        // Ejecuta el poblado de datos leyendo el JSON
+        await ObraSmartDbContextSeed.SeedAsync(context);
+        Console.WriteLine("Poblado de datos finalizado con éxito.");
+    }
+    return; // Detiene la app después de sembrar, no levanta el servidor web
 }
 
 app.UseHttpsRedirection();

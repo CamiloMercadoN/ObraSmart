@@ -1,0 +1,1488 @@
+﻿[
+  {
+    "Nombre": "Chile",
+    "CodigoIso": "CL",
+    "EstadosProvincias": [
+      {
+        "Nombre": "Tarapacá",
+        "CodigoLocal": "01",
+        "Ciudades": [
+          {
+            "Nombre": "Iquique",
+            "CodigoLocal": "01101"
+          },
+          {
+            "Nombre": "Alto Hospicio",
+            "CodigoLocal": "01107"
+          },
+          {
+            "Nombre": "Pozo Almonte",
+            "CodigoLocal": "01401"
+          },
+          {
+            "Nombre": "Camiña",
+            "CodigoLocal": "01402"
+          },
+          {
+            "Nombre": "Colchane",
+            "CodigoLocal": "01403"
+          },
+          {
+            "Nombre": "Huara",
+            "CodigoLocal": "01404"
+          },
+          {
+            "Nombre": "Pica",
+            "CodigoLocal": "01405"
+          }
+        ]
+      },
+      {
+        "Nombre": "Antofagasta",
+        "CodigoLocal": "02",
+        "Ciudades": [
+          {
+            "Nombre": "Antofagasta",
+            "CodigoLocal": "02101"
+          },
+          {
+            "Nombre": "Mejillones",
+            "CodigoLocal": "02102"
+          },
+          {
+            "Nombre": "Sierra Gorda",
+            "CodigoLocal": "02103"
+          },
+          {
+            "Nombre": "Taltal",
+            "CodigoLocal": "02104"
+          },
+          {
+            "Nombre": "Calama",
+            "CodigoLocal": "02201"
+          },
+          {
+            "Nombre": "Ollagüe",
+            "CodigoLocal": "02202"
+          },
+          {
+            "Nombre": "San Pedro de Atacama",
+            "CodigoLocal": "02203"
+          },
+          {
+            "Nombre": "Tocopilla",
+            "CodigoLocal": "02301"
+          },
+          {
+            "Nombre": "María Elena",
+            "CodigoLocal": "02302"
+          }
+        ]
+      },
+      {
+        "Nombre": "Atacama",
+        "CodigoLocal": "03",
+        "Ciudades": [
+          {
+            "Nombre": "Copiapó",
+            "CodigoLocal": "03101"
+          },
+          {
+            "Nombre": "Caldera",
+            "CodigoLocal": "03102"
+          },
+          {
+            "Nombre": "Tierra Amarilla",
+            "CodigoLocal": "03103"
+          },
+          {
+            "Nombre": "Chañaral",
+            "CodigoLocal": "03201"
+          },
+          {
+            "Nombre": "Diego de Almagro",
+            "CodigoLocal": "03202"
+          },
+          {
+            "Nombre": "Vallenar",
+            "CodigoLocal": "03301"
+          },
+          {
+            "Nombre": "Alto del Carmen",
+            "CodigoLocal": "03302"
+          },
+          {
+            "Nombre": "Freirina",
+            "CodigoLocal": "03303"
+          },
+          {
+            "Nombre": "Huasco",
+            "CodigoLocal": "03304"
+          }
+        ]
+      },
+      {
+        "Nombre": "Coquimbo",
+        "CodigoLocal": "04",
+        "Ciudades": [
+          {
+            "Nombre": "La Serena",
+            "CodigoLocal": "04101"
+          },
+          {
+            "Nombre": "Coquimbo",
+            "CodigoLocal": "04102"
+          },
+          {
+            "Nombre": "Andacollo",
+            "CodigoLocal": "04103"
+          },
+          {
+            "Nombre": "La Higuera",
+            "CodigoLocal": "04104"
+          },
+          {
+            "Nombre": "Paiguano",
+            "CodigoLocal": "04105"
+          },
+          {
+            "Nombre": "Vicuña",
+            "CodigoLocal": "04106"
+          },
+          {
+            "Nombre": "Illapel",
+            "CodigoLocal": "04201"
+          },
+          {
+            "Nombre": "Canela",
+            "CodigoLocal": "04202"
+          },
+          {
+            "Nombre": "Los Vilos",
+            "CodigoLocal": "04203"
+          },
+          {
+            "Nombre": "Salamanca",
+            "CodigoLocal": "04204"
+          },
+          {
+            "Nombre": "Ovalle",
+            "CodigoLocal": "04301"
+          },
+          {
+            "Nombre": "Combarbalá",
+            "CodigoLocal": "04302"
+          },
+          {
+            "Nombre": "Monte Patria",
+            "CodigoLocal": "04303"
+          },
+          {
+            "Nombre": "Punitaqui",
+            "CodigoLocal": "04304"
+          },
+          {
+            "Nombre": "Río Hurtado",
+            "CodigoLocal": "04305"
+          }
+        ]
+      },
+      {
+        "Nombre": "Valparaíso",
+        "CodigoLocal": "05",
+        "Ciudades": [
+          {
+            "Nombre": "Valparaíso",
+            "CodigoLocal": "05101"
+          },
+          {
+            "Nombre": "Casablanca",
+            "CodigoLocal": "05102"
+          },
+          {
+            "Nombre": "Concón",
+            "CodigoLocal": "05103"
+          },
+          {
+            "Nombre": "Juan Fernández",
+            "CodigoLocal": "05104"
+          },
+          {
+            "Nombre": "Puchuncaví",
+            "CodigoLocal": "05105"
+          },
+          {
+            "Nombre": "Quintero",
+            "CodigoLocal": "05107"
+          },
+          {
+            "Nombre": "Viña del Mar",
+            "CodigoLocal": "05109"
+          },
+          {
+            "Nombre": "Isla de Pascua",
+            "CodigoLocal": "05201"
+          },
+          {
+            "Nombre": "Los Andes",
+            "CodigoLocal": "05301"
+          },
+          {
+            "Nombre": "Calle Larga",
+            "CodigoLocal": "05302"
+          },
+          {
+            "Nombre": "Rinconada",
+            "CodigoLocal": "05303"
+          },
+          {
+            "Nombre": "San Esteban",
+            "CodigoLocal": "05304"
+          },
+          {
+            "Nombre": "La Ligua",
+            "CodigoLocal": "05401"
+          },
+          {
+            "Nombre": "Cabildo",
+            "CodigoLocal": "05402"
+          },
+          {
+            "Nombre": "Papudo",
+            "CodigoLocal": "05403"
+          },
+          {
+            "Nombre": "Petorca",
+            "CodigoLocal": "05404"
+          },
+          {
+            "Nombre": "Zapallar",
+            "CodigoLocal": "05405"
+          },
+          {
+            "Nombre": "Quillota",
+            "CodigoLocal": "05501"
+          },
+          {
+            "Nombre": "Calera",
+            "CodigoLocal": "05502"
+          },
+          {
+            "Nombre": "Hijuelas",
+            "CodigoLocal": "05503"
+          },
+          {
+            "Nombre": "La Cruz",
+            "CodigoLocal": "05504"
+          },
+          {
+            "Nombre": "Nogales",
+            "CodigoLocal": "05506"
+          },
+          {
+            "Nombre": "San Antonio",
+            "CodigoLocal": "05601"
+          },
+          {
+            "Nombre": "Algarrobo",
+            "CodigoLocal": "05602"
+          },
+          {
+            "Nombre": "Cartagena",
+            "CodigoLocal": "05603"
+          },
+          {
+            "Nombre": "El Quisco",
+            "CodigoLocal": "05604"
+          },
+          {
+            "Nombre": "El Tabo",
+            "CodigoLocal": "05605"
+          },
+          {
+            "Nombre": "Santo Domingo",
+            "CodigoLocal": "05606"
+          },
+          {
+            "Nombre": "San Felipe",
+            "CodigoLocal": "05701"
+          },
+          {
+            "Nombre": "Catemu",
+            "CodigoLocal": "05702"
+          },
+          {
+            "Nombre": "Llaillay",
+            "CodigoLocal": "05703"
+          },
+          {
+            "Nombre": "Panquehue",
+            "CodigoLocal": "05704"
+          },
+          {
+            "Nombre": "Putaendo",
+            "CodigoLocal": "05705"
+          },
+          {
+            "Nombre": "Santa María",
+            "CodigoLocal": "05706"
+          },
+          {
+            "Nombre": "Quilpué",
+            "CodigoLocal": "05801"
+          },
+          {
+            "Nombre": "Limache",
+            "CodigoLocal": "05802"
+          },
+          {
+            "Nombre": "Olmué",
+            "CodigoLocal": "05803"
+          },
+          {
+            "Nombre": "Villa Alemana",
+            "CodigoLocal": "05804"
+          }
+        ]
+      },
+      {
+        "Nombre": "Libertador General Bernardo O'Higgins",
+        "CodigoLocal": "06",
+        "Ciudades": [
+          {
+            "Nombre": "Rancagua",
+            "CodigoLocal": "06101"
+          },
+          {
+            "Nombre": "Codegua",
+            "CodigoLocal": "06102"
+          },
+          {
+            "Nombre": "Coinco",
+            "CodigoLocal": "06103"
+          },
+          {
+            "Nombre": "Coltauco",
+            "CodigoLocal": "06104"
+          },
+          {
+            "Nombre": "Doñihue",
+            "CodigoLocal": "06105"
+          },
+          {
+            "Nombre": "Graneros",
+            "CodigoLocal": "06106"
+          },
+          {
+            "Nombre": "Las Cabras",
+            "CodigoLocal": "06107"
+          },
+          {
+            "Nombre": "Machalí",
+            "CodigoLocal": "06108"
+          },
+          {
+            "Nombre": "Malloa",
+            "CodigoLocal": "06109"
+          },
+          {
+            "Nombre": "Mostazal",
+            "CodigoLocal": "06110"
+          },
+          {
+            "Nombre": "Olivar",
+            "CodigoLocal": "06111"
+          },
+          {
+            "Nombre": "Peumo",
+            "CodigoLocal": "06112"
+          },
+          {
+            "Nombre": "Pichidegua",
+            "CodigoLocal": "06113"
+          },
+          {
+            "Nombre": "Quinta de Tilcoco",
+            "CodigoLocal": "06114"
+          },
+          {
+            "Nombre": "Rengo",
+            "CodigoLocal": "06115"
+          },
+          {
+            "Nombre": "Requínoa",
+            "CodigoLocal": "06116"
+          },
+          {
+            "Nombre": "San Vicente",
+            "CodigoLocal": "06117"
+          },
+          {
+            "Nombre": "Pichilemu",
+            "CodigoLocal": "06201"
+          },
+          {
+            "Nombre": "La Estrella",
+            "CodigoLocal": "06202"
+          },
+          {
+            "Nombre": "Litueche",
+            "CodigoLocal": "06203"
+          },
+          {
+            "Nombre": "Marchihue",
+            "CodigoLocal": "06204"
+          },
+          {
+            "Nombre": "Navidad",
+            "CodigoLocal": "06205"
+          },
+          {
+            "Nombre": "Paredones",
+            "CodigoLocal": "06206"
+          },
+          {
+            "Nombre": "San Fernando",
+            "CodigoLocal": "06301"
+          },
+          {
+            "Nombre": "Chépica",
+            "CodigoLocal": "06302"
+          },
+          {
+            "Nombre": "Chimbarongo",
+            "CodigoLocal": "06303"
+          },
+          {
+            "Nombre": "Lolol",
+            "CodigoLocal": "06304"
+          },
+          {
+            "Nombre": "Nancagua",
+            "CodigoLocal": "06305"
+          },
+          {
+            "Nombre": "Palmilla",
+            "CodigoLocal": "06306"
+          },
+          {
+            "Nombre": "Peralillo",
+            "CodigoLocal": "06307"
+          },
+          {
+            "Nombre": "Placilla",
+            "CodigoLocal": "06308"
+          },
+          {
+            "Nombre": "Pumanque",
+            "CodigoLocal": "06309"
+          },
+          {
+            "Nombre": "Santa Cruz",
+            "CodigoLocal": "06310"
+          }
+        ]
+      },
+      {
+        "Nombre": "Maule",
+        "CodigoLocal": "07",
+        "Ciudades": [
+          {
+            "Nombre": "Talca",
+            "CodigoLocal": "07101"
+          },
+          {
+            "Nombre": "Constitución",
+            "CodigoLocal": "07102"
+          },
+          {
+            "Nombre": "Curepto",
+            "CodigoLocal": "07103"
+          },
+          {
+            "Nombre": "Empedrado",
+            "CodigoLocal": "07104"
+          },
+          {
+            "Nombre": "Maule",
+            "CodigoLocal": "07105"
+          },
+          {
+            "Nombre": "Pelarco",
+            "CodigoLocal": "07106"
+          },
+          {
+            "Nombre": "Pencahue",
+            "CodigoLocal": "07107"
+          },
+          {
+            "Nombre": "Río Claro",
+            "CodigoLocal": "07108"
+          },
+          {
+            "Nombre": "San Clemente",
+            "CodigoLocal": "07109"
+          },
+          {
+            "Nombre": "San Rafael",
+            "CodigoLocal": "07110"
+          },
+          {
+            "Nombre": "Cauquenes",
+            "CodigoLocal": "07201"
+          },
+          {
+            "Nombre": "Chanco",
+            "CodigoLocal": "07202"
+          },
+          {
+            "Nombre": "Pelluhue",
+            "CodigoLocal": "07203"
+          },
+          {
+            "Nombre": "Curicó",
+            "CodigoLocal": "07301"
+          },
+          {
+            "Nombre": "Hualañé",
+            "CodigoLocal": "07302"
+          },
+          {
+            "Nombre": "Licantén",
+            "CodigoLocal": "07303"
+          },
+          {
+            "Nombre": "Molina",
+            "CodigoLocal": "07304"
+          },
+          {
+            "Nombre": "Rauco",
+            "CodigoLocal": "07305"
+          },
+          {
+            "Nombre": "Romeral",
+            "CodigoLocal": "07306"
+          },
+          {
+            "Nombre": "Sagrada Familia",
+            "CodigoLocal": "07307"
+          },
+          {
+            "Nombre": "Teno",
+            "CodigoLocal": "07308"
+          },
+          {
+            "Nombre": "Vichuquén",
+            "CodigoLocal": "07309"
+          },
+          {
+            "Nombre": "Linares",
+            "CodigoLocal": "07401"
+          },
+          {
+            "Nombre": "Colbún",
+            "CodigoLocal": "07402"
+          },
+          {
+            "Nombre": "Longaví",
+            "CodigoLocal": "07403"
+          },
+          {
+            "Nombre": "Parral",
+            "CodigoLocal": "07404"
+          },
+          {
+            "Nombre": "Retiro",
+            "CodigoLocal": "07405"
+          },
+          {
+            "Nombre": "San Javier",
+            "CodigoLocal": "07406"
+          },
+          {
+            "Nombre": "Villa Alegre",
+            "CodigoLocal": "07407"
+          },
+          {
+            "Nombre": "Yerbas Buenas",
+            "CodigoLocal": "07408"
+          }
+        ]
+      },
+      {
+        "Nombre": "Biobío",
+        "CodigoLocal": "08",
+        "Ciudades": [
+          {
+            "Nombre": "Concepción",
+            "CodigoLocal": "08101"
+          },
+          {
+            "Nombre": "Coronel",
+            "CodigoLocal": "08102"
+          },
+          {
+            "Nombre": "Chiguayante",
+            "CodigoLocal": "08103"
+          },
+          {
+            "Nombre": "Florida",
+            "CodigoLocal": "08104"
+          },
+          {
+            "Nombre": "Hualqui",
+            "CodigoLocal": "08105"
+          },
+          {
+            "Nombre": "Lota",
+            "CodigoLocal": "08106"
+          },
+          {
+            "Nombre": "Penco",
+            "CodigoLocal": "08107"
+          },
+          {
+            "Nombre": "San Pedro de la Paz",
+            "CodigoLocal": "08108"
+          },
+          {
+            "Nombre": "Santa Juana",
+            "CodigoLocal": "08109"
+          },
+          {
+            "Nombre": "Talcahuano",
+            "CodigoLocal": "08110"
+          },
+          {
+            "Nombre": "Tomé",
+            "CodigoLocal": "08111"
+          },
+          {
+            "Nombre": "Hualpén",
+            "CodigoLocal": "08112"
+          },
+          {
+            "Nombre": "Lebu",
+            "CodigoLocal": "08201"
+          },
+          {
+            "Nombre": "Arauco",
+            "CodigoLocal": "08202"
+          },
+          {
+            "Nombre": "Cañete",
+            "CodigoLocal": "08203"
+          },
+          {
+            "Nombre": "Contulmo",
+            "CodigoLocal": "08204"
+          },
+          {
+            "Nombre": "Curanilahue",
+            "CodigoLocal": "08205"
+          },
+          {
+            "Nombre": "Los Alamos",
+            "CodigoLocal": "08206"
+          },
+          {
+            "Nombre": "Tirúa",
+            "CodigoLocal": "08207"
+          },
+          {
+            "Nombre": "Los Angeles",
+            "CodigoLocal": "08301"
+          },
+          {
+            "Nombre": "Antuco",
+            "CodigoLocal": "08302"
+          },
+          {
+            "Nombre": "Cabrero",
+            "CodigoLocal": "08303"
+          },
+          {
+            "Nombre": "Laja",
+            "CodigoLocal": "08304"
+          },
+          {
+            "Nombre": "Mulchén",
+            "CodigoLocal": "08305"
+          },
+          {
+            "Nombre": "Nacimiento",
+            "CodigoLocal": "08306"
+          },
+          {
+            "Nombre": "Negrete",
+            "CodigoLocal": "08307"
+          },
+          {
+            "Nombre": "Quilaco",
+            "CodigoLocal": "08308"
+          },
+          {
+            "Nombre": "Quilleco",
+            "CodigoLocal": "08309"
+          },
+          {
+            "Nombre": "San Rosendo",
+            "CodigoLocal": "08310"
+          },
+          {
+            "Nombre": "Santa Bárbara",
+            "CodigoLocal": "08311"
+          },
+          {
+            "Nombre": "Tucapel",
+            "CodigoLocal": "08312"
+          },
+          {
+            "Nombre": "Yumbel",
+            "CodigoLocal": "08313"
+          },
+          {
+            "Nombre": "Alto Biobío",
+            "CodigoLocal": "08314"
+          }
+        ]
+      },
+      {
+        "Nombre": "La Araucanía",
+        "CodigoLocal": "09",
+        "Ciudades": [
+          {
+            "Nombre": "Temuco",
+            "CodigoLocal": "09101"
+          },
+          {
+            "Nombre": "Carahue",
+            "CodigoLocal": "09102"
+          },
+          {
+            "Nombre": "Cunco",
+            "CodigoLocal": "09103"
+          },
+          {
+            "Nombre": "Curarrehue",
+            "CodigoLocal": "09104"
+          },
+          {
+            "Nombre": "Freire",
+            "CodigoLocal": "09105"
+          },
+          {
+            "Nombre": "Galvarino",
+            "CodigoLocal": "09106"
+          },
+          {
+            "Nombre": "Gorbea",
+            "CodigoLocal": "09107"
+          },
+          {
+            "Nombre": "Lautaro",
+            "CodigoLocal": "09108"
+          },
+          {
+            "Nombre": "Loncoche",
+            "CodigoLocal": "09109"
+          },
+          {
+            "Nombre": "Melipeuco",
+            "CodigoLocal": "09110"
+          },
+          {
+            "Nombre": "Nueva Imperial",
+            "CodigoLocal": "09111"
+          },
+          {
+            "Nombre": "Padre Las Casas",
+            "CodigoLocal": "09112"
+          },
+          {
+            "Nombre": "Perquenco",
+            "CodigoLocal": "09113"
+          },
+          {
+            "Nombre": "Pitrufquén",
+            "CodigoLocal": "09114"
+          },
+          {
+            "Nombre": "Pucón",
+            "CodigoLocal": "09115"
+          },
+          {
+            "Nombre": "Saavedra",
+            "CodigoLocal": "09116"
+          },
+          {
+            "Nombre": "Teodoro Schmidt",
+            "CodigoLocal": "09117"
+          },
+          {
+            "Nombre": "Toltén",
+            "CodigoLocal": "09118"
+          },
+          {
+            "Nombre": "Vilcún",
+            "CodigoLocal": "09119"
+          },
+          {
+            "Nombre": "Villarrica",
+            "CodigoLocal": "09120"
+          },
+          {
+            "Nombre": "Cholchol",
+            "CodigoLocal": "09121"
+          },
+          {
+            "Nombre": "Angol",
+            "CodigoLocal": "09201"
+          },
+          {
+            "Nombre": "Collipulli",
+            "CodigoLocal": "09202"
+          },
+          {
+            "Nombre": "Curacautín",
+            "CodigoLocal": "09203"
+          },
+          {
+            "Nombre": "Ercilla",
+            "CodigoLocal": "09204"
+          },
+          {
+            "Nombre": "Lonquimay",
+            "CodigoLocal": "09205"
+          },
+          {
+            "Nombre": "Los Sauces",
+            "CodigoLocal": "09206"
+          },
+          {
+            "Nombre": "Lumaco",
+            "CodigoLocal": "09207"
+          },
+          {
+            "Nombre": "Purén",
+            "CodigoLocal": "09208"
+          },
+          {
+            "Nombre": "Renaico",
+            "CodigoLocal": "09209"
+          },
+          {
+            "Nombre": "Traiguén",
+            "CodigoLocal": "09210"
+          },
+          {
+            "Nombre": "Victoria",
+            "CodigoLocal": "09211"
+          }
+        ]
+      },
+      {
+        "Nombre": "Los Lagos",
+        "CodigoLocal": "10",
+        "Ciudades": [
+          {
+            "Nombre": "Puerto Montt",
+            "CodigoLocal": "10101"
+          },
+          {
+            "Nombre": "Calbuco",
+            "CodigoLocal": "10102"
+          },
+          {
+            "Nombre": "Cochamó",
+            "CodigoLocal": "10103"
+          },
+          {
+            "Nombre": "Fresia",
+            "CodigoLocal": "10104"
+          },
+          {
+            "Nombre": "Frutillar",
+            "CodigoLocal": "10105"
+          },
+          {
+            "Nombre": "Los Muermos",
+            "CodigoLocal": "10106"
+          },
+          {
+            "Nombre": "Llanquihue",
+            "CodigoLocal": "10107"
+          },
+          {
+            "Nombre": "Maullín",
+            "CodigoLocal": "10108"
+          },
+          {
+            "Nombre": "Puerto Varas",
+            "CodigoLocal": "10109"
+          },
+          {
+            "Nombre": "Castro",
+            "CodigoLocal": "10201"
+          },
+          {
+            "Nombre": "Ancud",
+            "CodigoLocal": "10202"
+          },
+          {
+            "Nombre": "Chonchi",
+            "CodigoLocal": "10203"
+          },
+          {
+            "Nombre": "Curaco de Vélez",
+            "CodigoLocal": "10204"
+          },
+          {
+            "Nombre": "Dalcahue",
+            "CodigoLocal": "10205"
+          },
+          {
+            "Nombre": "Puqueldón",
+            "CodigoLocal": "10206"
+          },
+          {
+            "Nombre": "Queilén",
+            "CodigoLocal": "10207"
+          },
+          {
+            "Nombre": "Quellón",
+            "CodigoLocal": "10208"
+          },
+          {
+            "Nombre": "Quemchi",
+            "CodigoLocal": "10209"
+          },
+          {
+            "Nombre": "Quinchao",
+            "CodigoLocal": "10210"
+          },
+          {
+            "Nombre": "Osorno",
+            "CodigoLocal": "10301"
+          },
+          {
+            "Nombre": "Puerto Octay",
+            "CodigoLocal": "10302"
+          },
+          {
+            "Nombre": "Purranque",
+            "CodigoLocal": "10303"
+          },
+          {
+            "Nombre": "Puyehue",
+            "CodigoLocal": "10304"
+          },
+          {
+            "Nombre": "Río Negro",
+            "CodigoLocal": "10305"
+          },
+          {
+            "Nombre": "San Juan de la Costa",
+            "CodigoLocal": "10306"
+          },
+          {
+            "Nombre": "San Pablo",
+            "CodigoLocal": "10307"
+          },
+          {
+            "Nombre": "Chaitén",
+            "CodigoLocal": "10401"
+          },
+          {
+            "Nombre": "Futaleufú",
+            "CodigoLocal": "10402"
+          },
+          {
+            "Nombre": "Hualaihué",
+            "CodigoLocal": "10403"
+          },
+          {
+            "Nombre": "Palena",
+            "CodigoLocal": "10404"
+          }
+        ]
+      },
+      {
+        "Nombre": "Aysén del General Carlos Ibáñez del Campo",
+        "CodigoLocal": "11",
+        "Ciudades": [
+          {
+            "Nombre": "Coihaique",
+            "CodigoLocal": "11101"
+          },
+          {
+            "Nombre": "Lago Verde",
+            "CodigoLocal": "11102"
+          },
+          {
+            "Nombre": "Aisén",
+            "CodigoLocal": "11201"
+          },
+          {
+            "Nombre": "Cisnes",
+            "CodigoLocal": "11202"
+          },
+          {
+            "Nombre": "Guaitecas",
+            "CodigoLocal": "11203"
+          },
+          {
+            "Nombre": "Cochrane",
+            "CodigoLocal": "11301"
+          },
+          {
+            "Nombre": "O'Higgins",
+            "CodigoLocal": "11302"
+          },
+          {
+            "Nombre": "Tortel",
+            "CodigoLocal": "11303"
+          },
+          {
+            "Nombre": "Chile Chico",
+            "CodigoLocal": "11401"
+          },
+          {
+            "Nombre": "Río Ibáñez",
+            "CodigoLocal": "11402"
+          }
+        ]
+      },
+      {
+        "Nombre": "Magallanes y de la Antártica Chilena",
+        "CodigoLocal": "12",
+        "Ciudades": [
+          {
+            "Nombre": "Punta Arenas",
+            "CodigoLocal": "12101"
+          },
+          {
+            "Nombre": "Laguna Blanca",
+            "CodigoLocal": "12102"
+          },
+          {
+            "Nombre": "Río Verde",
+            "CodigoLocal": "12103"
+          },
+          {
+            "Nombre": "San Gregorio",
+            "CodigoLocal": "12104"
+          },
+          {
+            "Nombre": "Cabo de Hornos",
+            "CodigoLocal": "12201"
+          },
+          {
+            "Nombre": "Antártica",
+            "CodigoLocal": "12202"
+          },
+          {
+            "Nombre": "Porvenir",
+            "CodigoLocal": "12301"
+          },
+          {
+            "Nombre": "Primavera",
+            "CodigoLocal": "12302"
+          },
+          {
+            "Nombre": "Timaukel",
+            "CodigoLocal": "12303"
+          },
+          {
+            "Nombre": "Natales",
+            "CodigoLocal": "12401"
+          },
+          {
+            "Nombre": "Torres del Paine",
+            "CodigoLocal": "12402"
+          }
+        ]
+      },
+      {
+        "Nombre": "Metropolitana de Santiago",
+        "CodigoLocal": "13",
+        "Ciudades": [
+          {
+            "Nombre": "Santiago",
+            "CodigoLocal": "13101"
+          },
+          {
+            "Nombre": "Cerrillos",
+            "CodigoLocal": "13102"
+          },
+          {
+            "Nombre": "Cerro Navia",
+            "CodigoLocal": "13103"
+          },
+          {
+            "Nombre": "Conchalí",
+            "CodigoLocal": "13104"
+          },
+          {
+            "Nombre": "El Bosque",
+            "CodigoLocal": "13105"
+          },
+          {
+            "Nombre": "Estación Central",
+            "CodigoLocal": "13106"
+          },
+          {
+            "Nombre": "Huechuraba",
+            "CodigoLocal": "13107"
+          },
+          {
+            "Nombre": "Independencia",
+            "CodigoLocal": "13108"
+          },
+          {
+            "Nombre": "La Cisterna",
+            "CodigoLocal": "13109"
+          },
+          {
+            "Nombre": "La Florida",
+            "CodigoLocal": "13110"
+          },
+          {
+            "Nombre": "La Granja",
+            "CodigoLocal": "13111"
+          },
+          {
+            "Nombre": "La Pintana",
+            "CodigoLocal": "13112"
+          },
+          {
+            "Nombre": "La Reina",
+            "CodigoLocal": "13113"
+          },
+          {
+            "Nombre": "Las Condes",
+            "CodigoLocal": "13114"
+          },
+          {
+            "Nombre": "Lo Barnechea",
+            "CodigoLocal": "13115"
+          },
+          {
+            "Nombre": "Lo Espejo",
+            "CodigoLocal": "13116"
+          },
+          {
+            "Nombre": "Lo Prado",
+            "CodigoLocal": "13117"
+          },
+          {
+            "Nombre": "Macul",
+            "CodigoLocal": "13118"
+          },
+          {
+            "Nombre": "Maipú",
+            "CodigoLocal": "13119"
+          },
+          {
+            "Nombre": "Ñuñoa",
+            "CodigoLocal": "13120"
+          },
+          {
+            "Nombre": "Pedro Aguirre Cerda",
+            "CodigoLocal": "13121"
+          },
+          {
+            "Nombre": "Peñalolén",
+            "CodigoLocal": "13122"
+          },
+          {
+            "Nombre": "Providencia",
+            "CodigoLocal": "13123"
+          },
+          {
+            "Nombre": "Pudahuel",
+            "CodigoLocal": "13124"
+          },
+          {
+            "Nombre": "Quilicura",
+            "CodigoLocal": "13125"
+          },
+          {
+            "Nombre": "Quinta Normal",
+            "CodigoLocal": "13126"
+          },
+          {
+            "Nombre": "Recoleta",
+            "CodigoLocal": "13127"
+          },
+          {
+            "Nombre": "Renca",
+            "CodigoLocal": "13128"
+          },
+          {
+            "Nombre": "San Joaquín",
+            "CodigoLocal": "13129"
+          },
+          {
+            "Nombre": "San Miguel",
+            "CodigoLocal": "13130"
+          },
+          {
+            "Nombre": "San Ramón",
+            "CodigoLocal": "13131"
+          },
+          {
+            "Nombre": "Vitacura",
+            "CodigoLocal": "13132"
+          },
+          {
+            "Nombre": "Puente Alto",
+            "CodigoLocal": "13201"
+          },
+          {
+            "Nombre": "Pirque",
+            "CodigoLocal": "13202"
+          },
+          {
+            "Nombre": "San José de Maipo",
+            "CodigoLocal": "13203"
+          },
+          {
+            "Nombre": "Colina",
+            "CodigoLocal": "13301"
+          },
+          {
+            "Nombre": "Lampa",
+            "CodigoLocal": "13302"
+          },
+          {
+            "Nombre": "Tiltil",
+            "CodigoLocal": "13303"
+          },
+          {
+            "Nombre": "San Bernardo",
+            "CodigoLocal": "13401"
+          },
+          {
+            "Nombre": "Buin",
+            "CodigoLocal": "13402"
+          },
+          {
+            "Nombre": "Calera de Tango",
+            "CodigoLocal": "13403"
+          },
+          {
+            "Nombre": "Paine",
+            "CodigoLocal": "13404"
+          },
+          {
+            "Nombre": "Melipilla",
+            "CodigoLocal": "13501"
+          },
+          {
+            "Nombre": "Alhué",
+            "CodigoLocal": "13502"
+          },
+          {
+            "Nombre": "Curacaví",
+            "CodigoLocal": "13503"
+          },
+          {
+            "Nombre": "María Pinto",
+            "CodigoLocal": "13504"
+          },
+          {
+            "Nombre": "San Pedro",
+            "CodigoLocal": "13505"
+          },
+          {
+            "Nombre": "Talagante",
+            "CodigoLocal": "13601"
+          },
+          {
+            "Nombre": "El Monte",
+            "CodigoLocal": "13602"
+          },
+          {
+            "Nombre": "Isla de Maipo",
+            "CodigoLocal": "13603"
+          },
+          {
+            "Nombre": "Padre Hurtado",
+            "CodigoLocal": "13604"
+          },
+          {
+            "Nombre": "Peñaflor",
+            "CodigoLocal": "13605"
+          }
+        ]
+      },
+      {
+        "Nombre": "Los Ríos",
+        "CodigoLocal": "14",
+        "Ciudades": [
+          {
+            "Nombre": "Valdivia",
+            "CodigoLocal": "14101"
+          },
+          {
+            "Nombre": "Corral",
+            "CodigoLocal": "14102"
+          },
+          {
+            "Nombre": "Lanco",
+            "CodigoLocal": "14103"
+          },
+          {
+            "Nombre": "Los Lagos",
+            "CodigoLocal": "14104"
+          },
+          {
+            "Nombre": "Máfil",
+            "CodigoLocal": "14105"
+          },
+          {
+            "Nombre": "Mariquina",
+            "CodigoLocal": "14106"
+          },
+          {
+            "Nombre": "Paillaco",
+            "CodigoLocal": "14107"
+          },
+          {
+            "Nombre": "Panguipulli",
+            "CodigoLocal": "14108"
+          },
+          {
+            "Nombre": "La Unión",
+            "CodigoLocal": "14201"
+          },
+          {
+            "Nombre": "Futrono",
+            "CodigoLocal": "14202"
+          },
+          {
+            "Nombre": "Lago Ranco",
+            "CodigoLocal": "14203"
+          },
+          {
+            "Nombre": "Río Bueno",
+            "CodigoLocal": "14204"
+          }
+        ]
+      },
+      {
+        "Nombre": "Arica y Parinacota",
+        "CodigoLocal": "15",
+        "Ciudades": [
+          {
+            "Nombre": "Arica",
+            "CodigoLocal": "15101"
+          },
+          {
+            "Nombre": "Camarones",
+            "CodigoLocal": "15102"
+          },
+          {
+            "Nombre": "Putre",
+            "CodigoLocal": "15201"
+          },
+          {
+            "Nombre": "General Lagos",
+            "CodigoLocal": "15202"
+          }
+        ]
+      },
+      {
+        "Nombre": "Ñuble",
+        "CodigoLocal": "16",
+        "Ciudades": [
+          {
+            "Nombre": "Chillán",
+            "CodigoLocal": "16101"
+          },
+          {
+            "Nombre": "Bulnes",
+            "CodigoLocal": "16102"
+          },
+          {
+            "Nombre": "Chillán Viejo",
+            "CodigoLocal": "16103"
+          },
+          {
+            "Nombre": "El Carmen",
+            "CodigoLocal": "16104"
+          },
+          {
+            "Nombre": "Pemuco",
+            "CodigoLocal": "16105"
+          },
+          {
+            "Nombre": "Pinto",
+            "CodigoLocal": "16106"
+          },
+          {
+            "Nombre": "Quillón",
+            "CodigoLocal": "16107"
+          },
+          {
+            "Nombre": "San Ignacio",
+            "CodigoLocal": "16108"
+          },
+          {
+            "Nombre": "Yungay",
+            "CodigoLocal": "16109"
+          },
+          {
+            "Nombre": "Quirihue",
+            "CodigoLocal": "16201"
+          },
+          {
+            "Nombre": "Cobquecura",
+            "CodigoLocal": "16202"
+          },
+          {
+            "Nombre": "Coelemu",
+            "CodigoLocal": "16203"
+          },
+          {
+            "Nombre": "Ninhue",
+            "CodigoLocal": "16204"
+          },
+          {
+            "Nombre": "Portezuelo",
+            "CodigoLocal": "16205"
+          },
+          {
+            "Nombre": "Ranquil",
+            "CodigoLocal": "16206"
+          },
+          {
+            "Nombre": "Treguaco",
+            "CodigoLocal": "16207"
+          },
+          {
+            "Nombre": "San Carlos",
+            "CodigoLocal": "16301"
+          },
+          {
+            "Nombre": "Coihueco",
+            "CodigoLocal": "16302"
+          },
+          {
+            "Nombre": "Ñiquén",
+            "CodigoLocal": "16303"
+          },
+          {
+            "Nombre": "San Fabián",
+            "CodigoLocal": "16304"
+          },
+          {
+            "Nombre": "San Nicolás",
+            "CodigoLocal": "16305"
+          }
+        ]
+      }
+    ]
+  }
+]

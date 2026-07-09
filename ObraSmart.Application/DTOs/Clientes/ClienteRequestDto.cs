@@ -9,5 +9,6 @@ namespace ObraSmart.Application.DTOs.Clientes
         public string Correo { get; set; } = string.Empty;
         public string Telefono { get; set; } = string.Empty;
         public string Direccion { get; set; } = string.Empty;
+        public int? CiudadId { get; set; }
     }
 }
