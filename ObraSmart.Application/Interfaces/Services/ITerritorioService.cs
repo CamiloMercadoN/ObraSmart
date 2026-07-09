@@ -1,7 +1,7 @@
 ﻿using ObraSmart.Application.Common;
 using ObraSmart.Application.DTOs.Territorios;
 
-namespace ObraSmart.Application.Interfaces
+namespace ObraSmart.Application.Interfaces.Services
 {
     public interface ITerritorioService
     {

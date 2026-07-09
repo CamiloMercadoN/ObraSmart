@@ -3,7 +3,7 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ObraSmart.Application.DTOs;
-using ObraSmart.Application.Interfaces;
+using ObraSmart.Application.Interfaces.Services;
 
 namespace ObraSmart.Server.Controllers
 {

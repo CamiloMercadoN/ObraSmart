@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ObraSmart.Application.Interfaces;
+using ObraSmart.Application.Interfaces.Services;
 
 namespace ObraSmart.Server.Controllers
 {

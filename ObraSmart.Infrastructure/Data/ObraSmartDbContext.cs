@@ -1,14 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ObraSmart.Application.Interfaces.Services;
 using ObraSmart.Domain.Entities;
+using ObraSmart.Domain.Interfaces;
+using System.Reflection;
 
 namespace ObraSmart.Infrastructure.Data
 {
-    public class ObraSmartDbContext : DbContext
+    public class ObraSmartDbContext(DbContextOptions<ObraSmartDbContext> options, ICurrentUserService currentUserService) : DbContext(options)
     {
-        public ObraSmartDbContext(DbContextOptions<ObraSmartDbContext> options)
-            : base(options)
-        {
-        }
+
+        private readonly ICurrentUserService _currentUserService = currentUserService;
+
+        public Guid? CurrentUserId => _currentUserService.GetUserId();
 
         // Definición de las Tablas
         public DbSet<Usuario> Usuarios { get; set; }
@@ -28,9 +31,11 @@ namespace ObraSmart.Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // 1. Configuración de precisión para campos Monetarios/Decimales (Vital para presupuestos)
+            // Configuración de precisión para campos Monetarios/Decimales (Vital para presupuestos)
             modelBuilder.Entity<Insumo>().Property(i => i.PrecioReferencia).HasColumnType("decimal(18,2)");
+
             modelBuilder.Entity<EstructuraAPU>().Property(e => e.CostoTotalCalculado).HasColumnType("decimal(18,2)");
+
             modelBuilder.Entity<ComponenteAPU>().Property(c => c.Cantidad).HasColumnType("decimal(18,2)");
 
             modelBuilder.Entity<Presupuesto>().Property(p => p.Subtotal).HasColumnType("decimal(18,2)");
@@ -47,14 +52,14 @@ namespace ObraSmart.Infrastructure.Data
 
             modelBuilder.Entity<Usuario>().Property(u => u.PorcentajeIva).HasColumnType("decimal(5,2)");
 
-            // 2. Configurar la relación 1 a 1 entre Presupuesto y Cotización
+            // Configurar la relación 1 a 1 entre Presupuesto y Cotización
             modelBuilder.Entity<Presupuesto>()
                 .HasOne(p => p.Cotizacion)
                 .WithOne(c => c.Presupuesto)
                 .HasForeignKey<Cotizacion>(c => c.PresupuestoId);
 
 
-            // 3. Configuración para evitar eliminación en cascada en todas las relaciones
+            // Configuración para evitar eliminación en cascada en todas las relaciones
             var cascadeFKs = modelBuilder.Model.GetEntityTypes()
                 .SelectMany(t => t.GetForeignKeys())
                 .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
@@ -63,6 +68,24 @@ namespace ObraSmart.Infrastructure.Data
             {
                 fk.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+            // Configuración de filtros globales para entidades que implementan IUserOwnedEntity
+            var userOwnedEntities = modelBuilder.Model.GetEntityTypes()
+                .Where(e => typeof(IUserOwnedEntity).IsAssignableFrom(e.ClrType));
+
+            foreach (var entity in userOwnedEntities)
+            {
+                var method = typeof(ObraSmartDbContext)
+                    .GetMethod(nameof(AplicarFiltroUsuario), BindingFlags.NonPublic | BindingFlags.Instance)
+                    ?.MakeGenericMethod(entity.ClrType);
+
+                method?.Invoke(this, new object[] { modelBuilder });
+            }
+        }
+
+        private void AplicarFiltroUsuario<T>(ModelBuilder modelBuilder) where T : class, IUserOwnedEntity
+        {
+            modelBuilder.Entity<T>().HasQueryFilter(e => e.UsuarioId == CurrentUserId);
         }
     }
 }

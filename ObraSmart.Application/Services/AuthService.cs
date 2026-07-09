@@ -1,13 +1,12 @@
 ﻿using Microsoft.Extensions.Options;
 using ObraSmart.Application.Common;
 using ObraSmart.Application.DTOs;
-using ObraSmart.Application.Interfaces;
+using ObraSmart.Application.Interfaces.Services;
 using ObraSmart.Application.Settings;
 using ObraSmart.Domain.Entities;
 using ObraSmart.Domain.Interfaces.Repositories;
-using ObraSmart.Domain.Interfaces.Services;
 
-namespace ObraSmart.Application.Service
+namespace ObraSmart.Application.Services
 {
     public class AuthService : IAuthService
     {

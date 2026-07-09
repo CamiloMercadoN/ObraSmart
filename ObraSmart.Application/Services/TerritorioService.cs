@@ -1,9 +1,9 @@
 ﻿using ObraSmart.Application.Common;
 using ObraSmart.Application.DTOs.Territorios;
-using ObraSmart.Application.Interfaces;
+using ObraSmart.Application.Interfaces.Services;
 using ObraSmart.Domain.Interfaces.Repositories;
 
-namespace ObraSmart.Application.Service
+namespace ObraSmart.Application.Services
 {
     public class TerritorioService : ITerritorioService
     {

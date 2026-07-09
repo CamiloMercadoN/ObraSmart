@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ObraSmart.Application.DTOs.Clientes;
-using ObraSmart.Application.Interfaces;
+using ObraSmart.Application.Interfaces.Services;
 using System.Security.Claims;
 
 namespace ObraSmart.Server.Controllers
@@ -31,8 +31,7 @@ namespace ObraSmart.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetClientes()
         {
-            var usuarioId = ObtenerUsuarioId();
-            var result = await _clienteService.ObtenerTodosAsync(usuarioId);
+            var result = await _clienteService.ObtenerTodosAsync();
 
             if (!result.IsSuccess)
                 return BadRequest(new { Error = result.ErrorMessage });
@@ -43,8 +42,7 @@ namespace ObraSmart.Server.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCliente(Guid id)
         {
-            var usuarioId = ObtenerUsuarioId();
-            var result = await _clienteService.ObtenerPorIdAsync(id, usuarioId);
+            var result = await _clienteService.ObtenerPorIdAsync(id);
 
             if (!result.IsSuccess)
             {
@@ -70,8 +68,7 @@ namespace ObraSmart.Server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCliente(Guid id, [FromBody] ClienteRequestDto dto)
         {
-            var usuarioId = ObtenerUsuarioId();
-            var result = await _clienteService.ActualizarAsync(id, dto, usuarioId);
+            var result = await _clienteService.ActualizarAsync(id, dto);
 
             if (!result.IsSuccess)
             {
@@ -85,8 +82,7 @@ namespace ObraSmart.Server.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCliente(Guid id)
         {
-            var usuarioId = ObtenerUsuarioId();
-            var result = await _clienteService.EliminarAsync(id, usuarioId);
+            var result = await _clienteService.EliminarAsync(id);
 
             if (!result.IsSuccess)
             {

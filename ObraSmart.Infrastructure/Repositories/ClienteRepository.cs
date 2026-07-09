@@ -6,47 +6,21 @@ using ObraSmart.Infrastructure.Data;
 
 namespace ObraSmart.Infrastructure.Repositories
 {
-    public class ClienteRepository : IClienteRepository
+    public class ClienteRepository(ObraSmartDbContext context) : RepositoryBase<Cliente, Guid>(context), IClienteRepository
     {
-        private readonly ObraSmartDbContext _context;
-
-        public ClienteRepository(ObraSmartDbContext context)
-        {
-            _context = context;
-        }
-
-        public async Task<IEnumerable<Cliente>> ObtenerTodosAsync(Guid usuarioId)
+        public override async Task<IReadOnlyList<Cliente>> GetAllAsync()
         {
             return await _context.Clientes
                             .Include(c => c.Ciudad)
                             .AsNoTracking()
-                            .Where(c => c.UsuarioId == usuarioId)
                             .ToListAsync();
         }
 
-        public async Task<Cliente?> ObtenerPorIdAsync(Guid id, Guid usuarioId)
+        public override async Task<Cliente?> GetByIdAsync(Guid id)
         {
             return await _context.Clientes
                             .Include(c => c.Ciudad)
-                            .FirstOrDefaultAsync(c => c.Id == id && c.UsuarioId == usuarioId);
-        }
-
-        public async Task AgregarAsync(Cliente cliente)
-        {
-            await _context.Clientes.AddAsync(cliente);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task ActualizarAsync(Cliente cliente)
-        {
-            _context.Clientes.Update(cliente);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task EliminarAsync(Cliente cliente)
-        {
-            _context.Clientes.Remove(cliente);
-            await _context.SaveChangesAsync();
+                            .FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<bool> TienePresupuestosAsociadosAsync(Guid id)

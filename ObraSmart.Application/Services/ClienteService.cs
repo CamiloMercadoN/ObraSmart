@@ -1,10 +1,10 @@
 ﻿using ObraSmart.Application.Common;
 using ObraSmart.Application.DTOs.Clientes;
-using ObraSmart.Application.Interfaces;
+using ObraSmart.Application.Interfaces.Services;
 using ObraSmart.Application.Mappings;
 using ObraSmart.Domain.Interfaces.Repositories;
 
-namespace ObraSmart.Application.Service
+namespace ObraSmart.Application.Services
 {
     public class ClienteService : IClienteService
     {
@@ -15,17 +15,17 @@ namespace ObraSmart.Application.Service
             _clienteRepository = clienteRepository;
         }
 
-        public async Task<Result<IEnumerable<ClienteResponseDto>>> ObtenerTodosAsync(Guid usuarioId)
+        public async Task<Result<IEnumerable<ClienteResponseDto>>> ObtenerTodosAsync()
         {
-            var clientes = await _clienteRepository.ObtenerTodosAsync(usuarioId);
+            var clientes = await _clienteRepository.GetAllAsync();
             var dtos = clientes.Select(c => c.ToDto());
 
             return Result<IEnumerable<ClienteResponseDto>>.Success(dtos);
         }
 
-        public async Task<Result<ClienteResponseDto>> ObtenerPorIdAsync(Guid id, Guid usuarioId)
+        public async Task<Result<ClienteResponseDto>> ObtenerPorIdAsync(Guid id)
         {
-            var cliente = await _clienteRepository.ObtenerPorIdAsync(id, usuarioId);
+            var cliente = await _clienteRepository.GetByIdAsync(id);
 
             if (cliente == null)
                 return Result<ClienteResponseDto>.Failure("Cliente no encontrado.", "NOT_FOUND");
@@ -37,14 +37,14 @@ namespace ObraSmart.Application.Service
         {
             var cliente = dto.ToEntity(usuarioId);
 
-            await _clienteRepository.AgregarAsync(cliente);
+            await _clienteRepository.AddAsync(cliente);
 
             return Result<ClienteResponseDto>.Success(cliente.ToDto());
         }
 
-        public async Task<Result> ActualizarAsync(Guid id, ClienteRequestDto dto, Guid usuarioId)
+        public async Task<Result> ActualizarAsync(Guid id, ClienteRequestDto dto)
         {
-            var cliente = await _clienteRepository.ObtenerPorIdAsync(id, usuarioId);
+            var cliente = await _clienteRepository.GetByIdAsync(id);
 
             if (cliente == null)
                 return Result.Failure("Cliente no encontrado.", "NOT_FOUND");
@@ -52,14 +52,14 @@ namespace ObraSmart.Application.Service
             // Mapeo inverso de actualización
             dto.UpdateEntity(cliente);
 
-            await _clienteRepository.ActualizarAsync(cliente);
+            await _clienteRepository.UpdateAsync(cliente);
 
             return Result.Success();
         }
 
-        public async Task<Result> EliminarAsync(Guid id, Guid usuarioId)
+        public async Task<Result> EliminarAsync(Guid id)
         {
-            var cliente = await _clienteRepository.ObtenerPorIdAsync(id, usuarioId);
+            var cliente = await _clienteRepository.GetByIdAsync(id);
 
             if (cliente == null)
                 return Result.Failure("Cliente no encontrado.", "NOT_FOUND");
@@ -68,7 +68,7 @@ namespace ObraSmart.Application.Service
             if (tienePresupuestos)
                 return Result.Failure("No se puede eliminar el cliente porque tiene presupuestos asociados.", "CONFLICT");
 
-            await _clienteRepository.EliminarAsync(cliente);
+            await _clienteRepository.DeleteAsync(cliente);
 
             return Result.Success();
         }

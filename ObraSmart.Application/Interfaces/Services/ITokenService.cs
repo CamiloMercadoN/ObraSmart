@@ -1,6 +1,5 @@
-﻿using ObraSmart.Domain.Entities;
-
-namespace ObraSmart.Domain.Interfaces.Services
+﻿
+namespace ObraSmart.Application.Interfaces.Services
 {
     public interface ITokenService
     {

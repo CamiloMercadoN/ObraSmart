@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using ObraSmart.Application;
+using ObraSmart.Application.Interfaces.Services;
 using ObraSmart.Infrastructure;
 using ObraSmart.Infrastructure.Data;
+using ObraSmart.Server.Services;
 using ObraSmart.Server.Validators;
 using Scalar.AspNetCore;
 using System.Text;
@@ -66,12 +68,17 @@ builder.Services.AddOpenApi(options =>
     });
 });
 
+builder.Services.AddHttpContextAccessor();
+
 // Configuración de capas
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplicationServices(builder.Configuration);
 
 // Escanea el ensamblado y registra todos los validadores automáticamente como Scoped
 builder.Services.AddValidatorsFromAssemblyContaining<RegistroUsuarioValidator>();
+
+// Registramos la implementación específica de esta plataforma (Web)
+builder.Services.AddScoped<ICurrentUserService, WebCurrentUserService>();
 
 // Configuración de JWT
 var jwtKey = builder.Configuration["Jwt:Key"];

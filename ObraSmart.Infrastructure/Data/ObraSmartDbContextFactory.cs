@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
+using ObraSmart.Application.Interfaces.Services;
 
 namespace ObraSmart.Infrastructure.Data
 {
@@ -9,11 +11,30 @@ namespace ObraSmart.Infrastructure.Data
     {
         public ObraSmartDbContext CreateDbContext(string[] args)
         {
+            var basePath = Path.Combine(Directory.GetCurrentDirectory(), "../ObraSmart.Server");
+
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(basePath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+
             var optionsBuilder = new DbContextOptionsBuilder<ObraSmartDbContext>();
 
-            optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=ObraSmartDB;Trusted_Connection=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer(connectionString);
 
-            return new ObraSmartDbContext(optionsBuilder.Options);
+            return new ObraSmartDbContext(optionsBuilder.Options, new DesignTimeCurrentUserService());
+        }
+
+        // Clase privada (Dummy) exclusiva para engañar a Entity Framework durante las migraciones
+        private class DesignTimeCurrentUserService : ICurrentUserService
+        {
+            public Guid? GetUserId()
+            {
+                // En tiempo de diseño (creando migraciones), no hay usuario conectado.
+                return null;
+            }
         }
     }
 }

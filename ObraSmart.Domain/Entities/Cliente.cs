@@ -1,8 +1,10 @@
 ﻿
 
+using ObraSmart.Domain.Interfaces;
+
 namespace ObraSmart.Domain.Entities
 {
-    public class Cliente
+    public class Cliente : IUserOwnedEntity
     {
         public Guid Id { get; set; }
         public Guid UsuarioId { get; set; }

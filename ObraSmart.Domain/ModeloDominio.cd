@@ -3,12 +3,13 @@
   <Class Name="ObraSmart.Domain.Entities.Cliente">
     <Position X="4.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIACAAAAAAAAAAAAACAAgAAAAIAAAAAAAAAEAgAAAAI=</HashCode>
+      <HashCode>AIECAAAAAAAAAAAAACAAgAgAAIAAAAAAAAAEAgAAAAI=</HashCode>
       <FileName>Entities\Cliente.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
       <Property Name="Presupuestos" />
     </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="ObraSmart.Domain.Entities.ComponenteAPU">
     <Position X="16.75" Y="6" Width="2.25" />
@@ -36,6 +37,7 @@
     <ShowAsCollectionAssociation>
       <Property Name="Componentes" />
     </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="ObraSmart.Domain.Entities.Insumo">
     <Position X="17" Y="1.75" Width="2" />
@@ -43,6 +45,7 @@
       <HashCode>AAACAAEAAAAAAAAgAEAAAgABAIAAAAAAAAAEAAAAAAA=</HashCode>
       <FileName>Entities\Insumo.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="ObraSmart.Domain.Entities.ItemPresupuesto">
     <Position X="9" Y="7" Width="2.75" />
@@ -66,6 +69,7 @@
     <ShowAsCollectionAssociation>
       <Property Name="Items" />
     </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="ObraSmart.Domain.Entities.RecursoItemPresupuesto">
     <Position X="9" Y="10.25" Width="2.75" />
@@ -76,16 +80,64 @@
   </Class>
   <Class Name="ObraSmart.Domain.Entities.Usuario">
     <Position X="4" Y="1.75" Width="2.5" />
+    <AssociationLine Name="Clientes" Type="ObraSmart.Domain.Entities.Cliente">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.079" Y="0.331" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="EstructurasAPU" Type="ObraSmart.Domain.Entities.EstructuraAPU">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.62" Y="0.248" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AIKCAgAAAAgAAAIAACAAAAAAAIAAAAAAAABAAgABAAI=</HashCode>
+      <HashCode>AIOCAgAAAAgAAAIAACAAAAgAAIAAAAAAAABAAgABAAI=</HashCode>
       <FileName>Entities\Usuario.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
       <Property Name="Clientes" />
       <Property Name="Insumos" />
-      <Property Name="Presupuestos" />
       <Property Name="EstructurasAPU" />
+      <Property Name="Presupuestos" />
     </ShowAsCollectionAssociation>
   </Class>
+  <Class Name="ObraSmart.Domain.Entities.Pais">
+    <Position X="0.5" Y="8.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAAAAAAAAgAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Pais.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="EstadosProvincias" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ObraSmart.Domain.Entities.Ciudad">
+    <Position X="0.5" Y="2.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAIAAAAAAAAEAgAAAAAAAAAAAEABAAAAAAgA=</HashCode>
+      <FileName>Entities\Ciudad.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Clientes" />
+      <Property Name="Usuarios" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ObraSmart.Domain.Entities.EstadoProvincia">
+    <Position X="0.5" Y="5.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>gAACAAAAAAQAAAAgAAEAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\EstadoProvincia.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Ciudades" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Interface Name="ObraSmart.Domain.Interfaces.IUserOwnedEntity">
+    <Position X="10.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IUserOwnedEntity.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

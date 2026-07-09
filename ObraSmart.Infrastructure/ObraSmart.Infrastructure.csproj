@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ObraSmart.Application\ObraSmart.Application.csproj" />
     <ProjectReference Include="..\ObraSmart.Domain\ObraSmart.Domain.csproj" />
   </ItemGroup>
 
