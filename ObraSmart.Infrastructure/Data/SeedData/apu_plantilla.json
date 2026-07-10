@@ -1,0 +1,292 @@
+[
+  {
+    "Id": "a2a11111-1111-1111-1111-111111111111",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "Nombre": "Punto de Agua Potable PPR 20mm (Fría o Caliente)",
+    "UnidadMedidaId": 1,
+    "CostoTotalCalculado": 52600.00,
+    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000002" ],
+    "Componentes": [
+      {
+        "Id": "f2c11111-1111-1111-1111-111111111111",
+        "InsumoId": "e2b11111-1111-1111-1111-111111111111",
+        "Cantidad": 2.5
+      },
+      {
+        "Id": "f2c22222-2222-2222-2222-222222222222",
+        "InsumoId": "e2b55555-5555-5555-5555-555555555555",
+        "Cantidad": 1.0
+      },
+      {
+        "Id": "f2c33333-3333-3333-3333-333333333333",
+        "InsumoId": "e2b66666-6666-6666-6666-666666666666",
+        "Cantidad": 4.0
+      },
+      {
+        "Id": "f2c44444-4444-4444-4444-444444444444",
+        "InsumoId": "e2b77777-7777-7777-7777-777777777777",
+        "Cantidad": 4.0
+      },
+      {
+        "Id": "f2c55555-5555-5555-5555-555555555555",
+        "InsumoId": "e2b88888-8888-8888-8888-888888888888",
+        "Cantidad": 2.5
+      }
+    ]
+  },
+  {
+    "Id": "a2a22222-2222-2222-2222-222222222222",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "Nombre": "Punto de Descarga Alcantarillado PVC 40/50mm (Vanitorio/Lavaplatos)",
+    "UnidadMedidaId": 1,
+    "CostoTotalCalculado": 38650.00,
+    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000002" ],
+    "Componentes": [
+      {
+        "Id": "f2c66666-6666-6666-6666-666666666666",
+        "InsumoId": "e2b22222-2222-2222-2222-222222222222",
+        "Cantidad": 1.5
+      },
+      {
+        "Id": "f2c77777-7777-7777-7777-777777777777",
+        "InsumoId": "e2b44444-4444-4444-4444-444444444444",
+        "Cantidad": 0.15
+      },
+      {
+        "Id": "f2c88888-8888-8888-8888-888888888888",
+        "InsumoId": "e2b66666-6666-6666-6666-666666666666",
+        "Cantidad": 3.0
+      },
+      {
+        "Id": "f2c99999-9999-9999-9999-999999999999",
+        "InsumoId": "e2b77777-7777-7777-7777-777777777777",
+        "Cantidad": 3.0
+      }
+    ]
+  },
+  {
+    "Id": "a2a33333-3333-3333-3333-333333333333",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "Nombre": "Instalación de Artefacto WC (Incluye conexiones y kit de ajuste)",
+    "UnidadMedidaId": 1,
+    "CostoTotalCalculado": 33500.00,
+    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000002" ],
+    "Componentes": [
+      {
+        "Id": "f2caaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        "InsumoId": "e2b33333-3333-3333-3333-333333333333",
+        "Cantidad": 0.5
+      },
+      {
+        "Id": "f2cbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+        "InsumoId": "e2b66666-6666-6666-6666-666666666666",
+        "Cantidad": 3.0
+      },
+      {
+        "Id": "f2cccccc-cccc-cccc-cccc-cccccccccccc",
+        "InsumoId": "e2b77777-7777-7777-7777-777777777777",
+        "Cantidad": 2.0
+      }
+    ]
+  },
+  {
+    "Id": "a2a44444-4444-4444-4444-444444444444",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "Nombre": "Punto de Red de Gas en Cobre Tipo L 1/2\"",
+    "UnidadMedidaId": 1,
+    "CostoTotalCalculado": 52625.00,
+    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000003" ],
+    "Componentes": [
+      {
+        "Id": "f2cddddd-dddd-dddd-dddd-dddddddddddd",
+        "InsumoId": "e2b99999-9999-9999-9999-999999999999",
+        "Cantidad": 0.33
+      },
+      {
+        "Id": "f2ceeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+        "InsumoId": "e2baaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        "Cantidad": 0.05
+      },
+      {
+        "Id": "f2cfffff-ffff-ffff-ffff-ffffffffffff",
+        "InsumoId": "e2bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+        "Cantidad": 1.00
+      },
+      {
+        "Id": "f2c00001-0000-0000-0000-000000000000",
+        "InsumoId": "e2b66666-6666-6666-6666-666666666666",
+        "Cantidad": 3.00
+      },
+      {
+        "Id": "f2c00002-0000-0000-0000-000000000000",
+        "InsumoId": "e2bfffff-ffff-ffff-ffff-ffffffffffff",
+        "Cantidad": 1.00
+      }
+    ]
+  },
+  {
+    "Id": "a2a55555-5555-5555-5555-555555555555",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "Nombre": "Instalación de Lavaplatos y Grifería (Conexión a red existente)",
+    "UnidadMedidaId": 1,
+    "CostoTotalCalculado": 38100.00,
+    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000002" ],
+    "Componentes": [
+      {
+        "Id": "f2c00003-0000-0000-0000-000000000000",
+        "InsumoId": "e2bccccc-cccc-cccc-cccc-cccccccccccc",
+        "Cantidad": 1.00
+      },
+      {
+        "Id": "f2c00004-0000-0000-0000-000000000000",
+        "InsumoId": "e2beeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+        "Cantidad": 1.00
+      },
+      {
+        "Id": "f2c00005-0000-0000-0000-000000000000",
+        "InsumoId": "e2bddddd-dddd-dddd-dddd-dddddddddddd",
+        "Cantidad": 0.50
+      },
+      {
+        "Id": "f2c00006-0000-0000-0000-000000000000",
+        "InsumoId": "e2b66666-6666-6666-6666-666666666666",
+        "Cantidad": 2.00
+      },
+      {
+        "Id": "f2c00007-0000-0000-0000-000000000000",
+        "InsumoId": "e2b77777-7777-7777-7777-777777777777",
+        "Cantidad": 2.00
+      }
+    ]
+  },
+  {
+    "Id": "a2a66666-6666-6666-6666-666666666666",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "Nombre": "Instalación de Calefón (11 a 14 Lts) y Pruebas de Fuga",
+    "UnidadMedidaId": 1,
+    "CostoTotalCalculado": 50000.00,
+    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000003", "10000000-0000-0000-0000-000000000002" ],
+    "Componentes": [
+      {
+        "Id": "f2c00008-0000-0000-0000-000000000000",
+        "InsumoId": "e2beeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+        "Cantidad": 1.00
+      },
+      {
+        "Id": "f2c00009-0000-0000-0000-000000000000",
+        "InsumoId": "e2bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+        "Cantidad": 1.00
+      },
+      {
+        "Id": "f2c00010-0000-0000-0000-000000000000",
+        "InsumoId": "e2b66666-6666-6666-6666-666666666666",
+        "Cantidad": 4.00
+      },
+      {
+        "Id": "f2c00011-0000-0000-0000-000000000000",
+        "InsumoId": "e2b77777-7777-7777-7777-777777777777",
+        "Cantidad": 2.50
+      }
+    ]
+  },
+  {
+    "Id": "a3a11111-1111-1111-1111-111111111111",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "Nombre": "Servicio de Detección de Filtración de Agua No Visible",
+    "UnidadMedidaId": 2,
+    "CostoTotalCalculado": 55000.00,
+    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000002", "10000000-0000-0000-0000-000000000004" ],
+    "Componentes": [
+      {
+        "Id": "f3c11111-1111-1111-1111-111111111111",
+        "InsumoId": "e3b11111-1111-1111-1111-111111111111",
+        "Cantidad": 2.0
+      },
+      {
+        "Id": "f3c22222-2222-2222-2222-222222222222",
+        "InsumoId": "e3b33333-3333-3333-3333-333333333333",
+        "Cantidad": 1.0
+      }
+    ]
+  },
+  {
+    "Id": "a3a22222-2222-2222-2222-222222222222",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "Nombre": "Reparación Localizada de Filtración (Incluye picado y parche básico)",
+    "UnidadMedidaId": 2,
+    "CostoTotalCalculado": 47000.00,
+    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000002", "10000000-0000-0000-0000-000000000004", "10000000-0000-0000-0000-000000000005" ],
+    "Componentes": [
+      {
+        "Id": "f3c33333-3333-3333-3333-333333333333",
+        "InsumoId": "e3b22222-2222-2222-2222-222222222222",
+        "Cantidad": 3.0
+      },
+      {
+        "Id": "f3c44444-4444-4444-4444-444444444444",
+        "InsumoId": "e2b77777-7777-7777-7777-777777777777",
+        "Cantidad": 3.0
+      },
+      {
+        "Id": "f3c55555-5555-5555-5555-555555555555",
+        "InsumoId": "e3b55555-5555-5555-5555-555555555555",
+        "Cantidad": 1.0
+      },
+      {
+        "Id": "f3c66666-6666-6666-6666-666666666666",
+        "InsumoId": "e3b66666-6666-6666-6666-666666666666",
+        "Cantidad": 1.0
+      }
+    ]
+  },
+  {
+    "Id": "a3a33333-3333-3333-3333-333333333333",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "Nombre": "Destape de Red de Alcantarillado con Sonda Eléctrica (Hasta 10m)",
+    "UnidadMedidaId": 2,
+    "CostoTotalCalculado": 30000.00,
+    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000002", "10000000-0000-0000-0000-000000000004", "10000000-0000-0000-0000-000000000005" ],
+    "Componentes": [
+      {
+        "Id": "f3c77777-7777-7777-7777-777777777777",
+        "InsumoId": "e3b22222-2222-2222-2222-222222222222",
+        "Cantidad": 2.0
+      },
+      {
+        "Id": "f3c88888-8888-8888-8888-888888888888",
+        "InsumoId": "e3b44444-4444-4444-4444-444444444444",
+        "Cantidad": 1.0
+      }
+    ]
+  },
+  {
+    "Id": "a3a44444-4444-4444-4444-444444444444",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "Nombre": "Mantención Preventiva de Calefont (Limpieza y Cambio Membrana)",
+    "UnidadMedidaId": 2,
+    "CostoTotalCalculado": 27000.00,
+    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000003", "10000000-0000-0000-0000-000000000004" ],
+    "Componentes": [
+      {
+        "Id": "f3c99999-9999-9999-9999-999999999999",
+        "InsumoId": "e3b22222-2222-2222-2222-222222222222",
+        "Cantidad": 2.0
+      },
+      {
+        "Id": "f3caaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        "InsumoId": "e3b77777-7777-7777-7777-777777777777",
+        "Cantidad": 1.0
+      }
+    ]
+  }
+]

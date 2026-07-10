@@ -18,10 +18,10 @@ namespace ObraSmart.Domain.Entities
         public string LogoUrl { get; set; } = string.Empty;
 
         // Propiedades de Navegación
-        public virtual Ciudad? Ciudad { get; set; }
-        public virtual ICollection<Cliente> Clientes { get; set; } = new List<Cliente>();
-        public virtual ICollection<Insumo> Insumos { get; set; } = new List<Insumo>();
-        public virtual ICollection<EstructuraAPU> EstructurasAPU { get; set; } = new List<EstructuraAPU>();
-        public virtual ICollection<Presupuesto> Presupuestos { get; set; } = new List<Presupuesto>();
+        public Ciudad? Ciudad { get; set; }
+        public ICollection<Cliente> Clientes { get; set; } = new List<Cliente>();
+        public ICollection<Insumo> Insumos { get; set; } = new List<Insumo>();
+        public ICollection<EstructuraAPU> EstructurasAPU { get; set; } = new List<EstructuraAPU>();
+        public ICollection<Presupuesto> Presupuestos { get; set; } = new List<Presupuesto>();
     }
 }

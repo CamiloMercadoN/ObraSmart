@@ -11,8 +11,8 @@ namespace ObraSmart.Domain.Entities
         public string Nombre { get; set; } = string.Empty;
         public string CodigoLocal { get; set; } = string.Empty;
 
-        public virtual EstadoProvincia EstadoProvincia { get; set; } = null!;
-        public virtual ICollection<Cliente> Clientes { get; set; } = new List<Cliente>();
-        public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
+        public EstadoProvincia EstadoProvincia { get; set; } = null!;
+        public ICollection<Cliente> Clientes { get; set; } = new List<Cliente>();
+        public ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
     }
 }

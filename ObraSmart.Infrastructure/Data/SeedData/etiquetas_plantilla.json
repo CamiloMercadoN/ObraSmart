@@ -1,0 +1,58 @@
+[
+  {
+    "Id": "10000000-0000-0000-0000-000000000001",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "Nombre": "Obra Gruesa",
+    "ColorHex": "#64748b"
+  },
+  {
+    "Id": "10000000-0000-0000-0000-000000000002",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "Nombre": "Instalaciones Sanitarias",
+    "ColorHex": "#3b82f6"
+  },
+  {
+    "Id": "10000000-0000-0000-0000-000000000003",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "Nombre": "Red de Gas",
+    "ColorHex": "#f59e0b"
+  },
+  {
+    "Id": "10000000-0000-0000-0000-000000000004",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "Nombre": "Mantención y Servicios",
+    "ColorHex": "#10b981"
+  },
+  {
+    "Id": "10000000-0000-0000-0000-000000000005",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "Nombre": "Emergencia",
+    "ColorHex": "#ef4444"
+  },
+  {
+    "Id": "10000000-0000-0000-0000-000000000006",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "Nombre": "Materiales",
+    "ColorHex": "#8b5cf6"
+  },
+  {
+    "Id": "10000000-0000-0000-0000-000000000007",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "Nombre": "Mano de Obra",
+    "ColorHex": "#f97316"
+  },
+  {
+    "Id": "10000000-0000-0000-0000-000000000008",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "Nombre": "Maquinaria y Equipos",
+    "ColorHex": "#06b6d4"
+  }
+]

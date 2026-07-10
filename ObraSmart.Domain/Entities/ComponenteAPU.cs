@@ -10,7 +10,7 @@ namespace ObraSmart.Domain.Entities
         public decimal Cantidad { get; set; }
 
         // Propiedades de Navegación
-        public virtual EstructuraAPU? EstructuraAPU { get; set; }
-        public virtual Insumo? Insumo { get; set; }
+        public EstructuraAPU? EstructuraAPU { get; set; }
+        public Insumo? Insumo { get; set; }
     }
 }

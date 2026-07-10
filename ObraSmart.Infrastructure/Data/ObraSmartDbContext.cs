@@ -26,6 +26,8 @@ namespace ObraSmart.Infrastructure.Data
         public DbSet<Pais> Paises { get; set; }
         public DbSet<EstadoProvincia> EstadoProvincias { get; set; }
         public DbSet<Ciudad> Ciudades { get; set; }
+        public DbSet<UnidadMedida> UnidadesMedida { get; set; }
+        public DbSet<Etiqueta> Etiquetas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -85,7 +87,7 @@ namespace ObraSmart.Infrastructure.Data
 
         private void AplicarFiltroUsuario<T>(ModelBuilder modelBuilder) where T : class, IUserOwnedEntity
         {
-            modelBuilder.Entity<T>().HasQueryFilter(e => e.UsuarioId == CurrentUserId);
+            modelBuilder.Entity<T>().HasQueryFilter(e => e.UsuarioId == CurrentUserId || e.EsPlantilla);
         }
     }
 }

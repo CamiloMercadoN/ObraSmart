@@ -12,12 +12,14 @@ namespace ObraSmart.Application.Services
     {
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly ITokenService _tokenService;
+        private readonly IPasswordHasherService _passwordHasher;
         private readonly ConfiguracionNegocio _configuracionNegocio;
 
-        public AuthService(IUsuarioRepository usuarioRepository, ITokenService tokenService, IOptions<ConfiguracionNegocio> configuracionNegocio)
+        public AuthService(IUsuarioRepository usuarioRepository, ITokenService tokenService,IPasswordHasherService passwordHasher,  IOptions<ConfiguracionNegocio> configuracionNegocio)
         {
             _usuarioRepository = usuarioRepository;
             _tokenService = tokenService;
+            _passwordHasher = passwordHasher;
             _configuracionNegocio = configuracionNegocio.Value;
         }
 
@@ -30,7 +32,7 @@ namespace ObraSmart.Application.Services
             {
                 Id = Guid.NewGuid(),
                 Correo = dto.Correo,
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+                PasswordHash = _passwordHasher.HashPassword(dto.Password),
                 RazonSocial = dto.RazonSocial,
                 Rut = dto.Rut,
                 PorcentajeIva = _configuracionNegocio.PorcentajeIvaDefecto,
@@ -47,7 +49,7 @@ namespace ObraSmart.Application.Services
         {
             var usuario = await _usuarioRepository.ObtenerPorCorreoAsync(dto.Correo);
 
-            if (usuario == null || !BCrypt.Net.BCrypt.Verify(dto.Password, usuario.PasswordHash))
+            if (usuario == null || !_passwordHasher.VerifyPassword(dto.Password, usuario.PasswordHash))
                 return Result<string>.Failure("Credenciales inválidas.", "CREDENTIALS_INVALID");
 
             var token = _tokenService.GenerarToken(usuario.Id, usuario.Correo, usuario.RazonSocial);

@@ -1,0 +1,150 @@
+[
+  {
+    "Id": "b3b11111-1111-1111-1111-111111111111",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "NombreProyecto": "Instalación Sanitaria Baño Completo Estándar",
+    "FechaCreacion": "2026-07-10T08:30:00",
+    "Estado": "Borrador",
+    "Subtotal": 216000.00,
+    "MontoIva": 41040.00,
+    "Total": 257040.00,
+    "Items": [
+      {
+        "Id": "d3d11111-1111-1111-1111-111111111111",
+        "EstructuraAPUOrigenId": "a2a11111-1111-1111-1111-111111111111",
+        "Descripcion": "Punto de Agua Potable PPR 20mm (Vanitorio y WC)",
+        "CantidadItem": 2.00,
+        "PrecioUnitarioCalculado": 52600.00,
+        "Subtotal": 105200.00
+      },
+      {
+        "Id": "d3d22222-2222-2222-2222-222222222222",
+        "EstructuraAPUOrigenId": "a2a22222-2222-2222-2222-222222222222",
+        "Descripcion": "Punto de Descarga Alcantarillado PVC 40/50mm",
+        "CantidadItem": 2.00,
+        "PrecioUnitarioCalculado": 38650.00,
+        "Subtotal": 77300.00
+      },
+      {
+        "Id": "d3d33333-3333-3333-3333-333333333333",
+        "EstructuraAPUOrigenId": "a2a33333-3333-3333-3333-333333333333",
+        "Descripcion": "Instalación de Artefacto WC",
+        "CantidadItem": 1.00,
+        "PrecioUnitarioCalculado": 33500.00,
+        "Subtotal": 33500.00
+      }
+    ]
+  },
+  {
+    "Id": "b3b22222-2222-2222-2222-222222222222",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "NombreProyecto": "Remodelación Sanitaria Cocina y Red de Gas",
+    "FechaCreacion": "2026-07-10T09:15:00",
+    "Estado": "Borrador",
+    "Subtotal": 231975.00,
+    "MontoIva": 44075.25,
+    "Total": 276050.25,
+    "Items": [
+      {
+        "Id": "d3d44444-4444-4444-4444-444444444444",
+        "EstructuraAPUOrigenId": "a2a11111-1111-1111-1111-111111111111",
+        "Descripcion": "Punto de Agua Potable PPR 20mm (Para Lavaplatos)",
+        "CantidadItem": 1.00,
+        "PrecioUnitarioCalculado": 52600.00,
+        "Subtotal": 52600.00
+      },
+      {
+        "Id": "d3d55555-5555-5555-5555-555555555555",
+        "EstructuraAPUOrigenId": "a2a22222-2222-2222-2222-222222222222",
+        "Descripcion": "Punto de Descarga Alcantarillado PVC 50mm",
+        "CantidadItem": 1.00,
+        "PrecioUnitarioCalculado": 38650.00,
+        "Subtotal": 38650.00
+      },
+      {
+        "Id": "d3d66666-6666-6666-6666-666666666666",
+        "EstructuraAPUOrigenId": "a2a44444-4444-4444-4444-444444444444",
+        "Descripcion": "Punto de Red de Gas en Cobre (Alimentación Calefón)",
+        "CantidadItem": 1.00,
+        "PrecioUnitarioCalculado": 52625.00,
+        "Subtotal": 52625.00
+      },
+      {
+        "Id": "d3d77777-7777-7777-7777-777777777777",
+        "EstructuraAPUOrigenId": "a2a55555-5555-5555-5555-555555555555",
+        "Descripcion": "Instalación de Lavaplatos y Grifería",
+        "CantidadItem": 1.00,
+        "PrecioUnitarioCalculado": 38100.00,
+        "Subtotal": 38100.00
+      },
+      {
+        "Id": "d3d88888-8888-8888-8888-888888888888",
+        "EstructuraAPUOrigenId": "a2a66666-6666-6666-6666-666666666666",
+        "Descripcion": "Instalación de Calefón y Pruebas de Fuga",
+        "CantidadItem": 1.00,
+        "PrecioUnitarioCalculado": 50000.00,
+        "Subtotal": 50000.00
+      }
+    ]
+  },
+  {
+    "Id": "b3b33333-3333-3333-3333-333333333333",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "NombreProyecto": "Servicio de Emergencia: Detección y Reparación de Fuga",
+    "FechaCreacion": "2026-07-10T10:00:00",
+    "Estado": "Borrador",
+    "Subtotal": 102000.00,
+    "MontoIva": 19380.00,
+    "Total": 121380.00,
+    "Items": [
+      {
+        "Id": "d3d99999-9999-9999-9999-999999999999",
+        "EstructuraAPUOrigenId": "a3a11111-1111-1111-1111-111111111111",
+        "Descripcion": "Servicio de Detección de Filtración (Termografía)",
+        "CantidadItem": 1.00,
+        "PrecioUnitarioCalculado": 55000.00,
+        "Subtotal": 55000.00
+      },
+      {
+        "Id": "d3daaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        "EstructuraAPUOrigenId": "a3a22222-2222-2222-2222-222222222222",
+        "Descripcion": "Reparación Localizada de Filtración (Parche Rápido)",
+        "CantidadItem": 1.00,
+        "PrecioUnitarioCalculado": 47000.00,
+        "Subtotal": 47000.00
+      }
+    ]
+  },
+  {
+    "Id": "b3b44444-4444-4444-4444-444444444444",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "NombreProyecto": "Mantención Anual de Red Sanitaria y Calefacción",
+    "FechaCreacion": "2026-07-10T10:30:00",
+    "Estado": "Borrador",
+    "Subtotal": 57000.00,
+    "MontoIva": 10830.00,
+    "Total": 67830.00,
+    "Items": [
+      {
+        "Id": "d3dbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+        "EstructuraAPUOrigenId": "a3a33333-3333-3333-3333-333333333333",
+        "Descripcion": "Destape Preventivo de Red de Alcantarillado Principal",
+        "CantidadItem": 1.00,
+        "PrecioUnitarioCalculado": 30000.00,
+        "Subtotal": 30000.00
+      },
+      {
+        "Id": "d3dccccc-cccc-cccc-cccc-cccccccccccc",
+        "EstructuraAPUOrigenId": "a3a44444-4444-4444-4444-444444444444",
+        "Descripcion": "Mantención Preventiva de Calefont",
+        "CantidadItem": 1.00,
+        "PrecioUnitarioCalculado": 27000.00,
+        "Subtotal": 27000.00
+      }
+    ]
+  }
+]

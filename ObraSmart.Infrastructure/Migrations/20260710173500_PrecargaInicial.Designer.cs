@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ObraSmart.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using ObraSmart.Infrastructure.Data;
 namespace ObraSmart.Infrastructure.Migrations
 {
     [DbContext(typeof(ObraSmartDbContext))]
-    partial class ObraSmartDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260710173500_PrecargaInicial")]
+    partial class PrecargaInicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -364,7 +367,7 @@ namespace ObraSmart.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ClienteId")
+                    b.Property<Guid>("ClienteId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("EsPlantilla")
@@ -681,7 +684,9 @@ namespace ObraSmart.Infrastructure.Migrations
                 {
                     b.HasOne("ObraSmart.Domain.Entities.Cliente", "Cliente")
                         .WithMany("Presupuestos")
-                        .HasForeignKey("ClienteId");
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("ObraSmart.Domain.Entities.Usuario", "Usuario")
                         .WithMany("Presupuestos")

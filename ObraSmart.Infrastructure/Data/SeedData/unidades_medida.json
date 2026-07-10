@@ -1,0 +1,107 @@
+[
+  {
+    "Id": 1,
+    "Nombre": "Unidad",
+    "Abreviacion": "un"
+  },
+  {
+    "Id": 2,
+    "Nombre": "Global",
+    "Abreviacion": "gl"
+  },
+  {
+    "Id": 3,
+    "Nombre": "Pieza",
+    "Abreviacion": "pz"
+  },
+  {
+    "Id": 4,
+    "Nombre": "Kit",
+    "Abreviacion": "kit"
+  },
+  {
+    "Id": 5,
+    "Nombre": "Milímetro",
+    "Abreviacion": "mm"
+  },
+  {
+    "Id": 6,
+    "Nombre": "Centímetro",
+    "Abreviacion": "cm"
+  },
+  {
+    "Id": 7,
+    "Nombre": "Metro Lineal",
+    "Abreviacion": "m"
+  },
+  {
+    "Id": 8,
+    "Nombre": "Pulgada",
+    "Abreviacion": "in"
+  },
+  {
+    "Id": 9,
+    "Nombre": "Tira",
+    "Abreviacion": "tr"
+  },
+  {
+    "Id": 10,
+    "Nombre": "Metro Cuadrado",
+    "Abreviacion": "m2"
+  },
+  {
+    "Id": 11,
+    "Nombre": "Metro Cúbico",
+    "Abreviacion": "m3"
+  },
+  {
+    "Id": 12,
+    "Nombre": "Litro",
+    "Abreviacion": "l"
+  },
+  {
+    "Id": 13,
+    "Nombre": "Galón",
+    "Abreviacion": "gal"
+  },
+  {
+    "Id": 14,
+    "Nombre": "Gramo",
+    "Abreviacion": "g"
+  },
+  {
+    "Id": 15,
+    "Nombre": "Kilogramo",
+    "Abreviacion": "kg"
+  },
+  {
+    "Id": 16,
+    "Nombre": "Tonelada",
+    "Abreviacion": "t"
+  },
+  {
+    "Id": 17,
+    "Nombre": "Saco",
+    "Abreviacion": "sc"
+  },
+  {
+    "Id": 18,
+    "Nombre": "Hora",
+    "Abreviacion": "h"
+  },
+  {
+    "Id": 19,
+    "Nombre": "Día",
+    "Abreviacion": "d"
+  },
+  {
+    "Id": 20,
+    "Nombre": "Mes",
+    "Abreviacion": "mes"
+  },
+  {
+    "Id": 21,
+    "Nombre": "Jornada",
+    "Abreviacion": "jor"
+  }
+]

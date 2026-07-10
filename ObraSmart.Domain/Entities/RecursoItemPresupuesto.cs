@@ -11,8 +11,10 @@ namespace ObraSmart.Domain.Entities
         public decimal Cantidad { get; set; }
         public decimal PrecioUnitarioCongelado { get; set; }
         public decimal CostoTotalRecurso { get; set; }
-
+        public int UnidadMedidaId { get; set; }
+        
         // Propiedades de Navegación
-        public virtual ItemPresupuesto? ItemPresupuesto { get; set; }
+        public ItemPresupuesto? ItemPresupuesto { get; set; }
+        public UnidadMedida? UnidadMedida { get; set; }
     }
 }

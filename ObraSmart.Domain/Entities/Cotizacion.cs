@@ -13,6 +13,6 @@ namespace ObraSmart.Domain.Entities
         public string ArchivoPdfUrl { get; set; } = string.Empty;
 
         // Propiedades de Navegación
-        public virtual Presupuesto? Presupuesto { get; set; }
+        public Presupuesto? Presupuesto { get; set; }
     }
 }

@@ -10,6 +10,6 @@ namespace ObraSmart.Domain.Entities
         public string Nombre { get; set; } = string.Empty;
         public string CodigoIso { get; set; } = string.Empty; // Ej: "CL", "MX", "PE"
 
-        public virtual ICollection<EstadoProvincia> EstadosProvincias { get; set; } = new List<EstadoProvincia>();
+        public ICollection<EstadoProvincia> EstadosProvincias { get; set; } = new List<EstadoProvincia>();
     }
 }

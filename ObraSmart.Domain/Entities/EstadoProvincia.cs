@@ -11,7 +11,7 @@ namespace ObraSmart.Domain.Entities
         public string Nombre { get; set; } = string.Empty;
         public string CodigoLocal { get; set; } = string.Empty; // Ej: "RM"
 
-        public virtual Pais Pais { get; set; } = null!;
-        public virtual ICollection<Ciudad> Ciudades { get; set; } = new List<Ciudad>();
+        public Pais Pais { get; set; } = null!;
+        public ICollection<Ciudad> Ciudades { get; set; } = new List<Ciudad>();
     }
 }
