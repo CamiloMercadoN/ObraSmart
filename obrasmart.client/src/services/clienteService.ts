@@ -1,4 +1,4 @@
-import { apiClient } from '../utils/apiClient';
+import { apiClient, manejarErrorHttp } from '../utils/apiClient';
 import type { ICliente } from '../interfaces/ICliente';
 
 export const clienteService = {
@@ -20,7 +20,7 @@ export const clienteService = {
       body: JSON.stringify(cliente)
     });
 
-    if (!response.ok) await this.manejarErrorHttp(response);
+    if (!response.ok) await manejarErrorHttp(response);
     return await response.json();
   },
 
@@ -30,7 +30,7 @@ export const clienteService = {
       body: JSON.stringify(cliente)
     });
 
-    if (!response.ok) await this.manejarErrorHttp(response);
+    if (!response.ok) await manejarErrorHttp(response);
   },
 
   async eliminar(id: string): Promise<void> {
@@ -38,17 +38,6 @@ export const clienteService = {
       method: 'DELETE'
     });
 
-    if (!response.ok) await this.manejarErrorHttp(response);
+    if (!response.ok) await manejarErrorHttp(response);
   },
-
-  // Centraliza la lectura del patrón Result { Error: "..." } enviado desde el backend
-  async manejarErrorHttp(response: Response): Promise<never> {
-    let errorMsg = 'Ocurrió un error inesperado en el servidor.';
-    try {
-      const data = await response.json();
-      if (data && data.error) errorMsg = data.error;
-      else if (data && data.Error) errorMsg = data.Error; // Para coincidir con new { Error = ... }
-    } catch { }
-    throw new Error(errorMsg);
-  }
 };

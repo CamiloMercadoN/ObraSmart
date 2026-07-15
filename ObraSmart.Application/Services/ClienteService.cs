@@ -33,9 +33,9 @@ namespace ObraSmart.Application.Services
             return Result<ClienteResponseDto>.Success(cliente.ToDto());
         }
 
-        public async Task<Result<ClienteResponseDto>> CrearAsync(ClienteRequestDto dto, Guid usuarioId)
+        public async Task<Result<ClienteResponseDto>> CrearAsync(ClienteRequestDto dto)
         {
-            var cliente = dto.ToEntity(usuarioId);
+            var cliente = dto.ToEntity();
 
             await _clienteRepository.AddAsync(cliente);
 

@@ -85,6 +85,29 @@ namespace ObraSmart.Infrastructure.Data
             }
         }
 
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            // Verificamos si hay un usuario autenticado en el contexto actual
+            if (CurrentUserId.HasValue)
+            {
+                // Buscamos todas las entidades que van a ser insertadas y que heredan de IUserOwnedEntity
+                var entries = ChangeTracker.Entries<IUserOwnedEntity>()
+                    .Where(e => e.State == EntityState.Added);
+
+                foreach (var entry in entries)
+                {
+                    // Asignamos el ID del usuario automáticamente si no viene asignado (Guid.Empty)
+                    // Esto permite que el proceso de Seed o la creación explícita de plantillas globales siga funcionando
+                    if (entry.Entity.UsuarioId == Guid.Empty)
+                    {
+                        entry.Entity.UsuarioId = CurrentUserId.Value;
+                    }
+                }
+            }
+
+            return await base.SaveChangesAsync(cancellationToken);
+        }
+
         private void AplicarFiltroUsuario<T>(ModelBuilder modelBuilder) where T : class, IUserOwnedEntity
         {
             modelBuilder.Entity<T>().HasQueryFilter(e => e.UsuarioId == CurrentUserId || e.EsPlantilla);

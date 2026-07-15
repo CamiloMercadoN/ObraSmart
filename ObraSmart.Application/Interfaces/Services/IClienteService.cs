@@ -7,7 +7,7 @@ namespace ObraSmart.Application.Interfaces.Services
     {
         Task<Result<IEnumerable<ClienteResponseDto>>> ObtenerTodosAsync();
         Task<Result<ClienteResponseDto>> ObtenerPorIdAsync(Guid id);
-        Task<Result<ClienteResponseDto>> CrearAsync(ClienteRequestDto dto, Guid usuarioId);
+        Task<Result<ClienteResponseDto>> CrearAsync(ClienteRequestDto dto);
         Task<Result> ActualizarAsync(Guid id, ClienteRequestDto dto);
         Task<Result> EliminarAsync(Guid id);
     }

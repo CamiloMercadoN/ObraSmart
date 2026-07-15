@@ -29,3 +29,13 @@ export const apiClient = async (endpoint: string, options: RequestInit = {}): Pr
 
   return response;
 };
+
+export const manejarErrorHttp = async (response: Response): Promise<never> => {
+  let errorMsg = 'Ocurrió un error inesperado en el servidor.';
+  try {
+    const data = await response.json();
+    if (data && data.error) errorMsg = data.error;
+    else if (data && data.Error) errorMsg = data.Error;
+  } catch { }
+  throw new Error(errorMsg);
+};

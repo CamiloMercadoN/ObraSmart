@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ObraSmart.Domain.Interfaces.Repositories;
 using ObraSmart.Infrastructure.Data;
+using ObraSmart.Infrastructure.Repositories;
 using System.Reflection;
 
 namespace ObraSmart.Infrastructure
@@ -23,6 +25,9 @@ namespace ObraSmart.Infrastructure
                 publicOnly: false) // false para incluir tus repos 'internal' también
             .AsImplementedInterfaces() // Los vincula: Repository -> IRepository
             .WithScopedLifetime());    // Ciclo de vida: Scoped (por petición HTTP)
+
+            // Registro del repositorio genérico abierto (Scoped)
+            services.AddScoped(typeof(IRepository<,>), typeof(RepositoryBase<,>));
 
             return services;
         }

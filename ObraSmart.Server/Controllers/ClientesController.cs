@@ -57,7 +57,7 @@ namespace ObraSmart.Server.Controllers
         public async Task<IActionResult> PostCliente([FromBody] ClienteRequestDto dto)
         {
             var usuarioId = ObtenerUsuarioId();
-            var result = await _clienteService.CrearAsync(dto, usuarioId);
+            var result = await _clienteService.CrearAsync(dto);
 
             if (!result.IsSuccess)
                 return BadRequest(new { Error = result.ErrorMessage });

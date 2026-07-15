@@ -26,14 +26,13 @@ namespace ObraSmart.Application.Mappings
         }
 
         // Mapeo de Request DTO a Entidad (Creación)
-        public static Cliente ToEntity(this ClienteRequestDto dto, Guid usuarioId)
+        public static Cliente ToEntity(this ClienteRequestDto dto)
         {
             if (dto == null) return null!;
 
             return new Cliente
             {
                 Id = Guid.NewGuid(),
-                UsuarioId = usuarioId,
                 Nombre = dto.Nombre,
                 Rut = dto.Rut,
                 Correo = dto.Correo,

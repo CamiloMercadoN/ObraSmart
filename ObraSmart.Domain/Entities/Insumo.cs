@@ -1,6 +1,4 @@
-﻿
-
-using ObraSmart.Domain.Interfaces;
+﻿using ObraSmart.Domain.Interfaces;
 
 namespace ObraSmart.Domain.Entities
 {
@@ -8,7 +6,7 @@ namespace ObraSmart.Domain.Entities
     {
         public Guid Id { get; set; }
         public Guid UsuarioId { get; set; }
-        public string TipoInsumo { get; set; } = string.Empty; // Ej: Material, Mano de Obra, Equipo
+        public string TipoInsumo { get; set; } = string.Empty;
         public string Descripcion { get; set; } = string.Empty;
         public decimal PrecioReferencia { get; set; }
         public int UnidadMedidaId { get; set; }
