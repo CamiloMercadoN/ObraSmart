@@ -82,14 +82,21 @@ namespace ObraSmart.Application.Services
 
         public async Task<Result> DeleteAsync(Guid id)
         {
-            var insumoDb = await _insumoRepository.GetByIdAsync(id);
+            var insumoDb = await _insumoRepository.GetByIdWithDependenciesAsync(id);
             if (insumoDb == null)
                 return Result.Failure("Insumo no encontrado.");
 
             if (insumoDb.EsPlantilla)
                 return Result.Failure("No se pueden eliminar los insumos de plantilla global.");
 
+            if (insumoDb.Etiquetas.Any())
+            {
+                insumoDb.Etiquetas.Clear();
+                await _insumoRepository.UpdateAsync(insumoDb);
+            }
+
             await _insumoRepository.DeleteAsync(insumoDb);
+
             return Result.Success();
         }
     }

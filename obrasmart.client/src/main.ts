@@ -8,11 +8,14 @@ import router from './router';
 import PrimeVue from 'primevue/config';
 import ConfirmationService from 'primevue/confirmationservice';
 import Aura from '@primeuix/themes/aura';
+import Tooltip from 'primevue/tooltip';
 import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 
 const app = createApp(App);
 const pinia = createPinia();
+
+app.directive('tooltip', Tooltip);
 
 app.use(pinia);
 app.use(router);

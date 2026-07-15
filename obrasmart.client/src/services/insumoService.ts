@@ -53,4 +53,14 @@ export const insumoService = {
     if (!response.ok) throw new Error('Error al cargar las etiquetas.');
     return await response.json();
   },
+
+  async crearEtiqueta(etiqueta: { nombre: string; colorHex: string }): Promise<string> {
+    const response = await apiClient('/Etiquetas', {
+      method: 'POST',
+      body: JSON.stringify(etiqueta)
+    });
+
+    if (!response.ok) await manejarErrorHttp(response);
+    return await response.json();
+  },
 };

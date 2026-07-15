@@ -1,19 +1,40 @@
 <template>
-  <div class="flex flex-column gap-4 pb-4">
+  <div class="flex flex-column gap-4 pb-4" style="height: calc(100vh - 120px);">
 
-    <div class="surface-card p-4 shadow-1 border-round">
-      <div class="flex flex-column md:flex-row justify-content-between md:align-items-center mb-4 gap-3">
-        <div class="flex align-items-center gap-3">
-          <div class="bg-blue-500 text-white border-round-lg flex align-items-center justify-content-center" style="width: 3rem; height: 3rem;">
+    <div class="surface-card p-4 shadow-1 border-round flex flex-column flex-grow-1 overflow-hidden">
+      <!--<div class="flex flex-column md:flex-row justify-content-between md:align-items-center mb-4 gap-3">
+    <div class="flex align-items-center gap-3">
+      <div class="bg-blue-500 text-white border-round-lg flex align-items-center justify-content-center" style="width: 3rem; height: 3rem;">
+        <i class="pi pi-box text-xl"></i>
+      </div>
+      <div>
+        <h2 class="m-0 text-900 text-xl font-bold">Catálogo de Insumos</h2>
+        <span class="text-500 text-sm">Administra los materiales, mano de obra y equipos</span>
+      </div>
+    </div>
+
+    <button-prime label="Nuevo Insumo" icon="pi pi-plus" @click="abrirNuevo" class="w-full md:w-auto p-button" />
+  </div>-->
+      <div class="flex flex-column md:flex-row justify-content-between md:align-items-center mb-3 gap-3">
+
+        <div class="flex align-items-center gap-3 titulo-mantenedor">
+          <div class="bg-blue-500 text-white border-round-lg flex align-items-center justify-content-center flex-shrink-0" style="width: 3rem; height: 3rem;">
             <i class="pi pi-box text-xl"></i>
           </div>
           <div>
             <h2 class="m-0 text-900 text-xl font-bold">Catálogo de Insumos</h2>
-            <span class="text-500 text-sm">Administra los materiales, mano de obra y equipos</span>
+            <span class="text-500 text-sm hidden md:block">Administra los materiales, mano de obra y equipos</span>
           </div>
         </div>
 
-        <button-prime label="Nuevo Insumo" icon="pi pi-plus" @click="abrirNuevo" class="w-full md:w-auto p-button" />
+        <div class="flex gap-2 w-full md:w-auto justify-content-end flex-shrink-0">
+          <Button :icon="mostrarFiltros ? 'pi pi-filter-slash' : 'pi pi-filter'"
+                  :label="mostrarFiltros ? 'Ocultar Filtros' : 'Filtros'"
+                  severity="secondary"
+                  outlined
+                  @click="mostrarFiltros = !mostrarFiltros" />
+          <Button label="Nuevo Insumo" icon="pi pi-plus" @click="abrirNuevo" />
+        </div>
       </div>
 
       <Message v-if="globalError" severity="error" :closable="true" @close="globalError = ''" class="mb-3">
@@ -22,9 +43,44 @@
 
       <DataTable :value="insumos"
                  :loading="cargando"
+                 v-model:filters="filtros"
+                 :globalFilterFields="['descripcion']"
                  responsiveLayout="scroll"
                  stripedRows
-                 class="p-datatable-sm">
+                 class="p-datatable-sm flex flex-column flex-grow-1"
+                 style="min-height: 0;"
+                 scrollable
+                 scrollHeight="flex"
+                 :virtualScroll="true"
+                 :rows="25">
+
+        <template #header>
+          <div v-if="mostrarFiltros" class="flex flex-column md:flex-row justify-content-between gap-3 transition-duration-200">
+
+            <div class="w-full md:w-20rem">
+              <InputText v-model="filtros['global'].value"
+                         placeholder="Buscar por descripción..."
+                         class="w-full" />
+            </div>
+
+            <div class="flex flex-column md:flex-row gap-2 w-full md:w-auto">
+              <Select v-model="filtros['tipoInsumo'].value"
+                      :options="tiposInsumo"
+                      placeholder="Filtrar por Tipo"
+                      showClear
+                      class="w-full md:w-15rem" />
+
+              <Select v-model="filtros['etiquetasIds'].value"
+                      :options="catalogoEtiquetas"
+                      optionLabel="nombre"
+                      optionValue="id"
+                      placeholder="Filtrar por Etiqueta"
+                      showClear
+                      class="w-full md:w-15rem" />
+            </div>
+
+          </div>
+        </template>
 
         <template #empty>
           <div class="text-center p-4 text-500">
@@ -104,7 +160,10 @@
   import Column from 'primevue/column';
   import { useConfirm } from "primevue/useconfirm";
   import ConfirmDialog from 'primevue/confirmdialog';
+  import { FilterMatchMode } from "@primevue/core/api";
   import Button from 'primevue/button';
+  import Select from 'primevue/select';
+  import InputText from 'primevue/inputtext';
 
   import ButtonPrime from 'primevue/button';
   import Message from 'primevue/message';
@@ -115,6 +174,17 @@
   const catalogoEtiquetas = ref<IEtiqueta[]>([]);
   const cargando = ref(false);
   const globalError = ref('');
+
+  // --- configuración de Filtros ---
+  const filtros = ref({
+    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    tipoInsumo: { value: null, matchMode: FilterMatchMode.EQUALS },
+    etiquetasIds: { value: null, matchMode: FilterMatchMode.CONTAINS }
+  });
+
+  const tiposInsumo = ref(['Material', 'Mano de Obra', 'Equipo']);
+  const mostrarFiltros = ref(window.innerHeight > 500);
+  // ------------------------------------
 
   // Estado del Modal
   const mostrarDialogo = ref(false);
@@ -170,6 +240,7 @@
         await insumoService.crear(payload);
       }
       mostrarDialogo.value = false;
+      await cargarEtiquetas();
       await cargarInsumos();
     } catch (err: any) {
       errorDialogo.value = err.message;
@@ -239,3 +310,11 @@
     };
   };
 </script>
+<style scoped>
+  /* Ocultar el título principal solo cuando la altura de la pantalla es crítica (ej. móviles en horizontal) para priorizar la tabla */
+  @media (max-height: 500px) {
+    .titulo-mantenedor {
+      display: none !important;
+    }
+  }
+</style>
