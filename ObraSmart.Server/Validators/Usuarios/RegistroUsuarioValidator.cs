@@ -2,7 +2,7 @@
 using ObraSmart.Application.DTOs;
 using ObraSmart.Server.Validators.Extensions;
 
-namespace ObraSmart.Server.Validators
+namespace ObraSmart.Server.Validators.Usuarios
 {
     public class RegistroUsuarioValidator : AbstractValidator<RegistroUsuarioDto>
     {

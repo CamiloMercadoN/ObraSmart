@@ -7,7 +7,7 @@ using ObraSmart.Application.Interfaces.Services;
 using ObraSmart.Infrastructure;
 using ObraSmart.Infrastructure.Data;
 using ObraSmart.Server.Services;
-using ObraSmart.Server.Validators;
+using ObraSmart.Server.Validators.Usuarios;
 using Scalar.AspNetCore;
 using System.Text;
 

@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using ObraSmart.Application.DTOs.Etiquetas;
 
-namespace ObraSmart.Server.Validators
+namespace ObraSmart.Server.Validators.Etiquetas
 {
     public class EtiquetaUpsertDtoValidator : AbstractValidator<EtiquetaUpsertDto>
     {

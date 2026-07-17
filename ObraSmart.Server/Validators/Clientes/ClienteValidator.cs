@@ -2,7 +2,7 @@
 using ObraSmart.Application.DTOs.Clientes;
 using ObraSmart.Server.Validators.Extensions;
 
-namespace ObraSmart.Server.Validators
+namespace ObraSmart.Server.Validators.Clientes
 {
     public class ClienteValidator : AbstractValidator<ClienteRequestDto>
     {

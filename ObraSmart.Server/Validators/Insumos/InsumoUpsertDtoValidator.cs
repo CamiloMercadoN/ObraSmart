@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using ObraSmart.Application.DTOs.Insumos;
 
-namespace ObraSmart.Server.Validators
+namespace ObraSmart.Server.Validators.Insumos
 {
     public class InsumoUpsertDtoValidator : AbstractValidator<InsumoUpsertDto>
     {

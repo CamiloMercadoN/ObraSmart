@@ -63,15 +63,20 @@
           command: () => { router.push('/presupuestos'); menuVisible.value = false; }
       },
       {
-          label: 'Clientes',
-          icon: 'pi pi-users',
-          command: () => { router.push('/clientes'); menuVisible.value = false; }
-    },
-    {
-      label: 'Insumos',
-      icon: 'pi pi-box',
-      command: () => { router.push('/insumos'); menuVisible.value = false; }
-    },
+            label: 'Clientes',
+            icon: 'pi pi-users',
+            command: () => { router.push('/clientes'); menuVisible.value = false; }
+      },
+      {
+        label: 'Insumos',
+        icon: 'pi pi-box',
+        command: () => { router.push('/insumos'); menuVisible.value = false; }
+      },
+      {
+        label: 'Actualizar Precios',
+        icon: 'pi pi-chart-line',
+        command: () => { router.push('/insumos/precios'); menuVisible.value = false; }
+      },
       { separator: true }, // Línea divisoria visual
       {
           label: 'Configuración',
