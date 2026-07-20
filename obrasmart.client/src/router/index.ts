@@ -38,6 +38,21 @@ const router = createRouter({
           path: 'insumos/precios',
           name: 'ActualizacionPrecios',
           component: () => import('../views/insumos/ActualizacionPrecios.vue'),
+        },
+        {
+          path: 'apus',
+          name: 'Apus',
+          component: () => import('../views/apus/Apus.vue'),
+        },
+        {
+          path: 'apus/crear',
+          name: 'CrearApu',
+          component: () => import('../views/apus/ApuForm.vue'),
+        },
+        {
+          path: 'apus/editar/:id',
+          name: 'EditarApu',
+          component: () => import('../views/apus/ApuForm.vue'),
         }
       ]
     },

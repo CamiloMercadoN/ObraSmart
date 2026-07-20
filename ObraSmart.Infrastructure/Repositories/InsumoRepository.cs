@@ -34,5 +34,13 @@ namespace ObraSmart.Infrastructure.Repositories
                 .Where(e => ids.Contains(e.Id))
                 .ToListAsync();
         }
+        public async Task<IReadOnlyList<Insumo>> GetByIdsAsync(IEnumerable<Guid> ids)
+        {
+            return await _context.Insumos
+                .AsNoTracking()
+                .Where(i => ids.Contains(i.Id))
+                .ToListAsync();
+        }
+
     }
 }

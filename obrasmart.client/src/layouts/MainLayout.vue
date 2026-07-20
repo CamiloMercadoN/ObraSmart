@@ -77,6 +77,11 @@
         icon: 'pi pi-chart-line',
         command: () => { router.push('/insumos/precios'); menuVisible.value = false; }
       },
+      {
+        label: 'Catálogo APUs',
+        icon: 'pi pi-book',
+        command: () => { router.push('/apus'); menuVisible.value = false; }
+      },
       { separator: true }, // Línea divisoria visual
       {
           label: 'Configuración',

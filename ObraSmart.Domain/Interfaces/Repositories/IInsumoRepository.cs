@@ -7,5 +7,6 @@ namespace ObraSmart.Domain.Interfaces.Repositories
         Task<IReadOnlyList<Insumo>> GetAllWithDependenciesAsync();
         Task<Insumo?> GetByIdWithDependenciesAsync(Guid id);
         Task<List<Etiqueta>> GetEtiquetasByIdsAsync(IEnumerable<Guid> ids);
+        Task<IReadOnlyList<Insumo>> GetByIdsAsync(IEnumerable<Guid> ids);
     }
 }
