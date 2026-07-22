@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# IDE0305: Simplificar la inicialización de la recopilación
+dotnet_diagnostic.IDE0305.severity = none

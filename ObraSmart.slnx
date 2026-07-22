@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
   <Project Path="ObraSmart.Application/ObraSmart.Application.csproj" Id="cc85cd87-c71c-49e2-a3d7-ca8f8a50a970" />
   <Project Path="obrasmart.client/obrasmart.client.esproj">
     <Build />

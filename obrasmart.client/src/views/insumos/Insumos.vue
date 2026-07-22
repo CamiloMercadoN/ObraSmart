@@ -2,19 +2,6 @@
   <div class="flex flex-column gap-4 pb-4" style="height: calc(100vh - 120px);">
 
     <div class="surface-card p-4 shadow-1 border-round flex flex-column flex-grow-1 overflow-hidden">
-      <!--<div class="flex flex-column md:flex-row justify-content-between md:align-items-center mb-4 gap-3">
-    <div class="flex align-items-center gap-3">
-      <div class="bg-blue-500 text-white border-round-lg flex align-items-center justify-content-center" style="width: 3rem; height: 3rem;">
-        <i class="pi pi-box text-xl"></i>
-      </div>
-      <div>
-        <h2 class="m-0 text-900 text-xl font-bold">Catálogo de Insumos</h2>
-        <span class="text-500 text-sm">Administra los materiales, mano de obra y equipos</span>
-      </div>
-    </div>
-
-    <button-prime label="Nuevo Insumo" icon="pi pi-plus" @click="abrirNuevo" class="w-full md:w-auto p-button" />
-  </div>-->
       <div class="flex flex-column md:flex-row justify-content-between md:align-items-center mb-3 gap-3">
 
         <div class="flex align-items-center gap-3 titulo-mantenedor">
