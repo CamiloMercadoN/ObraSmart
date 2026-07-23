@@ -12,6 +12,7 @@ namespace ObraSmart.Application.DTOs.Presupuestos
         public decimal Subtotal { get; set; }
         public decimal MontoIva { get; set; }
         public decimal Total { get; set; }
+        public bool EsPlantilla { get; set; }
         public List<ItemPresupuestoDto> Items { get; set; } = new List<ItemPresupuestoDto>();
     }
 }

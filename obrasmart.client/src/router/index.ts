@@ -53,6 +53,21 @@ const router = createRouter({
           path: 'apus/editar/:id',
           name: 'EditarApu',
           component: () => import('../views/apus/ApuForm.vue'),
+        },
+        {
+          path: 'presupuestos',
+          name: 'Presupuestos',
+          component: () => import('../views/presupuestos/Presupuestos.vue'),
+        },
+        {
+          path: 'presupuestos/crear',
+          name: 'CrearPresupuesto',
+          component: () => import('../views/presupuestos/PresupuestoForm.vue'),
+        },
+        {
+          path: 'presupuestos/editar/:id',
+          name: 'EditarPresupuesto',
+          component: () => import('../views/presupuestos/PresupuestoForm.vue'),
         }
       ]
     },

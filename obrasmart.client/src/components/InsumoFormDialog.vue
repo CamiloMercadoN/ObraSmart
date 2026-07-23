@@ -123,6 +123,7 @@
   import Message from 'primevue/message';
   import Select from 'primevue/select';
   import MultiSelect from 'primevue/multiselect';
+  import { TIPOS_INSUMO } from '../utils/constantes';
 
   const props = defineProps({
     visible: {
@@ -156,7 +157,7 @@
   const modoEdicion = computed(() => !!props.insumoData?.id);
 
   // Opciones estáticas e interactivas
-  const tiposInsumo = ref(['Material', 'Mano de Obra', 'Equipo']);
+  const tiposInsumo = ref(TIPOS_INSUMO);
   const unidades = ref<IUnidadMedida[]>([]);
   const etiquetas = ref<IEtiqueta[]>([]);
   const cargandoAuxiliares = ref(false);

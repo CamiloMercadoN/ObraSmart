@@ -79,7 +79,7 @@
 
         <Column field="tipoInsumo" header="Tipo">
           <template #body="slotProps">
-            <span :class="obtenerBadgeClaseTipo(slotProps.data.tipoInsumo)">
+            <span :class="OBTENER_CLASE_TIPO_INSUMO(slotProps.data.tipoInsumo)">
               {{ slotProps.data.tipoInsumo }}
             </span>
           </template>
@@ -155,6 +155,7 @@
   import ButtonPrime from 'primevue/button';
   import Message from 'primevue/message';
   import InsumoFormDialog from '../../components/InsumoFormDialog.vue';
+  import { TIPOS_INSUMO, OBTENER_CLASE_TIPO_INSUMO } from '../../utils/constantes';
 
   // Estado de la Vista
   const insumos = ref<IInsumo[]>([]);
@@ -169,7 +170,7 @@
     etiquetasIds: { value: null, matchMode: FilterMatchMode.CONTAINS }
   });
 
-  const tiposInsumo = ref(['Material', 'Mano de Obra', 'Equipo']);
+  const tiposInsumo = ref(TIPOS_INSUMO);
   const mostrarFiltros = ref(window.innerHeight > 500);
   // ------------------------------------
 
@@ -270,15 +271,6 @@
   // Funciones de utilidad visual
   const formatMonedaChilena = (valor: number) => {
     return new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(valor);
-  };
-
-  const obtenerBadgeClaseTipo = (tipo: string) => {
-    switch (tipo) {
-      case 'Material': return 'text-xs font-bold text-orange-600 bg-orange-50 border-round px-2 py-1';
-      case 'Mano de Obra': return 'text-xs font-bold text-blue-600 bg-blue-50 border-round px-2 py-1';
-      case 'Equipo': return 'text-xs font-bold text-purple-600 bg-purple-50 border-round px-2 py-1';
-      default: return 'text-xs font-bold text-500 bg-100 border-round px-2 py-1';
-    }
   };
 
   const obtenerNombreEtiqueta = (id: string): string => {

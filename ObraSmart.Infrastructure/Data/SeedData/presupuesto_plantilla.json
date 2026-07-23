@@ -6,33 +6,150 @@
     "NombreProyecto": "Instalación Sanitaria Baño Completo Estándar",
     "FechaCreacion": "2026-07-10T08:30:00",
     "Estado": "Borrador",
-    "Subtotal": 216000.00,
-    "MontoIva": 41040.00,
-    "Total": 257040.00,
+    "Subtotal": 233390.0,
+    "MontoIva": 44344.1,
+    "Total": 277734.1,
     "Items": [
       {
         "Id": "d3d11111-1111-1111-1111-111111111111",
         "EstructuraAPUOrigenId": "a2a11111-1111-1111-1111-111111111111",
         "Descripcion": "Punto de Agua Potable PPR 20mm (Vanitorio y WC)",
-        "CantidadItem": 2.00,
-        "PrecioUnitarioCalculado": 52600.00,
-        "Subtotal": 105200.00
+        "CantidadItem": 2.0,
+        "PrecioUnitarioCalculado": 61000.0,
+        "Subtotal": 122000.0,
+        "UnidadMedidaId": 1,
+        "Recursos": [
+          {
+            "Id": "c4c11111-1111-1111-1111-111111111111",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Tubo PPR 20mm x 3m PN16 (Agua Potable)",
+            "Cantidad": 2.5,
+            "PrecioUnitarioCongelado": 3800.0,
+            "CostoTotalRecurso": 9500.0,
+            "UnidadMedidaId": 9
+          },
+          {
+            "Id": "c4c11111-1111-1111-1111-111111111112",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Kit de fittings PPR 20 mm (codos, tees y terminales)",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 4500.0,
+            "CostoTotalRecurso": 4500.0,
+            "UnidadMedidaId": 4
+          },
+          {
+            "Id": "c4c11111-1111-1111-1111-111111111113",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Maestro Gasfíter Instalador",
+            "Cantidad": 4.0,
+            "PrecioUnitarioCongelado": 6500.0,
+            "CostoTotalRecurso": 26000.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "c4c11111-1111-1111-1111-111111111114",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Ayudante Gasfíter",
+            "Cantidad": 4.0,
+            "PrecioUnitarioCongelado": 4000.0,
+            "CostoTotalRecurso": 16000.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "c4c11111-1111-1111-1111-111111111115",
+            "TipoInsumo": "Equipo",
+            "DescripcionCongelada": "Arriendo Máquina Termofusora PPR",
+            "Cantidad": 2.5,
+            "PrecioUnitarioCongelado": 2000.0,
+            "CostoTotalRecurso": 5000.0,
+            "UnidadMedidaId": 18
+          }
+        ]
       },
       {
         "Id": "d3d22222-2222-2222-2222-222222222222",
         "EstructuraAPUOrigenId": "a2a22222-2222-2222-2222-222222222222",
-        "Descripcion": "Punto de Descarga Alcantarillado PVC 40/50mm",
-        "CantidadItem": 2.00,
-        "PrecioUnitarioCalculado": 38650.00,
-        "Subtotal": 77300.00
+        "Descripcion": "Puntos de Descarga Alcantarillado PVC 40 mm (Vanitorio y ducha)",
+        "CantidadItem": 2.0,
+        "PrecioUnitarioCalculado": 38820.0,
+        "Subtotal": 77640.0,
+        "UnidadMedidaId": 1,
+        "Recursos": [
+          {
+            "Id": "c4c22222-2222-2222-2222-222222222221",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Tubo PVC Alcantarillado 40mm x 3m",
+            "Cantidad": 1.5,
+            "PrecioUnitarioCongelado": 4200.0,
+            "CostoTotalRecurso": 6300.0,
+            "UnidadMedidaId": 9
+          },
+          {
+            "Id": "c4c22222-2222-2222-2222-222222222222",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Adhesivo PVC Vinilit 250g",
+            "Cantidad": 0.15,
+            "PrecioUnitarioCongelado": 6800.0,
+            "CostoTotalRecurso": 1020.0,
+            "UnidadMedidaId": 1
+          },
+          {
+            "Id": "c4c22222-2222-2222-2222-222222222223",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Maestro Gasfíter Instalador",
+            "Cantidad": 3.0,
+            "PrecioUnitarioCongelado": 6500.0,
+            "CostoTotalRecurso": 19500.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "c4c22222-2222-2222-2222-222222222224",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Ayudante Gasfíter",
+            "Cantidad": 3.0,
+            "PrecioUnitarioCongelado": 4000.0,
+            "CostoTotalRecurso": 12000.0,
+            "UnidadMedidaId": 18
+          }
+        ]
       },
       {
         "Id": "d3d33333-3333-3333-3333-333333333333",
         "EstructuraAPUOrigenId": "a2a33333-3333-3333-3333-333333333333",
-        "Descripcion": "Instalación de Artefacto WC",
-        "CantidadItem": 1.00,
-        "PrecioUnitarioCalculado": 33500.00,
-        "Subtotal": 33500.00
+        "Descripcion": "Instalación de Artefacto WC (Conexión a descarga existente)",
+        "CantidadItem": 1.0,
+        "PrecioUnitarioCalculado": 33750.0,
+        "Subtotal": 33750.0,
+        "UnidadMedidaId": 1,
+        "Recursos": [
+          {
+            "Id": "c4c33333-3333-3333-3333-333333333331",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Tubo PVC Alcantarillado 110mm x 3m",
+            "Cantidad": 0.5,
+            "PrecioUnitarioCongelado": 12500.0,
+            "CostoTotalRecurso": 6250.0,
+            "UnidadMedidaId": 9
+          },
+          {
+            "Id": "c4c33333-3333-3333-3333-333333333332",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Maestro Gasfíter Instalador",
+            "Cantidad": 3.0,
+            "PrecioUnitarioCongelado": 6500.0,
+            "CostoTotalRecurso": 19500.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "c4c33333-3333-3333-3333-333333333333",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Ayudante Gasfíter",
+            "Cantidad": 2.0,
+            "PrecioUnitarioCongelado": 4000.0,
+            "CostoTotalRecurso": 8000.0,
+            "UnidadMedidaId": 18
+          }
+        ]
       }
     ]
   },
@@ -43,49 +160,271 @@
     "NombreProyecto": "Remodelación Sanitaria Cocina y Red de Gas",
     "FechaCreacion": "2026-07-10T09:15:00",
     "Estado": "Borrador",
-    "Subtotal": 231975.00,
-    "MontoIva": 44075.25,
-    "Total": 276050.25,
+    "Subtotal": 234625.0,
+    "MontoIva": 44578.75,
+    "Total": 279203.75,
     "Items": [
       {
         "Id": "d3d44444-4444-4444-4444-444444444444",
         "EstructuraAPUOrigenId": "a2a11111-1111-1111-1111-111111111111",
         "Descripcion": "Punto de Agua Potable PPR 20mm (Para Lavaplatos)",
-        "CantidadItem": 1.00,
-        "PrecioUnitarioCalculado": 52600.00,
-        "Subtotal": 52600.00
+        "CantidadItem": 1.0,
+        "PrecioUnitarioCalculado": 61000.0,
+        "Subtotal": 61000.0,
+        "UnidadMedidaId": 1,
+        "Recursos": [
+          {
+            "Id": "c4c44444-4444-4444-4444-444444444441",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Tubo PPR 20mm x 3m PN16 (Agua Potable)",
+            "Cantidad": 2.5,
+            "PrecioUnitarioCongelado": 3800.0,
+            "CostoTotalRecurso": 9500.0,
+            "UnidadMedidaId": 9
+          },
+          {
+            "Id": "c4c44444-4444-4444-4444-444444444442",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Kit de fittings PPR 20 mm (codos, tees y terminales)",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 4500.0,
+            "CostoTotalRecurso": 4500.0,
+            "UnidadMedidaId": 4
+          },
+          {
+            "Id": "c4c44444-4444-4444-4444-444444444443",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Maestro Gasfíter Instalador",
+            "Cantidad": 4.0,
+            "PrecioUnitarioCongelado": 6500.0,
+            "CostoTotalRecurso": 26000.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "c4c44444-4444-4444-4444-444444444444",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Ayudante Gasfíter",
+            "Cantidad": 4.0,
+            "PrecioUnitarioCongelado": 4000.0,
+            "CostoTotalRecurso": 16000.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "c4c44444-4444-4444-4444-444444444445",
+            "TipoInsumo": "Equipo",
+            "DescripcionCongelada": "Arriendo Máquina Termofusora PPR",
+            "Cantidad": 2.5,
+            "PrecioUnitarioCongelado": 2000.0,
+            "CostoTotalRecurso": 5000.0,
+            "UnidadMedidaId": 18
+          }
+        ]
       },
       {
         "Id": "d3d55555-5555-5555-5555-555555555555",
-        "EstructuraAPUOrigenId": "a2a22222-2222-2222-2222-222222222222",
-        "Descripcion": "Punto de Descarga Alcantarillado PVC 50mm",
-        "CantidadItem": 1.00,
-        "PrecioUnitarioCalculado": 38650.00,
-        "Subtotal": 38650.00
+        "EstructuraAPUOrigenId": "eecde254-aeea-5022-a9c8-dff2b15e1271",
+        "Descripcion": "Punto de Descarga Alcantarillado PVC 50 mm (Lavaplatos)",
+        "CantidadItem": 1.0,
+        "PrecioUnitarioCalculado": 42270.0,
+        "Subtotal": 42270.0,
+        "UnidadMedidaId": 1,
+        "Recursos": [
+          {
+            "Id": "c4c55555-5555-5555-5555-555555555551",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Tubo PVC alcantarillado 50 mm x 3 m",
+            "Cantidad": 1.5,
+            "PrecioUnitarioCongelado": 6500.0,
+            "CostoTotalRecurso": 9750.0,
+            "UnidadMedidaId": 9
+          },
+          {
+            "Id": "c4c55555-5555-5555-5555-555555555552",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Adhesivo PVC Vinilit 250g",
+            "Cantidad": 0.15,
+            "PrecioUnitarioCongelado": 6800.0,
+            "CostoTotalRecurso": 1020.0,
+            "UnidadMedidaId": 1
+          },
+          {
+            "Id": "c4c55555-5555-5555-5555-555555555553",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Maestro Gasfíter Instalador",
+            "Cantidad": 3.0,
+            "PrecioUnitarioCongelado": 6500.0,
+            "CostoTotalRecurso": 19500.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "c4c55555-5555-5555-5555-555555555554",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Ayudante Gasfíter",
+            "Cantidad": 3.0,
+            "PrecioUnitarioCongelado": 4000.0,
+            "CostoTotalRecurso": 12000.0,
+            "UnidadMedidaId": 18
+          }
+        ]
       },
       {
         "Id": "d3d66666-6666-6666-6666-666666666666",
         "EstructuraAPUOrigenId": "a2a44444-4444-4444-4444-444444444444",
         "Descripcion": "Punto de Red de Gas en Cobre (Alimentación Calefón)",
-        "CantidadItem": 1.00,
-        "PrecioUnitarioCalculado": 52625.00,
-        "Subtotal": 52625.00
+        "CantidadItem": 1.0,
+        "PrecioUnitarioCalculado": 45855.0,
+        "Subtotal": 45855.0,
+        "UnidadMedidaId": 1,
+        "Recursos": [
+          {
+            "Id": "c4c66666-6666-6666-6666-666666666661",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Tubo Cobre Tipo L 1/2\" x 6m (Gas)",
+            "Cantidad": 0.33,
+            "PrecioUnitarioCongelado": 28500.0,
+            "CostoTotalRecurso": 9405.0,
+            "UnidadMedidaId": 9
+          },
+          {
+            "Id": "c4c66666-6666-6666-6666-666666666662",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Soldadura de plata al 5%",
+            "Cantidad": 0.05,
+            "PrecioUnitarioCongelado": 145000.0,
+            "CostoTotalRecurso": 7250.0,
+            "UnidadMedidaId": 15
+          },
+          {
+            "Id": "c4c66666-6666-6666-6666-666666666663",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Llave de Paso Gas Cobre/Bronce 1/2\"",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 8500.0,
+            "CostoTotalRecurso": 8500.0,
+            "UnidadMedidaId": 1
+          },
+          {
+            "Id": "c4c66666-6666-6666-6666-666666666664",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Maestro Gasfíter Instalador",
+            "Cantidad": 3.0,
+            "PrecioUnitarioCongelado": 6500.0,
+            "CostoTotalRecurso": 19500.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "c4c66666-6666-6666-6666-666666666665",
+            "TipoInsumo": "Equipo",
+            "DescripcionCongelada": "Soplete a Gas Propano (Desgaste)",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 1200.0,
+            "CostoTotalRecurso": 1200.0,
+            "UnidadMedidaId": 18
+          }
+        ]
       },
       {
         "Id": "d3d77777-7777-7777-7777-777777777777",
         "EstructuraAPUOrigenId": "a2a55555-5555-5555-5555-555555555555",
         "Descripcion": "Instalación de Lavaplatos y Grifería",
-        "CantidadItem": 1.00,
-        "PrecioUnitarioCalculado": 38100.00,
-        "Subtotal": 38100.00
+        "CantidadItem": 1.0,
+        "PrecioUnitarioCalculado": 35500.0,
+        "Subtotal": 35500.0,
+        "UnidadMedidaId": 1,
+        "Recursos": [
+          {
+            "Id": "c4c77777-7777-7777-7777-777777777771",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Sifón Desagüe Lavaplatos Doble",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 6900.0,
+            "CostoTotalRecurso": 6900.0,
+            "UnidadMedidaId": 1
+          },
+          {
+            "Id": "c4c77777-7777-7777-7777-777777777772",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Set de flexibles vinílicos 1/2\" x 30 cm (par)",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 5500.0,
+            "CostoTotalRecurso": 5500.0,
+            "UnidadMedidaId": 4
+          },
+          {
+            "Id": "c4c77777-7777-7777-7777-777777777773",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Silicona acética antihongos (cartucho)",
+            "Cantidad": 0.5,
+            "PrecioUnitarioCongelado": 4200.0,
+            "CostoTotalRecurso": 2100.0,
+            "UnidadMedidaId": 1
+          },
+          {
+            "Id": "c4c77777-7777-7777-7777-777777777774",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Maestro Gasfíter Instalador",
+            "Cantidad": 2.0,
+            "PrecioUnitarioCongelado": 6500.0,
+            "CostoTotalRecurso": 13000.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "c4c77777-7777-7777-7777-777777777775",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Ayudante Gasfíter",
+            "Cantidad": 2.0,
+            "PrecioUnitarioCongelado": 4000.0,
+            "CostoTotalRecurso": 8000.0,
+            "UnidadMedidaId": 18
+          }
+        ]
       },
       {
         "Id": "d3d88888-8888-8888-8888-888888888888",
         "EstructuraAPUOrigenId": "a2a66666-6666-6666-6666-666666666666",
         "Descripcion": "Instalación de Calefón y Pruebas de Fuga",
-        "CantidadItem": 1.00,
-        "PrecioUnitarioCalculado": 50000.00,
-        "Subtotal": 50000.00
+        "CantidadItem": 1.0,
+        "PrecioUnitarioCalculado": 50000.0,
+        "Subtotal": 50000.0,
+        "UnidadMedidaId": 1,
+        "Recursos": [
+          {
+            "Id": "c4c88888-8888-8888-8888-888888888881",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Set de flexibles vinílicos 1/2\" x 30 cm (par)",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 5500.0,
+            "CostoTotalRecurso": 5500.0,
+            "UnidadMedidaId": 4
+          },
+          {
+            "Id": "c4c88888-8888-8888-8888-888888888882",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Llave de Paso Gas Cobre/Bronce 1/2\"",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 8500.0,
+            "CostoTotalRecurso": 8500.0,
+            "UnidadMedidaId": 1
+          },
+          {
+            "Id": "c4c88888-8888-8888-8888-888888888883",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Maestro Gasfíter Instalador",
+            "Cantidad": 4.0,
+            "PrecioUnitarioCongelado": 6500.0,
+            "CostoTotalRecurso": 26000.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "c4c88888-8888-8888-8888-888888888884",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Ayudante Gasfíter",
+            "Cantidad": 2.5,
+            "PrecioUnitarioCongelado": 4000.0,
+            "CostoTotalRecurso": 10000.0,
+            "UnidadMedidaId": 18
+          }
+        ]
       }
     ]
   },
@@ -96,25 +435,85 @@
     "NombreProyecto": "Servicio de Emergencia: Detección y Reparación de Fuga",
     "FechaCreacion": "2026-07-10T10:00:00",
     "Estado": "Borrador",
-    "Subtotal": 102000.00,
-    "MontoIva": 19380.00,
-    "Total": 121380.00,
+    "Subtotal": 100500.0,
+    "MontoIva": 19095.0,
+    "Total": 119595.0,
     "Items": [
       {
         "Id": "d3d99999-9999-9999-9999-999999999999",
         "EstructuraAPUOrigenId": "a3a11111-1111-1111-1111-111111111111",
         "Descripcion": "Servicio de Detección de Filtración (Termografía)",
-        "CantidadItem": 1.00,
-        "PrecioUnitarioCalculado": 55000.00,
-        "Subtotal": 55000.00
+        "CantidadItem": 1.0,
+        "PrecioUnitarioCalculado": 55000.0,
+        "Subtotal": 55000.0,
+        "UnidadMedidaId": 2,
+        "Recursos": [
+          {
+            "Id": "c4c99999-9999-9999-9999-999999999991",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Técnico Especialista (Diagnóstico/Mantención)",
+            "Cantidad": 2.0,
+            "PrecioUnitarioCongelado": 15000.0,
+            "CostoTotalRecurso": 30000.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "c4c99999-9999-9999-9999-999999999992",
+            "TipoInsumo": "Equipo",
+            "DescripcionCongelada": "Uso de cámara termográfica o equipo de ultrasonido",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 25000.0,
+            "CostoTotalRecurso": 25000.0,
+            "UnidadMedidaId": 2
+          }
+        ]
       },
       {
         "Id": "d3daaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
         "EstructuraAPUOrigenId": "a3a22222-2222-2222-2222-222222222222",
         "Descripcion": "Reparación Localizada de Filtración (Parche Rápido)",
-        "CantidadItem": 1.00,
-        "PrecioUnitarioCalculado": 47000.00,
-        "Subtotal": 47000.00
+        "CantidadItem": 1.0,
+        "PrecioUnitarioCalculado": 45500.0,
+        "Subtotal": 45500.0,
+        "UnidadMedidaId": 2,
+        "Recursos": [
+          {
+            "Id": "c4caaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa1",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Maestro Gasfíter de Reparaciones",
+            "Cantidad": 3.0,
+            "PrecioUnitarioCongelado": 7500.0,
+            "CostoTotalRecurso": 22500.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "c4caaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa2",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Ayudante Gasfíter",
+            "Cantidad": 3.0,
+            "PrecioUnitarioCongelado": 4000.0,
+            "CostoTotalRecurso": 12000.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "c4caaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa3",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Kit básico de reparación de cañerías (coplas y consumibles)",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 6500.0,
+            "CostoTotalRecurso": 6500.0,
+            "UnidadMedidaId": 4
+          },
+          {
+            "Id": "c4caaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa4",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Mortero de reparación rápida 5 kg (parche)",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 4500.0,
+            "CostoTotalRecurso": 4500.0,
+            "UnidadMedidaId": 1
+          }
+        ]
       }
     ]
   },
@@ -125,25 +524,458 @@
     "NombreProyecto": "Mantención Anual de Red Sanitaria y Calefacción",
     "FechaCreacion": "2026-07-10T10:30:00",
     "Estado": "Borrador",
-    "Subtotal": 57000.00,
-    "MontoIva": 10830.00,
-    "Total": 67830.00,
+    "Subtotal": 57000.0,
+    "MontoIva": 10830.0,
+    "Total": 67830.0,
     "Items": [
       {
         "Id": "d3dbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
         "EstructuraAPUOrigenId": "a3a33333-3333-3333-3333-333333333333",
         "Descripcion": "Destape Preventivo de Red de Alcantarillado Principal",
-        "CantidadItem": 1.00,
-        "PrecioUnitarioCalculado": 30000.00,
-        "Subtotal": 30000.00
+        "CantidadItem": 1.0,
+        "PrecioUnitarioCalculado": 30000.0,
+        "Subtotal": 30000.0,
+        "UnidadMedidaId": 2,
+        "Recursos": [
+          {
+            "Id": "c4cbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb1",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Maestro Gasfíter de Reparaciones",
+            "Cantidad": 2.0,
+            "PrecioUnitarioCongelado": 7500.0,
+            "CostoTotalRecurso": 15000.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "c4cbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbb2",
+            "TipoInsumo": "Equipo",
+            "DescripcionCongelada": "Uso de máquina desobstructora con sonda eléctrica",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 15000.0,
+            "CostoTotalRecurso": 15000.0,
+            "UnidadMedidaId": 2
+          }
+        ]
       },
       {
         "Id": "d3dccccc-cccc-cccc-cccc-cccccccccccc",
         "EstructuraAPUOrigenId": "a3a44444-4444-4444-4444-444444444444",
-        "Descripcion": "Mantención Preventiva de Calefont",
-        "CantidadItem": 1.00,
-        "PrecioUnitarioCalculado": 27000.00,
-        "Subtotal": 27000.00
+        "Descripcion": "Mantención Preventiva de Calefón",
+        "CantidadItem": 1.0,
+        "PrecioUnitarioCalculado": 27000.0,
+        "Subtotal": 27000.0,
+        "UnidadMedidaId": 2,
+        "Recursos": [
+          {
+            "Id": "c4cccccc-cccc-cccc-cccc-ccccccccccc1",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Maestro Gasfíter de Reparaciones",
+            "Cantidad": 2.0,
+            "PrecioUnitarioCongelado": 7500.0,
+            "CostoTotalRecurso": 15000.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "c4cccccc-cccc-cccc-cccc-ccccccccccc2",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Kit de repuestos para mantención de calefón (membrana y O-rings)",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 12000.0,
+            "CostoTotalRecurso": 12000.0,
+            "UnidadMedidaId": 4
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": "e8cd5165-794c-5741-80d4-95015b845bf5",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "NombreProyecto": "Reparaciones Sanitarias Menores en Vivienda",
+    "FechaCreacion": "2026-07-10T11:00:00",
+    "Estado": "Borrador",
+    "Subtotal": 94680.0,
+    "MontoIva": 17989.2,
+    "Total": 112669.2,
+    "Items": [
+      {
+        "Id": "c565c97c-8bc5-562d-9cf0-a633b8786549",
+        "EstructuraAPUOrigenId": "79a250ae-b11e-5a4e-acd8-635c41d449ae",
+        "Descripcion": "Cambio de Grifería de Lavamanos",
+        "CantidadItem": 1.0,
+        "PrecioUnitarioCalculado": 20250.0,
+        "Subtotal": 20250.0,
+        "UnidadMedidaId": 1,
+        "Recursos": [
+          {
+            "Id": "8dcc51a8-15f3-5056-b74c-51be630049b2",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Set de flexibles vinílicos 1/2\" x 30 cm (par)",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 5500.0,
+            "CostoTotalRecurso": 5500.0,
+            "UnidadMedidaId": 4
+          },
+          {
+            "Id": "bdccc3d7-61c2-5469-8670-45ccbba1d49f",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Cinta selladora PTFE 12 mm x 10 m",
+            "Cantidad": 0.25,
+            "PrecioUnitarioCongelado": 1800.0,
+            "CostoTotalRecurso": 450.0,
+            "UnidadMedidaId": 1
+          },
+          {
+            "Id": "1b0c43f6-4628-56f0-a552-b455df28d208",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Silicona acética antihongos (cartucho)",
+            "Cantidad": 0.25,
+            "PrecioUnitarioCongelado": 4200.0,
+            "CostoTotalRecurso": 1050.0,
+            "UnidadMedidaId": 1
+          },
+          {
+            "Id": "628c7c3d-4b3c-555f-b501-2b3adec338fc",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Maestro Gasfíter de Reparaciones",
+            "Cantidad": 1.5,
+            "PrecioUnitarioCongelado": 7500.0,
+            "CostoTotalRecurso": 11250.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "a1f85a48-96c8-55cf-9f63-e666c37e8174",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Ayudante Gasfíter",
+            "Cantidad": 0.5,
+            "PrecioUnitarioCongelado": 4000.0,
+            "CostoTotalRecurso": 2000.0,
+            "UnidadMedidaId": 18
+          }
+        ]
+      },
+      {
+        "Id": "19fe4c4a-68fa-5b67-a19a-7d07fa62837f",
+        "EstructuraAPUOrigenId": "1ea1ddeb-10ec-5e84-bf62-c1df532f67f6",
+        "Descripcion": "Cambio de Mecanismo de Estanque WC",
+        "CantidadItem": 1.0,
+        "PrecioUnitarioCalculado": 26020.0,
+        "Subtotal": 26020.0,
+        "UnidadMedidaId": 1,
+        "Recursos": [
+          {
+            "Id": "0d0c43f6-7f6d-517a-8f7a-440a7af3e17d",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Mecanismo universal de descarga para estanque WC",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 12000.0,
+            "CostoTotalRecurso": 12000.0,
+            "UnidadMedidaId": 4
+          },
+          {
+            "Id": "41ad3956-60ec-50cc-9db6-1b79ba9c27fb",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Empaquetadura de descarga para WC",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 2500.0,
+            "CostoTotalRecurso": 2500.0,
+            "UnidadMedidaId": 1
+          },
+          {
+            "Id": "dec04584-6ba5-5496-b6f6-fdf37172785e",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Cinta selladora PTFE 12 mm x 10 m",
+            "Cantidad": 0.15,
+            "PrecioUnitarioCongelado": 1800.0,
+            "CostoTotalRecurso": 270.0,
+            "UnidadMedidaId": 1
+          },
+          {
+            "Id": "bb24289b-839d-524a-b5e6-a95b4f587650",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Maestro Gasfíter de Reparaciones",
+            "Cantidad": 1.5,
+            "PrecioUnitarioCongelado": 7500.0,
+            "CostoTotalRecurso": 11250.0,
+            "UnidadMedidaId": 18
+          }
+        ]
+      },
+      {
+        "Id": "ca23789d-edcb-5399-a8db-153eb88b983c",
+        "EstructuraAPUOrigenId": "3d7a4c91-9565-584e-85f0-7328e5956192",
+        "Descripcion": "Cambio de Llave de Paso de Agua Potable",
+        "CantidadItem": 1.0,
+        "PrecioUnitarioCalculado": 29660.0,
+        "Subtotal": 29660.0,
+        "UnidadMedidaId": 1,
+        "Recursos": [
+          {
+            "Id": "b1217492-3f84-50cc-bb5a-48ff400b777b",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Llave de paso para agua potable 1/2\"",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 6500.0,
+            "CostoTotalRecurso": 6500.0,
+            "UnidadMedidaId": 1
+          },
+          {
+            "Id": "979ff544-a531-5a95-889b-f9a110dc694c",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Terminal PPR 20 mm x 1/2\" con rosca",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 1800.0,
+            "CostoTotalRecurso": 1800.0,
+            "UnidadMedidaId": 1
+          },
+          {
+            "Id": "843070dc-0fb6-5f16-abf2-9215c3983f03",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Cinta selladora PTFE 12 mm x 10 m",
+            "Cantidad": 0.2,
+            "PrecioUnitarioCongelado": 1800.0,
+            "CostoTotalRecurso": 360.0,
+            "UnidadMedidaId": 1
+          },
+          {
+            "Id": "b54a2a2a-a696-58dc-b73c-abdc1029ace8",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Maestro Gasfíter de Reparaciones",
+            "Cantidad": 2.0,
+            "PrecioUnitarioCongelado": 7500.0,
+            "CostoTotalRecurso": 15000.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "d1fa2d5b-d382-5350-ad99-263dddec9444",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Ayudante Gasfíter",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 4000.0,
+            "CostoTotalRecurso": 4000.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "1932155f-1a1a-5414-ba61-c923c8d4a615",
+            "TipoInsumo": "Equipo",
+            "DescripcionCongelada": "Arriendo Máquina Termofusora PPR",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 2000.0,
+            "CostoTotalRecurso": 2000.0,
+            "UnidadMedidaId": 18
+          }
+        ]
+      },
+      {
+        "Id": "7de9d04a-4e28-5921-b0e0-2cf0e0d78fde",
+        "EstructuraAPUOrigenId": "e425191b-b122-52b0-aa66-67ec17281b97",
+        "Descripcion": "Destape de Lavamanos con Sonda Manual",
+        "CantidadItem": 1.0,
+        "PrecioUnitarioCalculado": 18750.0,
+        "Subtotal": 18750.0,
+        "UnidadMedidaId": 2,
+        "Recursos": [
+          {
+            "Id": "b62b46a7-4de9-532b-be6a-09567b6c5e17",
+            "TipoInsumo": "Equipo",
+            "DescripcionCongelada": "Uso de sonda manual destapadora",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 5000.0,
+            "CostoTotalRecurso": 5000.0,
+            "UnidadMedidaId": 2
+          },
+          {
+            "Id": "04982f5d-a5ef-59ae-98af-e6083510cf84",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Consumibles de limpieza y desinfección",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 2500.0,
+            "CostoTotalRecurso": 2500.0,
+            "UnidadMedidaId": 4
+          },
+          {
+            "Id": "f4c37161-2982-5483-a880-71a97382d9bc",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Maestro Gasfíter de Reparaciones",
+            "Cantidad": 1.5,
+            "PrecioUnitarioCongelado": 7500.0,
+            "CostoTotalRecurso": 11250.0,
+            "UnidadMedidaId": 18
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": "da889728-9f1b-5c6b-9f3d-6a53dc60680a",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "NombreProyecto": "Renovación de Artefactos de Baño",
+    "FechaCreacion": "2026-07-10T11:30:00",
+    "Estado": "Borrador",
+    "Subtotal": 102400.0,
+    "MontoIva": 19456.0,
+    "Total": 121856.0,
+    "Items": [
+      {
+        "Id": "d527defb-037c-538c-b0de-cc76d6342e8e",
+        "EstructuraAPUOrigenId": "a2a33333-3333-3333-3333-333333333333",
+        "Descripcion": "Instalación de Artefacto WC",
+        "CantidadItem": 1.0,
+        "PrecioUnitarioCalculado": 33750.0,
+        "Subtotal": 33750.0,
+        "UnidadMedidaId": 1,
+        "Recursos": [
+          {
+            "Id": "645f5281-4c02-5b8e-b0bc-6586b64ac802",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Tubo PVC Alcantarillado 110mm x 3m",
+            "Cantidad": 0.5,
+            "PrecioUnitarioCongelado": 12500.0,
+            "CostoTotalRecurso": 6250.0,
+            "UnidadMedidaId": 9
+          },
+          {
+            "Id": "e6c40811-8d70-50b3-b43b-34ee4a04b747",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Maestro Gasfíter Instalador",
+            "Cantidad": 3.0,
+            "PrecioUnitarioCongelado": 6500.0,
+            "CostoTotalRecurso": 19500.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "8c28f5f9-26a4-5f7e-9d59-69c77849cb64",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Ayudante Gasfíter",
+            "Cantidad": 2.0,
+            "PrecioUnitarioCongelado": 4000.0,
+            "CostoTotalRecurso": 8000.0,
+            "UnidadMedidaId": 18
+          }
+        ]
+      },
+      {
+        "Id": "4b9d0a26-d5b6-5451-8553-0fdb74071dd4",
+        "EstructuraAPUOrigenId": "db73b662-6dc8-5e10-9a91-d49295217371",
+        "Descripcion": "Instalación de Vanitorio y Lavamanos",
+        "CantidadItem": 1.0,
+        "PrecioUnitarioCalculado": 42400.0,
+        "Subtotal": 42400.0,
+        "UnidadMedidaId": 1,
+        "Recursos": [
+          {
+            "Id": "7b47e2ed-2721-5d37-a053-1ca3eba24bee",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Sifón para lavamanos 1 1/4\"",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 4500.0,
+            "CostoTotalRecurso": 4500.0,
+            "UnidadMedidaId": 1
+          },
+          {
+            "Id": "d7557576-dcd0-5728-b73d-4f1c46e71817",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Set de flexibles vinílicos 1/2\" x 30 cm (par)",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 5500.0,
+            "CostoTotalRecurso": 5500.0,
+            "UnidadMedidaId": 4
+          },
+          {
+            "Id": "54bda2ed-c7f7-5210-96db-843216180ef0",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Silicona acética antihongos (cartucho)",
+            "Cantidad": 0.5,
+            "PrecioUnitarioCongelado": 4200.0,
+            "CostoTotalRecurso": 2100.0,
+            "UnidadMedidaId": 1
+          },
+          {
+            "Id": "96121da8-6312-5104-a686-f3363ce845ac",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Kit de fijación para vanitorio y lavamanos",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 2800.0,
+            "CostoTotalRecurso": 2800.0,
+            "UnidadMedidaId": 4
+          },
+          {
+            "Id": "3d7daffd-1fdd-5bce-bb1f-38fb8a50c4cd",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Maestro Gasfíter Instalador",
+            "Cantidad": 3.0,
+            "PrecioUnitarioCongelado": 6500.0,
+            "CostoTotalRecurso": 19500.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "4ec8b8f5-3cf2-5e85-83f8-8d25b6571ce4",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Ayudante Gasfíter",
+            "Cantidad": 2.0,
+            "PrecioUnitarioCongelado": 4000.0,
+            "CostoTotalRecurso": 8000.0,
+            "UnidadMedidaId": 18
+          }
+        ]
+      },
+      {
+        "Id": "b2d79586-dc89-53fe-8d99-eccb425f448f",
+        "EstructuraAPUOrigenId": "f26896b7-4315-5027-ab5a-26cf591cb736",
+        "Descripcion": "Instalación o Cambio de Ducha y Grifería",
+        "CantidadItem": 1.0,
+        "PrecioUnitarioCalculado": 26250.0,
+        "Subtotal": 26250.0,
+        "UnidadMedidaId": 1,
+        "Recursos": [
+          {
+            "Id": "84d2beb9-95c8-595a-ac22-c43ba016dce1",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Kit de conexión para ducha (excéntricas y sellos)",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 4500.0,
+            "CostoTotalRecurso": 4500.0,
+            "UnidadMedidaId": 4
+          },
+          {
+            "Id": "85ec4f88-f761-5581-9f41-925559b4d460",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Cinta selladora PTFE 12 mm x 10 m",
+            "Cantidad": 0.25,
+            "PrecioUnitarioCongelado": 1800.0,
+            "CostoTotalRecurso": 450.0,
+            "UnidadMedidaId": 1
+          },
+          {
+            "Id": "ceef698d-bce5-536b-8a1f-13e8b000e39d",
+            "TipoInsumo": "Material",
+            "DescripcionCongelada": "Silicona acética antihongos (cartucho)",
+            "Cantidad": 0.25,
+            "PrecioUnitarioCongelado": 4200.0,
+            "CostoTotalRecurso": 1050.0,
+            "UnidadMedidaId": 1
+          },
+          {
+            "Id": "ea414083-4e0f-555f-8cd7-e3d09ff6b1ec",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Maestro Gasfíter Instalador",
+            "Cantidad": 2.5,
+            "PrecioUnitarioCongelado": 6500.0,
+            "CostoTotalRecurso": 16250.0,
+            "UnidadMedidaId": 18
+          },
+          {
+            "Id": "46eb1c11-be6d-52f2-bf31-8bc58729f3bd",
+            "TipoInsumo": "Mano de Obra",
+            "DescripcionCongelada": "Ayudante Gasfíter",
+            "Cantidad": 1.0,
+            "PrecioUnitarioCongelado": 4000.0,
+            "CostoTotalRecurso": 4000.0,
+            "UnidadMedidaId": 18
+          }
+        ]
       }
     ]
   }

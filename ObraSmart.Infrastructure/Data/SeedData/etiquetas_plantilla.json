@@ -54,5 +54,12 @@
     "EsPlantilla": true,
     "Nombre": "Maquinaria y Equipos",
     "ColorHex": "#06b6d4"
+  },
+  {
+    "Id": "10000000-0000-0000-0000-000000000009",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "Nombre": "Transporte y Logística",
+    "ColorHex": "#6366f1"
   }
 ]

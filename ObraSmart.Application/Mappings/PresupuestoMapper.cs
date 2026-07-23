@@ -44,6 +44,7 @@ namespace ObraSmart.Application.Mappings
                 Subtotal = entity.Subtotal,
                 MontoIva = entity.MontoIva,
                 Total = entity.Total,
+                EsPlantilla = entity.EsPlantilla,
                 Items = entity.Items.Select(i => new ItemPresupuestoDto
                 {
                     Id = i.Id,

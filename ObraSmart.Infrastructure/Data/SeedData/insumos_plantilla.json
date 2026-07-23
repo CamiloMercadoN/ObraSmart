@@ -5,9 +5,12 @@
     "EsPlantilla": true,
     "TipoInsumo": "Material",
     "Descripcion": "Tubo PPR 20mm x 3m PN16 (Agua Potable)",
-    "PrecioReferencia": 3800.00,
+    "PrecioReferencia": 3800.0,
     "UnidadMedidaId": 9,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000006", "10000000-0000-0000-0000-000000000002" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000002"
+    ]
   },
   {
     "Id": "e2b22222-2222-2222-2222-222222222222",
@@ -15,9 +18,12 @@
     "EsPlantilla": true,
     "TipoInsumo": "Material",
     "Descripcion": "Tubo PVC Alcantarillado 40mm x 3m",
-    "PrecioReferencia": 4200.00,
+    "PrecioReferencia": 4200.0,
     "UnidadMedidaId": 9,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000006", "10000000-0000-0000-0000-000000000002" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000002"
+    ]
   },
   {
     "Id": "e2b33333-3333-3333-3333-333333333333",
@@ -25,9 +31,12 @@
     "EsPlantilla": true,
     "TipoInsumo": "Material",
     "Descripcion": "Tubo PVC Alcantarillado 110mm x 3m",
-    "PrecioReferencia": 12500.00,
+    "PrecioReferencia": 12500.0,
     "UnidadMedidaId": 9,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000006", "10000000-0000-0000-0000-000000000002" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000002"
+    ]
   },
   {
     "Id": "e2b44444-4444-4444-4444-444444444444",
@@ -35,19 +44,25 @@
     "EsPlantilla": true,
     "TipoInsumo": "Material",
     "Descripcion": "Adhesivo PVC Vinilit 250g",
-    "PrecioReferencia": 6800.00,
+    "PrecioReferencia": 6800.0,
     "UnidadMedidaId": 1,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000006", "10000000-0000-0000-0000-000000000002" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000002"
+    ]
   },
   {
     "Id": "e2b55555-5555-5555-5555-555555555555",
     "UsuarioId": "00000000-0000-0000-0000-000000000000",
     "EsPlantilla": true,
     "TipoInsumo": "Material",
-    "Descripcion": "Fittings surtidos PPR (Codos, tees, terminales)",
-    "PrecioReferencia": 4500.00,
+    "Descripcion": "Kit de fittings PPR 20 mm (codos, tees y terminales)",
+    "PrecioReferencia": 4500.0,
     "UnidadMedidaId": 4,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000006", "10000000-0000-0000-0000-000000000002" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000002"
+    ]
   },
   {
     "Id": "e2b66666-6666-6666-6666-666666666666",
@@ -55,9 +70,12 @@
     "EsPlantilla": true,
     "TipoInsumo": "Mano de Obra",
     "Descripcion": "Maestro Gasfíter Instalador",
-    "PrecioReferencia": 6500.00,
+    "PrecioReferencia": 6500.0,
     "UnidadMedidaId": 18,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000007", "10000000-0000-0000-0000-000000000002" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000007",
+      "10000000-0000-0000-0000-000000000002"
+    ]
   },
   {
     "Id": "e2b77777-7777-7777-7777-777777777777",
@@ -65,9 +83,12 @@
     "EsPlantilla": true,
     "TipoInsumo": "Mano de Obra",
     "Descripcion": "Ayudante Gasfíter",
-    "PrecioReferencia": 4000.00,
+    "PrecioReferencia": 4000.0,
     "UnidadMedidaId": 18,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000007", "10000000-0000-0000-0000-000000000002" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000007",
+      "10000000-0000-0000-0000-000000000002"
+    ]
   },
   {
     "Id": "e2b88888-8888-8888-8888-888888888888",
@@ -75,9 +96,12 @@
     "EsPlantilla": true,
     "TipoInsumo": "Equipo",
     "Descripcion": "Arriendo Máquina Termofusora PPR",
-    "PrecioReferencia": 2000.00,
+    "PrecioReferencia": 2000.0,
     "UnidadMedidaId": 18,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000008", "10000000-0000-0000-0000-000000000002" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000008",
+      "10000000-0000-0000-0000-000000000002"
+    ]
   },
   {
     "Id": "e2b99999-9999-9999-9999-999999999999",
@@ -85,19 +109,25 @@
     "EsPlantilla": true,
     "TipoInsumo": "Material",
     "Descripcion": "Tubo Cobre Tipo L 1/2\" x 6m (Gas)",
-    "PrecioReferencia": 28500.00,
+    "PrecioReferencia": 28500.0,
     "UnidadMedidaId": 9,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000006", "10000000-0000-0000-0000-000000000003" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000003"
+    ]
   },
   {
     "Id": "e2baaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
     "UsuarioId": "00000000-0000-0000-0000-000000000000",
     "EsPlantilla": true,
     "TipoInsumo": "Material",
-    "Descripcion": "Soldadura de Plata al 5% (Kilo)",
-    "PrecioReferencia": 145000.00,
+    "Descripcion": "Soldadura de plata al 5%",
+    "PrecioReferencia": 145000.0,
     "UnidadMedidaId": 15,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000006", "10000000-0000-0000-0000-000000000003" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000003"
+    ]
   },
   {
     "Id": "e2bbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
@@ -105,9 +135,12 @@
     "EsPlantilla": true,
     "TipoInsumo": "Material",
     "Descripcion": "Llave de Paso Gas Cobre/Bronce 1/2\"",
-    "PrecioReferencia": 8500.00,
+    "PrecioReferencia": 8500.0,
     "UnidadMedidaId": 1,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000006", "10000000-0000-0000-0000-000000000003" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000003"
+    ]
   },
   {
     "Id": "e2bccccc-cccc-cccc-cccc-cccccccccccc",
@@ -115,29 +148,38 @@
     "EsPlantilla": true,
     "TipoInsumo": "Material",
     "Descripcion": "Sifón Desagüe Lavaplatos Doble",
-    "PrecioReferencia": 6900.00,
+    "PrecioReferencia": 6900.0,
     "UnidadMedidaId": 1,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000006", "10000000-0000-0000-0000-000000000002" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000002"
+    ]
   },
   {
     "Id": "e2bddddd-dddd-dddd-dddd-dddddddddddd",
     "UsuarioId": "00000000-0000-0000-0000-000000000000",
     "EsPlantilla": true,
     "TipoInsumo": "Material",
-    "Descripcion": "Silicona Acética Anti-hongos (Cartucho)",
-    "PrecioReferencia": 4200.00,
+    "Descripcion": "Silicona acética antihongos (cartucho)",
+    "PrecioReferencia": 4200.0,
     "UnidadMedidaId": 1,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000006", "10000000-0000-0000-0000-000000000002" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000002"
+    ]
   },
   {
     "Id": "e2beeeee-eeee-eeee-eeee-eeeeeeeeeeee",
     "UsuarioId": "00000000-0000-0000-0000-000000000000",
     "EsPlantilla": true,
     "TipoInsumo": "Material",
-    "Descripcion": "Set Flexibles Vinílicos 1/2\" x 30cm (Par)",
-    "PrecioReferencia": 5500.00,
+    "Descripcion": "Set de flexibles vinílicos 1/2\" x 30 cm (par)",
+    "PrecioReferencia": 5500.0,
     "UnidadMedidaId": 4,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000006", "10000000-0000-0000-0000-000000000002" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000002"
+    ]
   },
   {
     "Id": "e2bfffff-ffff-ffff-ffff-ffffffffffff",
@@ -145,9 +187,12 @@
     "EsPlantilla": true,
     "TipoInsumo": "Equipo",
     "Descripcion": "Soplete a Gas Propano (Desgaste)",
-    "PrecioReferencia": 1200.00,
+    "PrecioReferencia": 1200.0,
     "UnidadMedidaId": 18,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000008", "10000000-0000-0000-0000-000000000003" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000008",
+      "10000000-0000-0000-0000-000000000003"
+    ]
   },
   {
     "Id": "e3b11111-1111-1111-1111-111111111111",
@@ -155,9 +200,12 @@
     "EsPlantilla": true,
     "TipoInsumo": "Mano de Obra",
     "Descripcion": "Técnico Especialista (Diagnóstico/Mantención)",
-    "PrecioReferencia": 15000.00,
+    "PrecioReferencia": 15000.0,
     "UnidadMedidaId": 18,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000007", "10000000-0000-0000-0000-000000000004" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000007",
+      "10000000-0000-0000-0000-000000000004"
+    ]
   },
   {
     "Id": "e3b22222-2222-2222-2222-222222222222",
@@ -165,58 +213,283 @@
     "EsPlantilla": true,
     "TipoInsumo": "Mano de Obra",
     "Descripcion": "Maestro Gasfíter de Reparaciones",
-    "PrecioReferencia": 7500.00,
+    "PrecioReferencia": 7500.0,
     "UnidadMedidaId": 18,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000007", "10000000-0000-0000-0000-000000000004", "10000000-0000-0000-0000-000000000005" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000007",
+      "10000000-0000-0000-0000-000000000004",
+      "10000000-0000-0000-0000-000000000005"
+    ]
   },
   {
     "Id": "e3b33333-3333-3333-3333-333333333333",
     "UsuarioId": "00000000-0000-0000-0000-000000000000",
     "EsPlantilla": true,
     "TipoInsumo": "Equipo",
-    "Descripcion": "Uso Cámara Termográfica / Ultrasonido",
-    "PrecioReferencia": 25000.00,
+    "Descripcion": "Uso de cámara termográfica o equipo de ultrasonido",
+    "PrecioReferencia": 25000.0,
     "UnidadMedidaId": 2,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000008", "10000000-0000-0000-0000-000000000004" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000008",
+      "10000000-0000-0000-0000-000000000004"
+    ]
   },
   {
     "Id": "e3b44444-4444-4444-4444-444444444444",
     "UsuarioId": "00000000-0000-0000-0000-000000000000",
     "EsPlantilla": true,
     "TipoInsumo": "Equipo",
-    "Descripcion": "Uso Máquina Desobstructora Sonda Eléctrica",
-    "PrecioReferencia": 15000.00,
+    "Descripcion": "Uso de máquina desobstructora con sonda eléctrica",
+    "PrecioReferencia": 15000.0,
     "UnidadMedidaId": 2,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000008", "10000000-0000-0000-0000-000000000004", "10000000-0000-0000-0000-000000000005" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000008",
+      "10000000-0000-0000-0000-000000000004",
+      "10000000-0000-0000-0000-000000000005"
+    ]
   },
   {
     "Id": "e3b55555-5555-5555-5555-555555555555",
     "UsuarioId": "00000000-0000-0000-0000-000000000000",
     "EsPlantilla": true,
     "TipoInsumo": "Material",
-    "Descripcion": "Kit Reparación Cañerías (Coplas, Adhesivo/Soldadura)",
-    "PrecioReferencia": 6500.00,
+    "Descripcion": "Kit básico de reparación de cañerías (coplas y consumibles)",
+    "PrecioReferencia": 6500.0,
     "UnidadMedidaId": 4,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000006", "10000000-0000-0000-0000-000000000004", "10000000-0000-0000-0000-000000000005" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000004",
+      "10000000-0000-0000-0000-000000000005"
+    ]
   },
   {
     "Id": "e3b66666-6666-6666-6666-666666666666",
     "UsuarioId": "00000000-0000-0000-0000-000000000000",
     "EsPlantilla": true,
     "TipoInsumo": "Material",
-    "Descripcion": "Mortero de Reparación Rápida 5kg (Parche)",
-    "PrecioReferencia": 4500.00,
+    "Descripcion": "Mortero de reparación rápida 5 kg (parche)",
+    "PrecioReferencia": 4500.0,
     "UnidadMedidaId": 1,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000006", "10000000-0000-0000-0000-000000000001", "10000000-0000-0000-0000-000000000004" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000001",
+      "10000000-0000-0000-0000-000000000004"
+    ]
   },
   {
     "Id": "e3b77777-7777-7777-7777-777777777777",
     "UsuarioId": "00000000-0000-0000-0000-000000000000",
     "EsPlantilla": true,
     "TipoInsumo": "Material",
-    "Descripcion": "Kit Repuestos Mantención Calefont (Membrana, O-rings)",
-    "PrecioReferencia": 12000.00,
+    "Descripcion": "Kit de repuestos para mantención de calefón (membrana y O-rings)",
+    "PrecioReferencia": 12000.0,
     "UnidadMedidaId": 4,
-    "EtiquetasIds": [ "10000000-0000-0000-0000-000000000006", "10000000-0000-0000-0000-000000000004", "10000000-0000-0000-0000-000000000003" ]
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000004",
+      "10000000-0000-0000-0000-000000000003"
+    ]
+  },
+  {
+    "Id": "c7f5de25-3f2c-50ab-8139-79e5e8047f39",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "TipoInsumo": "Material",
+    "Descripcion": "Tubo PVC alcantarillado 50 mm x 3 m",
+    "PrecioReferencia": 6500.0,
+    "UnidadMedidaId": 9,
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000002"
+    ]
+  },
+  {
+    "Id": "7f4563ff-cd83-5055-909b-7d40cab4afdb",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "TipoInsumo": "Material",
+    "Descripcion": "Cinta selladora PTFE 12 mm x 10 m",
+    "PrecioReferencia": 1800.0,
+    "UnidadMedidaId": 1,
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000002"
+    ]
+  },
+  {
+    "Id": "f32860c8-8c91-51c6-9720-1f4dad58d86e",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "TipoInsumo": "Material",
+    "Descripcion": "Mecanismo universal de descarga para estanque WC",
+    "PrecioReferencia": 12000.0,
+    "UnidadMedidaId": 4,
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000002",
+      "10000000-0000-0000-0000-000000000005"
+    ]
+  },
+  {
+    "Id": "fd17ff20-de64-594f-95a0-e861a43610ef",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "TipoInsumo": "Material",
+    "Descripcion": "Empaquetadura de descarga para WC",
+    "PrecioReferencia": 2500.0,
+    "UnidadMedidaId": 1,
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000002",
+      "10000000-0000-0000-0000-000000000005"
+    ]
+  },
+  {
+    "Id": "b0054c35-700d-5aee-8654-b2963b102caa",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "TipoInsumo": "Material",
+    "Descripcion": "Sifón para lavamanos 1 1/4\"",
+    "PrecioReferencia": 4500.0,
+    "UnidadMedidaId": 1,
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000002"
+    ]
+  },
+  {
+    "Id": "ef031a05-96dc-58f2-8e22-88757f9fb657",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "TipoInsumo": "Material",
+    "Descripcion": "Kit de fijación para vanitorio y lavamanos",
+    "PrecioReferencia": 2800.0,
+    "UnidadMedidaId": 4,
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000002"
+    ]
+  },
+  {
+    "Id": "0c699f99-cc02-531c-82eb-1704bfc21fe5",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "TipoInsumo": "Material",
+    "Descripcion": "Kit de conexión para ducha (excéntricas y sellos)",
+    "PrecioReferencia": 4500.0,
+    "UnidadMedidaId": 4,
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000002"
+    ]
+  },
+  {
+    "Id": "c4e5417d-09e0-5dae-accb-6ddf286996a7",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "TipoInsumo": "Material",
+    "Descripcion": "Llave de paso para agua potable 1/2\"",
+    "PrecioReferencia": 6500.0,
+    "UnidadMedidaId": 1,
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000002",
+      "10000000-0000-0000-0000-000000000005"
+    ]
+  },
+  {
+    "Id": "dab35e8d-9199-5bef-92d7-65f7e4d1e817",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "TipoInsumo": "Material",
+    "Descripcion": "Terminal PPR 20 mm x 1/2\" con rosca",
+    "PrecioReferencia": 1800.0,
+    "UnidadMedidaId": 1,
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000002"
+    ]
+  },
+  {
+    "Id": "bdd6b3b9-f164-5d16-8337-ba2da6759deb",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "TipoInsumo": "Equipo",
+    "Descripcion": "Uso de sonda manual destapadora",
+    "PrecioReferencia": 5000.0,
+    "UnidadMedidaId": 2,
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000008",
+      "10000000-0000-0000-0000-000000000002",
+      "10000000-0000-0000-0000-000000000004",
+      "10000000-0000-0000-0000-000000000005"
+    ]
+  },
+  {
+    "Id": "6d6a7cfa-b99a-508b-b948-ad446769399b",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "TipoInsumo": "Material",
+    "Descripcion": "Consumibles de limpieza y desinfección",
+    "PrecioReferencia": 2500.0,
+    "UnidadMedidaId": 4,
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000002",
+      "10000000-0000-0000-0000-000000000004"
+    ]
+  },
+  {
+    "Id": "ae84c722-1b35-5b1d-a378-15ce692ef895",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "TipoInsumo": "Material",
+    "Descripcion": "Sello de goma o cera para WC",
+    "PrecioReferencia": 3500.0,
+    "UnidadMedidaId": 1,
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000002",
+      "10000000-0000-0000-0000-000000000005"
+    ]
+  },
+  {
+    "Id": "d4071314-fede-5339-aad3-c9c576ff2976",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "TipoInsumo": "Material",
+    "Descripcion": "Copla PPR 20 mm",
+    "PrecioReferencia": 1800.0,
+    "UnidadMedidaId": 1,
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000006",
+      "10000000-0000-0000-0000-000000000002",
+      "10000000-0000-0000-0000-000000000005"
+    ]
+  },
+  {
+    "Id": "e4b11111-1111-1111-1111-111111111111",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "TipoInsumo": "Equipo",
+    "Descripcion": "Uso de camioneta para traslado de materiales",
+    "PrecioReferencia": 8000.00,
+    "UnidadMedidaId": 18,
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000008",
+      "10000000-0000-0000-0000-000000000009"
+    ]
+  },
+  {
+    "Id": "e4b22222-2222-2222-2222-222222222222",
+    "UsuarioId": "00000000-0000-0000-0000-000000000000",
+    "EsPlantilla": true,
+    "TipoInsumo": "Servicio",
+    "Descripcion": "Flete y transporte de materiales contratado",
+    "PrecioReferencia": 15000.00,
+    "UnidadMedidaId": 2,
+    "EtiquetasIds": [
+      "10000000-0000-0000-0000-000000000009"
+    ]
   }
 ]
