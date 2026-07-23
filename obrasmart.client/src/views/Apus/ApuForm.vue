@@ -1,86 +1,92 @@
 <template>
-  <div class="flex flex-column gap-4 pb-4">
-    <!-- Cabecera y Acciones -->
-    <div class="flex justify-content-between align-items-center">
-      <div class="flex align-items-center gap-3">
-        <Button icon="pi pi-arrow-left" text rounded @click="volver" />
-        <div>
-          <h2 class="m-0 text-900 text-xl font-bold">
-            {{ esEdicion ? 'Editar Estructura APU' : 'Nueva Estructura APU' }}
-          </h2>
-        </div>
+  <div class="flex flex-column gap-3 md:gap-4 pb-4">
+    <!-- Cabecera y Acciones Responsivas -->
+    <div class="flex flex-column md:flex-row md:align-items-center justify-content-between gap-3">
+      <div class="flex align-items-center gap-2">
+        <Button icon="pi pi-arrow-left" text rounded @click="volver" class="p-0 flex-shrink-0" style="width: 2.5rem; height: 2.5rem;" />
+        <h2 class="m-0 text-900 text-lg md:text-xl font-bold line-height-2">
+          {{ esEdicion ? 'Editar Estructura APU' : 'Nueva Estructura APU' }}
+        </h2>
       </div>
-      <div class="flex gap-2">
-        <Button label="Cancelar" outlined severity="secondary" @click="volver" />
-        <Button label="Guardar APU" icon="pi pi-save" @click="guardar" :loading="guardando" />
+      <div class="flex gap-2 w-full md:w-auto">
+        <Button label="Cancelar" outlined severity="secondary" @click="volver" class="flex-1 md:flex-none" />
+        <Button label="Guardar APU" icon="pi pi-save" @click="guardar" :loading="guardando" class="flex-1 md:flex-none" />
       </div>
     </div>
 
-    <Message v-if="errorGlobal" severity="error" :closable="true" @close="errorGlobal = ''">
+    <Message v-if="errorGlobal" severity="error" :closable="true" @close="errorGlobal = ''" class="m-0">
       {{ errorGlobal }}
     </Message>
 
     <!-- Datos Generales -->
-    <div class="surface-card p-4 shadow-1 border-round">
-      <h3 class="mt-0 mb-4 text-900 border-bottom-1 border-300 pb-2">Datos Generales</h3>
+    <div class="surface-card p-3 md:p-4 shadow-1 border-round">
+      <h3 class="mt-0 mb-3 text-900 border-bottom-1 border-300 pb-2 text-lg">Datos Generales</h3>
 
       <div class="grid formgrid p-fluid">
         <div class="field col-12 md:col-6">
-          <label for="nombre" class="font-bold">Nombre del APU <span class="text-red-500">*</span></label>
-          <InputText id="nombre" v-model="formulario.nombre" placeholder="Ej: Hormigón H30" />
+          <label for="nombre" class="font-bold block mb-2 text-700">Nombre del APU <span class="text-red-500">*</span></label>
+          <InputText id="nombre" v-model="formulario.nombre" placeholder="Ej: Hormigón H30" class="w-full" />
         </div>
 
         <div class="field col-12 md:col-3">
-          <label for="unidad" class="font-bold">Unidad de Medida <span class="text-red-500">*</span></label>
+          <label for="unidad" class="font-bold block mb-2 text-700">Unidad de Medida <span class="text-red-500">*</span></label>
           <Select id="unidad" v-model="formulario.unidadMedidaId" :options="unidades"
-                  optionLabel="nombre" optionValue="id" placeholder="Seleccione..." />
+                  optionLabel="nombre" optionValue="id" placeholder="Seleccione..." class="w-full" />
         </div>
 
         <div class="field col-12 md:col-3">
-          <label for="etiquetas" class="font-bold">Clasificación</label>
+          <label for="etiquetas" class="font-bold block mb-2 text-700">Clasificación</label>
           <MultiSelect id="etiquetas" v-model="formulario.etiquetasIds" :options="etiquetas"
                        optionLabel="nombre" optionValue="id" placeholder="Seleccione etiquetas"
-                       display="chip" />
+                       display="chip" class="w-full" />
         </div>
       </div>
     </div>
 
     <!-- Receta (Componentes) -->
-    <div class="surface-card p-4 shadow-1 border-round">
-      <div class="flex justify-content-between align-items-center mb-4 border-bottom-1 border-300 pb-2">
-        <h3 class="m-0 text-900">Desglose de Insumos (Receta)</h3>
-        <div class="text-xl font-bold text-primary">
+    <div class="surface-card p-3 md:p-4 shadow-1 border-round">
+      <div class="flex flex-column lg:flex-row justify-content-between align-items-start lg:align-items-center mb-4 border-bottom-1 border-300 pb-3 gap-3">
+        <h3 class="m-0 text-900 text-lg">Desglose de Insumos (Receta)</h3>
+        <div class="text-xl font-bold text-primary surface-100 p-2 border-round">
           Costo Directo Total: $ {{ formatearMoneda(costoTotalApu) }}
         </div>
       </div>
 
-      <!-- Buscador y Agregador -->
-      <div class="surface-ground border-1 surface-border p-3 border-round mb-4 flex flex-column md:flex-row gap-3 align-items-end">
+      <!-- Buscador y Agregador Responsivo -->
+      <div class="surface-ground border-1 surface-border p-3 border-round mb-4 flex flex-column md:flex-row gap-3 md:align-items-end">
 
         <!-- Contenedor del Buscador de Insumos -->
         <div class="flex-grow-1 w-full">
-          <label class="font-bold text-sm block mb-2">Buscar Insumo / Equipo / Mano de Obra</label>
+          <label class="font-bold text-sm block mb-2 text-700">Buscar Insumo / Equipo / Mano de Obra</label>
 
-          <div class="flex gap-2 align-items-stretch">
+          <div class="flex flex-column sm:flex-row gap-2">
             <Select v-model="insumoSeleccionado"
                     :options="insumosCatalogo"
                     filter
                     optionLabel="descripcion"
                     placeholder="Escriba para buscar..."
-                    class="flex-grow-1"
-                    style="min-width: 0;">
+                    class="w-full flex-grow-1"
+                    appendTo="body">
               <template #value="slotProps">
                 <div v-if="slotProps.value" class="flex align-items-center gap-2 text-overflow-ellipsis overflow-hidden">
-                  <Tag :value="slotProps.value.tipoInsumo" severity="info" />
-                  <span class="white-space-nowrap text-overflow-ellipsis overflow-hidden">{{ slotProps.value.descripcion }}</span>
+                  <Tag :value="slotProps.value.tipoInsumo" severity="info" class="hidden sm:inline-flex" />
+                  <span class="white-space-nowrap text-overflow-ellipsis overflow-hidden">
+                    {{ slotProps.value.descripcion }}
+                    <!-- Usamos directamente la propiedad que viene del backend -->
+                    <span class="text-500 font-semibold">({{ slotProps.value.unidadMedidaNombre || 'S/U' }})</span>
+                  </span>
                 </div>
                 <span v-else>{{ slotProps.placeholder }}</span>
               </template>
               <template #option="slotProps">
-                <div class="flex flex-column">
-                  <span class="font-bold">{{ slotProps.option.descripcion }}</span>
-                  <span class="text-sm text-500">
-                    {{ slotProps.option.tipoInsumo }} | Precio: $ {{ formatearMoneda(slotProps.option.precioReferencia) }}
+                <div class="flex flex-column w-full" style="max-width: 85vw;">
+                  <span class="font-bold white-space-normal text-sm line-height-2" style="word-break: break-word;">{{ slotProps.option.descripcion }}</span>
+                  <span class="text-sm text-500 mt-1 flex align-items-center flex-wrap gap-2">
+                    <Tag :value="slotProps.option.tipoInsumo" severity="info" style="font-size: 0.6rem; padding: 2px 4px;" />
+                    <!-- Usamos directamente la propiedad que viene del backend -->
+                    <span class="font-semibold text-600">{{ slotProps.option.unidadMedidaNombre || 'S/U' }}</span>
+                    <span>|</span>
+                    <span>Precio Ref: $ {{ formatearMoneda(slotProps.option.precioReferencia) }}</span>
                   </span>
                 </div>
               </template>
@@ -89,52 +95,69 @@
             <Button icon="pi pi-plus"
                     severity="success"
                     @click="abrirModalInsumo"
-                    class="flex-shrink-0"
-                    v-tooltip.top="'Crear nuevo insumo'" />
+                    class="w-full sm:w-auto flex-shrink-0"
+                    label="Nuevo Insumo"
+                    v-tooltip.top="'Crear nuevo insumo en el sistema'" />
           </div>
         </div>
 
-        <!-- Contenedor de Cantidad -->
-        <div class="w-full md:w-15rem">
-          <label class="font-bold text-sm block mb-2">Cantidad / Rendimiento</label>
-          <InputNumber v-model="cantidadInput" :minFractionDigits="2" :maxFractionDigits="4" class="w-full" />
-        </div>
+        <!-- Contenedor de Cantidad y Agregar -->
+        <div class="flex flex-column sm:flex-row gap-3 w-full md:w-auto">
+          <div class="w-full sm:w-15rem">
+            <label class="font-bold text-sm block mb-2 text-700">Cantidad / Rendimiento</label>
+            <InputNumber v-model="cantidadInput" :minFractionDigits="2" :maxFractionDigits="4" class="w-full" inputClass="w-full" />
+          </div>
 
-        <Button label="Agregar" icon="pi pi-check" @click="agregarComponente"
-                :disabled="!insumoSeleccionado || !cantidadInput || cantidadInput <= 0" />
+          <Button label="Agregar a la Receta" icon="pi pi-check" @click="agregarComponente"
+                  class="w-full sm:w-auto"
+                  :disabled="!insumoSeleccionado || !cantidadInput || cantidadInput <= 0" />
+        </div>
       </div>
 
-      <!-- Tabla de Componentes Agregados -->
-      <DataTable :value="componentesVisuales" responsiveLayout="scroll">
-        <template #empty>
-          <div class="text-center p-3 text-500">No hay insumos agregados a esta receta.</div>
-        </template>
+      <!-- Estado Vacío -->
+      <div v-if="componentesVisuales.length === 0" class="text-center p-4 text-500 border-round surface-100 border-1 surface-border border-dashed">
+        No hay insumos agregados a esta receta. Búscalos arriba y añádelos.
+      </div>
 
-        <Column field="tipoInsumo" header="Tipo">
-          <template #body="slotProps">
-            <Tag :value="slotProps.data.tipoInsumo" severity="secondary" />
-          </template>
-        </Column>
-        <Column field="descripcionInsumo" header="Insumo"></Column>
-        <Column header="Precio Unitario (Ref)">
-          <template #body="slotProps">
-            $ {{ formatearMoneda(slotProps.data.precioUnitarioReferencia) }}
-          </template>
-        </Column>
-        <Column field="cantidad" header="Cantidad"></Column>
-        <Column header="Subtotal" style="width: 15%">
-          <template #body="slotProps">
-            <span class="font-bold">$ {{ formatearMoneda(slotProps.data.precioUnitarioReferencia * slotProps.data.cantidad) }}</span>
-          </template>
-        </Column>
-        <Column style="width: 5%">
-          <template #body="slotProps">
-            <Button icon="pi pi-trash" text rounded severity="danger"
-                    @click="eliminarComponente(slotProps.index)" />
-          </template>
-        </Column>
-      </DataTable>
+      <!-- Tarjetas de Componentes (Reemplazo del DataTable) -->
+      <div v-else class="grid">
+        <div v-for="(componente, index) in componentesVisuales" :key="index" class="col-12 lg:col-6 xl:col-4">
+          <div class="surface-ground border-1 surface-border border-round p-3 relative h-full flex flex-column">
+
+            <Button icon="pi pi-times" severity="danger" text rounded class="absolute top-0 right-0 mt-1 mr-1" @click="eliminarComponente(index)" />
+
+            <div class="flex flex-column gap-2 mt-2 flex-grow-1 pr-4">
+              <span class="text-xs font-semibold text-600 mb-1">
+                <Tag :value="componente.tipoInsumo" severity="secondary" class="mr-1" />
+              </span>
+              <span class="font-bold text-700 line-height-2" style="word-break: break-word;">{{ componente.descripcionInsumo }}</span>
+            </div>
+
+            <div class="grid formgrid p-fluid mt-3">
+              <div class="field col-6">
+                <label class="block mb-2 text-sm font-semibold text-600">Precio Ref.</label>
+                <div class="surface-100 p-2 border-round text-sm font-semibold text-700 text-center">
+                  $ {{ formatearMoneda(componente.precioUnitarioReferencia) }}
+                </div>
+              </div>
+              <div class="field col-6">
+                <label class="block mb-2 text-sm font-semibold text-600">Cantidad <span class="text-400 font-normal">({{ componente.unidadMedidaNombre }})</span></label>
+                <!-- Ojo aquí: Vinculado al v-model para edición rápida desde la tarjeta -->
+                <InputNumber v-model="componente.cantidad" :minFractionDigits="0" :maxFractionDigits="4" class="w-full" inputClass="w-full text-center" />
+              </div>
+            </div>
+
+            <div class="col-12 mt-auto p-0">
+              <div class="flex justify-content-between align-items-center p-2 surface-100 border-round w-full border-1 surface-border">
+                <span class="text-sm font-bold text-700">Subtotal:</span>
+                <span class="font-bold text-green-600 text-lg">$ {{ formatearMoneda(componente.precioUnitarioReferencia * componente.cantidad) }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
     <InsumoFormDialog v-model:visible="modalInsumoVisible"
                       :insumoData=null
                       :loading="guardandoInsumo"
@@ -152,13 +175,15 @@
   import type { IInsumo, IUnidadMedida, IEtiqueta } from '../../interfaces/IInsumo';
   import InsumoFormDialog from '../../components/InsumoFormDialog.vue';
 
+  interface IComponenteVisual extends IComponenteAPU {
+    unidadMedidaNombre?: string;
+  }
+
   import InputText from 'primevue/inputtext';
   import Select from 'primevue/select';
   import MultiSelect from 'primevue/multiselect';
   import InputNumber from 'primevue/inputnumber';
   import Button from 'primevue/button';
-  import DataTable from 'primevue/datatable';
-  import Column from 'primevue/column';
   import Tag from 'primevue/tag';
   import Message from 'primevue/message';
 
@@ -183,7 +208,7 @@
   });
 
   // Estado visual de la tabla
-  const componentesVisuales = ref<IComponenteAPU[]>([]);
+  const componentesVisuales = ref<IComponenteVisual[]>([]);
 
   // Estado del agregador
   const insumoSeleccionado = ref<IInsumo | null>(null);
@@ -217,8 +242,7 @@
       ]);
       unidades.value = unds;
       etiquetas.value = etqs;
-      // Excluimos las plantillas para que el usuario arme con sus propios insumos
-      insumosCatalogo.value = insms.filter(i => !i.esPlantilla);
+      insumosCatalogo.value = insms
     } catch (error: any) {
       errorGlobal.value = "Error al cargar catálogos: " + error.message;
     }
@@ -231,8 +255,16 @@
       formulario.value.unidadMedidaId = apu.unidadMedidaId;
       formulario.value.etiquetasIds = apu.etiquetasIds;
 
-      // Cargamos la lista visual con la información rica del backend
-      componentesVisuales.value = [...apu.componentes];
+      // Enriquecemos la lista visual cruzando con el catálogo de insumos y unidades
+      componentesVisuales.value = apu.componentes.map(comp => {
+        const insumoRef = insumosCatalogo.value.find(i => i.id === comp.insumoId);
+        const unidadRef = unidades.value.find(u => u.id === insumoRef?.unidadMedidaId);
+
+        return {
+          ...comp,
+          unidadMedidaNombre: unidadRef ? unidadRef.nombre : 'S/U'
+        };
+      });
     } catch (error: any) {
       errorGlobal.value = error.message;
     }
@@ -246,12 +278,13 @@
 
     const indexExistente = componentesVisuales.value.findIndex(c => c.insumoId === insumo.id);
 
+    // Buscamos el nombre de la unidad del insumo seleccionado
+    const unidadRef = unidades.value.find(u => u.id === insumo.unidadMedidaId);
+
     if (indexExistente >= 0) {
       const componenteExistente = componentesVisuales.value[indexExistente];
-
       if (componenteExistente) {
         componenteExistente.cantidad += cantidad;
-        // Actualizamos el subtotal de la fila
         componenteExistente.subtotal = componenteExistente.cantidad * componenteExistente.precioUnitarioReferencia;
       }
     } else {
@@ -261,14 +294,15 @@
         tipoInsumo: insumo.tipoInsumo,
         precioUnitarioReferencia: insumo.precioReferencia,
         cantidad: cantidad,
-        subtotal: insumo.precioReferencia * cantidad
+        subtotal: insumo.precioReferencia * cantidad,
+        unidadMedidaNombre: unidadRef ? unidadRef.nombre : 'S/U'
       });
     }
 
-    // Limpiar inputs
     insumoSeleccionado.value = null;
     cantidadInput.value = null;
   };
+
   const eliminarComponente = (index: number) => {
     componentesVisuales.value.splice(index, 1);
   };
@@ -329,7 +363,7 @@
 
       // Recargamos la lista de catálogo
       const insumosActualizados = await insumoService.obtenerTodos();
-      insumosCatalogo.value = insumosActualizados.filter(i => !i.esPlantilla);
+      insumosCatalogo.value = insumosActualizados;
 
       // Auto-seleccionamos el insumo
       const insumoRecienCreado = insumosCatalogo.value.find(i => i.id === insumoIdCreado);
@@ -344,5 +378,4 @@
       guardandoInsumo.value = false;
     }
   };
-
 </script>

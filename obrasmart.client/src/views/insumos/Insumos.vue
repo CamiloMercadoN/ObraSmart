@@ -1,133 +1,152 @@
 <template>
-  <div class="flex flex-column gap-4 pb-4" style="height: calc(100vh - 120px);">
+  <div class="flex flex-column gap-3 md:gap-4 pb-4 h-full">
 
-    <div class="surface-card p-4 shadow-1 border-round flex flex-column flex-grow-1 overflow-hidden">
-      <div class="flex flex-column md:flex-row justify-content-between md:align-items-center mb-3 gap-3">
+    <div class="surface-card p-3 md:p-4 shadow-1 border-round flex flex-column flex-grow-1 overflow-hidden">
 
+      <!-- Cabecera Responsiva -->
+      <div class="flex flex-column md:flex-row justify-content-between md:align-items-center mb-4 gap-3">
         <div class="flex align-items-center gap-3 titulo-mantenedor">
           <div class="bg-blue-500 text-white border-round-lg flex align-items-center justify-content-center flex-shrink-0" style="width: 3rem; height: 3rem;">
             <i class="pi pi-box text-xl"></i>
           </div>
           <div>
-            <h2 class="m-0 text-900 text-xl font-bold">Catálogo de Insumos</h2>
+            <h2 class="m-0 text-900 text-lg md:text-xl font-bold">Catálogo de Insumos</h2>
             <span class="text-500 text-sm hidden md:block">Administra los materiales, mano de obra y equipos</span>
           </div>
         </div>
 
-        <div class="flex gap-2 w-full md:w-auto justify-content-end flex-shrink-0">
+        <div class="flex flex-column sm:flex-row gap-2 w-full md:w-auto flex-shrink-0">
           <Button :icon="mostrarFiltros ? 'pi pi-filter-slash' : 'pi pi-filter'"
                   :label="mostrarFiltros ? 'Ocultar Filtros' : 'Filtros'"
                   severity="secondary"
                   outlined
+                  class="w-full sm:w-auto"
                   @click="mostrarFiltros = !mostrarFiltros" />
-          <Button label="Nuevo Insumo" icon="pi pi-plus" @click="abrirNuevo" />
+          <Button label="Nuevo Insumo" icon="pi pi-plus" class="w-full sm:w-auto" @click="abrirNuevo" />
         </div>
       </div>
 
+      <!-- Mensaje de Error -->
       <Message v-if="globalError" severity="error" :closable="true" @close="globalError = ''" class="mb-3">
         {{ globalError }}
       </Message>
 
-      <DataTable :value="insumos"
-                 :loading="cargando"
-                 v-model:filters="filtros"
-                 :globalFilterFields="['descripcion']"
-                 responsiveLayout="scroll"
-                 stripedRows
-                 class="p-datatable-sm flex flex-column flex-grow-1"
-                 style="min-height: 0;"
-                 scrollable
-                 scrollHeight="flex"
-                 :virtualScroll="true"
-                 :rows="25">
+      <!-- Zona de Filtros -->
+      <div v-if="mostrarFiltros" class="flex flex-column md:flex-row gap-3 mb-4 p-3 surface-100 border-round">
 
-        <template #header>
-          <div v-if="mostrarFiltros" class="flex flex-column md:flex-row justify-content-between gap-3 transition-duration-200">
+        <!-- Buscador con flex-1 y IconField -->
+        <div class="flex-1 w-full">
+          <IconField class="w-full">
+            <InputIcon class="pi pi-search" />
+            <InputText v-model="filtroTexto" placeholder="Buscar por descripción..." class="w-full" />
+          </IconField>
+        </div>
 
-            <div class="w-full md:w-20rem">
-              <InputText v-model="filtros['global'].value"
-                         placeholder="Buscar por descripción..."
-                         class="w-full" />
-            </div>
-
-            <div class="flex flex-column md:flex-row gap-2 w-full md:w-auto">
-              <Select v-model="filtros['tipoInsumo'].value"
-                      :options="tiposInsumo"
-                      placeholder="Filtrar por Tipo"
-                      showClear
-                      class="w-full md:w-15rem" />
-
-              <Select v-model="filtros['etiquetasIds'].value"
-                      :options="catalogoEtiquetas"
-                      optionLabel="nombre"
-                      optionValue="id"
-                      placeholder="Filtrar por Etiqueta"
-                      showClear
-                      class="w-full md:w-15rem" />
-            </div>
-
+        <div class="flex flex-column sm:flex-row gap-3 w-full md:w-auto flex-shrink-0">
+          <div class="w-full sm:w-15rem">
+            <Select v-model="filtroTipo"
+                    :options="tiposInsumo"
+                    placeholder="Filtrar por Tipo"
+                    showClear
+                    class="w-full" />
           </div>
-        </template>
 
-        <template #empty>
-          <div class="text-center p-4 text-500">
-            No se encontraron insumos registrados. Presiona "Nuevo Insumo" para comenzar.
+          <div class="w-full sm:w-15rem">
+            <Select v-model="filtroEtiqueta"
+                    :options="catalogoEtiquetas"
+                    optionLabel="nombre"
+                    optionValue="id"
+                    placeholder="Filtrar por Etiqueta"
+                    showClear
+                    class="w-full" />
           </div>
-        </template>
+        </div>
+      </div>
 
-        <Column field="descripcion" header="Descripción" class="font-bold"></Column>
+      <!-- Vista de Tarjetas (DataView) -->
+      <div class="flex-grow-1 overflow-auto">
 
-        <Column field="tipoInsumo" header="Tipo">
-          <template #body="slotProps">
-            <span :class="OBTENER_CLASE_TIPO_INSUMO(slotProps.data.tipoInsumo)">
-              {{ slotProps.data.tipoInsumo }}
-            </span>
-          </template>
-        </Column>
+        <div v-if="cargando" class="flex justify-content-center align-items-center p-5">
+          <i class="pi pi-spin pi-spinner text-4xl text-primary"></i>
+        </div>
 
-        <Column field="precioReferencia" header="Precio Referencia">
-          <template #body="slotProps">
-            {{ formatMonedaChilena(slotProps.data.precioReferencia) }}
-          </template>
-        </Column>
+        <div v-else-if="insumosFiltrados.length === 0" class="text-center p-5 text-500 border-round surface-100 border-1 surface-border border-dashed">
+          No se encontraron insumos que coincidan con la búsqueda.
+        </div>
 
-        <Column field="unidadMedidaNombre" header="Unidad"></Column>
+        <div v-else class="grid">
+          <div v-for="insumo in insumosFiltrados" :key="insumo.id" class="col-12 md:col-6 lg:col-4 xl:col-3">
 
-        <Column header="Etiquetas" style="min-width: 12rem">
-          <template #body="slotProps">
-            <div class="flex flex-wrap gap-1">
-              <span v-for="tagId in slotProps.data.etiquetasIds"
-                    :key="tagId"
-                    class="text-xs px-2 py-1 border-round font-semibold"
-                    :style="obtenerEstiloEtiqueta(tagId)">
-                {{ obtenerNombreEtiqueta(tagId) }}
-              </span>
+            <!-- Tarjeta Individual -->
+            <div class="surface-card border-1 surface-border border-round shadow-1 flex flex-column h-full">
+
+              <!-- Header Tarjeta -->
+              <div class="flex justify-content-between align-items-start p-3 border-bottom-1 surface-border surface-50 border-round-top">
+                <span class="text-900 font-bold text-lg line-height-2 mb-1 pr-2" style="word-break: break-word;">
+                  {{ insumo.descripcion }}
+                </span>
+                <div class="flex-shrink-0 mt-1">
+                  <Tag v-if="insumo.esPlantilla" value="Plantilla" severity="info" class="text-xs" v-tooltip.top="'Plantilla del Sistema'" />
+                  <Tag v-else value="Usuario" severity="success" class="text-xs" />
+                </div>
+              </div>
+
+              <!-- Body Tarjeta -->
+              <div class="p-3 flex-grow-1 flex flex-column gap-3 justify-content-between">
+
+                <div class="flex justify-content-between align-items-center">
+                  <span class="text-500 text-sm">Tipo:</span>
+                  <span :class="OBTENER_CLASE_TIPO_INSUMO(insumo.tipoInsumo)">
+                    {{ insumo.tipoInsumo }}
+                  </span>
+                </div>
+
+                <div class="flex justify-content-between align-items-center">
+                  <span class="text-500 text-sm">Unidad:</span>
+                  <span class="text-700 text-sm font-semibold">{{ insumo.unidadMedidaNombre }}</span>
+                </div>
+
+                <!-- Etiquetas -->
+                <div v-if="insumo.etiquetasIds && insumo.etiquetasIds.length > 0">
+                  <span class="text-500 text-sm block mb-2">Etiquetas:</span>
+                  <div class="flex flex-wrap gap-1">
+                    <span v-for="tagId in insumo.etiquetasIds"
+                          :key="tagId"
+                          class="text-xs px-2 py-1 border-round font-semibold"
+                          :style="obtenerEstiloEtiqueta(tagId)">
+                      {{ obtenerNombreEtiqueta(tagId) }}
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Precio Referencia -->
+                <div class="flex justify-content-between align-items-center pt-3 border-top-1 surface-border mt-auto">
+                  <span class="text-700 font-bold text-sm">Precio Referencia:</span>
+                  <span class="text-blue-600 font-bold text-xl">{{ formatMonedaChilena(insumo.precioReferencia) }}</span>
+                </div>
+
+              </div>
+
+              <!-- Footer Tarjeta (Acciones) -->
+              <div class="p-3 border-top-1 surface-border flex gap-2 justify-content-end surface-50 border-round-bottom">
+                <Button icon="pi pi-pencil" outlined rounded severity="info"
+                        @click="abrirEditar(insumo)"
+                        :disabled="insumo.esPlantilla"
+                        v-tooltip.top="insumo.esPlantilla ? 'Las plantillas no se pueden editar' : 'Editar'" />
+
+                <Button icon="pi pi-trash" outlined rounded severity="danger"
+                        @click="confirmarEliminacion(insumo.id!)"
+                        :disabled="insumo.esPlantilla"
+                        v-tooltip.top="insumo.esPlantilla ? 'Las plantillas no se pueden eliminar' : 'Eliminar'" />
+              </div>
+
             </div>
-          </template>
-        </Column>
-
-        <Column field="esPlantilla" header="Origen">
-          <template #body="slotProps">
-            <span v-if="slotProps.data.esPlantilla" class="text-xs font-bold text-blue-600 bg-blue-50 border-round px-2 py-1">
-              Plantilla Sistema
-            </span>
-            <span v-else class="text-xs font-bold text-green-600 bg-green-50 border-round px-2 py-1">
-              Usuario
-            </span>
-          </template>
-        </Column>
-
-        <Column header="Acciones" :exportable="false" style="min-width: 8rem" alignFrozen="right" frozen>
-          <template #body="slotProps">
-            <div class="flex gap-2">
-              <Button icon="pi pi-pencil" outlined rounded severity="info" @click="abrirEditar(slotProps.data)" :disabled="slotProps.data.esPlantilla" />
-              <Button icon="pi pi-trash" outlined rounded severity="danger" @click="confirmarEliminacion(slotProps.data.id)" :disabled="slotProps.data.esPlantilla" />
-            </div>
-          </template>
-        </Column>
-      </DataTable>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <!-- Modal Formulario Insumo -->
     <InsumoFormDialog v-model:visible="mostrarDialogo"
                       :insumoData="insumoSeleccionado"
                       :loading="guardando"
@@ -139,23 +158,21 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, computed } from 'vue';
   import type { IInsumo, IEtiqueta } from '../../interfaces/IInsumo';
   import { insumoService } from '../../services/insumoService';
+  import { TIPOS_INSUMO, OBTENER_CLASE_TIPO_INSUMO } from '../../utils/constantes';
 
-  import DataTable from 'primevue/datatable';
-  import Column from 'primevue/column';
   import { useConfirm } from "primevue/useconfirm";
   import ConfirmDialog from 'primevue/confirmdialog';
-  import { FilterMatchMode } from "@primevue/core/api";
   import Button from 'primevue/button';
+  import Message from 'primevue/message';
   import Select from 'primevue/select';
   import InputText from 'primevue/inputtext';
-
-  import ButtonPrime from 'primevue/button';
-  import Message from 'primevue/message';
+  import Tag from 'primevue/tag';
+  import IconField from 'primevue/iconfield';
+  import InputIcon from 'primevue/inputicon';
   import InsumoFormDialog from '../../components/InsumoFormDialog.vue';
-  import { TIPOS_INSUMO, OBTENER_CLASE_TIPO_INSUMO } from '../../utils/constantes';
 
   // Estado de la Vista
   const insumos = ref<IInsumo[]>([]);
@@ -163,22 +180,20 @@
   const cargando = ref(false);
   const globalError = ref('');
 
-  // --- configuración de Filtros ---
-  const filtros = ref({
-    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    tipoInsumo: { value: null, matchMode: FilterMatchMode.EQUALS },
-    etiquetasIds: { value: null, matchMode: FilterMatchMode.CONTAINS }
-  });
-
+  // Filtros Locales (Reemplazan al filterMode de DataTable)
+  const filtroTexto = ref('');
+  const filtroTipo = ref<string | null>(null);
+  const filtroEtiqueta = ref<string | null>(null);
   const tiposInsumo = ref(TIPOS_INSUMO);
-  const mostrarFiltros = ref(window.innerHeight > 500);
-  // ------------------------------------
+  const mostrarFiltros = ref(window.innerWidth > 768);
 
   // Estado del Modal
   const mostrarDialogo = ref(false);
   const insumoSeleccionado = ref<IInsumo | null>(null);
   const guardando = ref(false);
   const errorDialogo = ref('');
+
+  const confirm = useConfirm();
 
   onMounted(async () => {
     await cargarEtiquetas();
@@ -204,6 +219,29 @@
       cargando.value = false;
     }
   };
+
+  // Computada para el buscador responsivo por texto, tipo y etiquetas
+  const insumosFiltrados = computed(() => {
+    return insumos.value.filter(insumo => {
+      let coincideTexto = true;
+      let coincideTipo = true;
+      let coincideEtiqueta = true;
+
+      if (filtroTexto.value) {
+        coincideTexto = insumo.descripcion.toLowerCase().includes(filtroTexto.value.toLowerCase());
+      }
+
+      if (filtroTipo.value) {
+        coincideTipo = insumo.tipoInsumo === filtroTipo.value;
+      }
+
+      if (filtroEtiqueta.value) {
+        coincideEtiqueta = insumo.etiquetasIds?.includes(filtroEtiqueta.value) ?? false;
+      }
+
+      return coincideTexto && coincideTipo && coincideEtiqueta;
+    });
+  });
 
   const abrirNuevo = () => {
     insumoSeleccionado.value = null;
@@ -236,8 +274,6 @@
       guardando.value = false;
     }
   };
-
-  const confirm = useConfirm();
 
   const confirmarEliminacion = async (id: string) => {
     confirm.require({
@@ -289,8 +325,8 @@
     };
   };
 </script>
+
 <style scoped>
-  /* Ocultar el título principal solo cuando la altura de la pantalla es crítica (ej. móviles en horizontal) para priorizar la tabla */
   @media (max-height: 500px) {
     .titulo-mantenedor {
       display: none !important;

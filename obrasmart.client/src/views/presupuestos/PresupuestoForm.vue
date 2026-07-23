@@ -1,17 +1,17 @@
 <template>
-  <div class="flex flex-column gap-4 pb-4">
+  <div class="flex flex-column gap-3 md:gap-4 pb-4">
 
-    <!-- Header -->
-    <div class="flex align-items-center justify-content-between">
-      <div class="flex align-items-center gap-3">
-        <Button icon="pi pi-arrow-left" text rounded @click="volver" />
-        <h2 class="m-0 text-900 text-xl font-bold">
+    <!-- Header Responsivo -->
+    <div class="flex flex-column md:flex-row md:align-items-center justify-content-between gap-3">
+      <div class="flex align-items-center gap-2">
+        <Button icon="pi pi-arrow-left" text rounded @click="volver" class="p-0 flex-shrink-0" style="width: 2.5rem; height: 2.5rem;" />
+        <h2 class="m-0 text-900 text-lg md:text-xl font-bold line-height-2">
           {{ esEdicion ? 'Editar Presupuesto' : 'Nuevo Presupuesto' }}
         </h2>
       </div>
-      <div class="flex gap-2">
-        <Button label="Cancelar" severity="secondary" outlined @click="volver" />
-        <Button label="Guardar" icon="pi pi-save" @click="guardar" :loading="guardando" />
+      <div class="flex gap-2 w-full md:w-auto">
+        <Button label="Cancelar" severity="secondary" outlined @click="volver" class="flex-1 md:flex-none" />
+        <Button label="Guardar" icon="pi pi-save" @click="guardar" :loading="guardando" class="flex-1 md:flex-none" />
       </div>
     </div>
 
@@ -19,185 +19,194 @@
       {{ errorGlobal }}
     </Message>
 
-    <div class="grid formgrid p-fluid">
-      <!-- Datos Generales (Maestro) -->
-      <div class="col-12">
-        <div class="surface-card p-4 shadow-1 border-round">
-          <h3 class="mt-0 mb-4 text-900 border-bottom-1 border-300 pb-2">Datos Generales</h3>
-          <div class="grid formgrid">
-            <div class="field col-12 md:col-6">
-              <label for="proyecto" class="font-bold">Nombre del Proyecto <span class="text-red-500">*</span></label>
-              <InputText id="proyecto" v-model="formulario.nombreProyecto" placeholder="Ej: Remodelación Oficina Central" />
+    <!-- Datos Generales -->
+    <div class="surface-card p-3 md:p-4 shadow-1 border-round">
+      <h3 class="mt-0 mb-3 text-900 border-bottom-1 border-300 pb-2 text-lg">Datos Generales</h3>
+      <div class="grid formgrid p-fluid">
+        <div class="field col-12 md:col-6">
+          <label for="proyecto" class="font-bold block mb-2 text-700">Nombre del Proyecto <span class="text-red-500">*</span></label>
+          <InputText id="proyecto" v-model="formulario.nombreProyecto" placeholder="Ej: Remodelación Oficina Central" class="w-full" />
+        </div>
+        <div class="field col-12 md:col-6">
+          <label for="cliente" class="font-bold block mb-2 text-700">Cliente</label>
+          <Select id="cliente" v-model="formulario.clienteId" :options="clientes"
+                  optionLabel="nombre" optionValue="id" placeholder="Seleccione un cliente" showClear class="w-full" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Detalle (Lista de Tarjetas en Grilla) -->
+    <div class="surface-card p-3 md:p-4 shadow-1 border-round">
+      <div class="flex flex-column lg:flex-row justify-content-between align-items-start lg:align-items-center mb-4 border-bottom-1 border-300 pb-3 gap-3">
+        <h3 class="m-0 text-900 text-lg">Detalle del Presupuesto</h3>
+        <div class="flex flex-column sm:flex-row gap-2 w-full lg:w-auto">
+          <Button label="Nuevo Ítem Ad-Hoc" icon="pi pi-plus" severity="secondary" outlined @click="agregarItemManual" class="w-full sm:w-auto" />
+          <Button label="Catálogo APU" icon="pi pi-search" @click="mostrarModalCatalog = true" class="w-full sm:w-auto" />
+        </div>
+      </div>
+
+      <div v-if="formulario.items.length === 0" class="text-center p-4 text-500 border-round surface-100 border-1 surface-border border-dashed">
+        Aún no hay ítems en este presupuesto. Agrega una estructura APU desde el catálogo o crea una nueva.
+      </div>
+
+      <!-- Grilla de Ítems -->
+      <div v-else class="grid">
+        <!-- SE AGREGÓ EL ID DINÁMICO PARA EL SCROLL -->
+        <div v-for="(item, index) in formulario.items" :key="index" class="col-12 lg:col-6" :id="'item-tarjeta-' + index">
+          <div class="surface-ground border-1 surface-border border-round p-3 relative h-full flex flex-column">
+
+            <div class="flex justify-content-between align-items-center mb-3 border-bottom-1 surface-border pb-2">
+              <span class="font-bold text-700">Ítem {{ index + 1 }}</span>
+              <Button icon="pi pi-trash" severity="danger" text rounded size="small" @click="eliminarItem(index)" />
             </div>
-            <div class="field col-12 md:col-6">
-              <label for="cliente" class="font-bold">Cliente</label>
-              <Select id="cliente" v-model="formulario.clienteId" :options="clientes"
-                      optionLabel="nombre" optionValue="id" placeholder="Seleccione un cliente" showClear />
+
+            <div class="grid formgrid p-fluid flex-grow-1">
+              <div class="field col-12">
+                <label class="block mb-2 text-sm font-semibold text-600">Descripción</label>
+                <InputText v-model="item.descripcion" class="w-full input-descripcion" />
+              </div>
+
+              <div class="field col-6">
+                <label class="block mb-2 text-sm font-semibold text-600">Unidad</label>
+                <Select v-model="item.unidadMedidaId" :options="unidadesCatalogo" optionLabel="nombre" optionValue="id" class="w-full" appendTo="body" />
+              </div>
+
+              <div class="field col-6">
+                <label class="block mb-2 text-sm font-semibold text-600">Cantidad</label>
+                <InputNumber v-model="item.cantidadItem" :minFractionDigits="0" :maxFractionDigits="2" class="w-full" inputClass="w-full" />
+              </div>
+
+              <div class="col-12 flex flex-column gap-2 mt-auto">
+                <div class="flex justify-content-between align-items-center p-2 surface-100 border-round">
+                  <span class="text-sm text-600">P. Unitario:</span>
+                  <span class="font-semibold">$ {{ formatearMoneda(item.precioUnitarioCalculado) }}</span>
+                </div>
+                <div class="flex justify-content-between align-items-center p-2 bg-blue-50 border-round border-1 border-blue-100">
+                  <span class="text-sm font-bold text-blue-900">Subtotal Ítem:</span>
+                  <span class="font-bold text-blue-700 text-lg">$ {{ formatearMoneda(item.cantidadItem * (item.precioUnitarioCalculado || 0)) }}</span>
+                </div>
+                <Button label="Gestionar Insumos / Recursos" icon="pi pi-list" severity="info" outlined class="w-full mt-2" @click="abrirDetalleRecursos(index)" />
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Detalle (Ítems APU) -->
-      <div class="col-12">
-        <div class="surface-card p-4 shadow-1 border-round">
-          <div class="flex justify-content-between align-items-center mb-4 border-bottom-1 border-300 pb-2">
-            <h3 class="m-0 text-900">Detalle del Presupuesto</h3>
-            <div class="flex gap-2">
-              <Button label="Nuevo Ítem Ad-Hoc" icon="pi pi-plus" size="small" severity="secondary" outlined @click="agregarItemManual" />
-              <Button label="Agregar del Catálogo APU" icon="pi pi-search" size="small" @click="mostrarModalCatalog = true" />
-            </div>
+      <!-- Total del Presupuesto -->
+      <div class="flex justify-content-end mt-4">
+        <div class="w-full sm:w-20rem surface-100 p-3 border-round border-1 surface-border">
+          <div class="flex justify-content-between mb-2 align-items-center">
+            <span class="text-700 font-bold">Subtotal Neto:</span>
+            <span class="font-bold text-2xl text-green-600">$ {{ formatearMoneda(totalCalculadoFrontend) }}</span>
           </div>
-
-          <DataTable :value="formulario.items" responsiveLayout="scroll" class="p-datatable-sm" stripedRows>
-            <template #empty>
-              <div class="text-center p-4 text-500 border-round surface-100">
-                Aún no hay ítems en este presupuesto. Agrega una estructura APU desde el catálogo o crea una nueva.
-              </div>
-            </template>
-
-            <Column header="Descripción del Ítem">
-              <template #body="slotProps">
-                <InputText v-model="slotProps.data.descripcion" class="w-full" />
-              </template>
-            </Column>
-
-            <Column header="Unidad">
-              <template #body="slotProps">
-                <Select v-model="slotProps.data.unidadMedidaId" :options="unidadesCatalogo"
-                        optionLabel="nombre" optionValue="id" class="w-full md:w-8rem" />
-              </template>
-            </Column>
-
-            <Column header="Cantidad">
-              <template #body="slotProps">
-                <!-- Reactividad delegada al watcher profundo -->
-                <InputNumber v-model="slotProps.data.cantidadItem" :minFractionDigits="0" :maxFractionDigits="2"
-                             class="w-8rem" />
-              </template>
-            </Column>
-
-            <Column header="P. Unitario">
-              <template #body="slotProps">
-                $ {{ formatearMoneda(slotProps.data.precioUnitarioCalculado) }}
-              </template>
-            </Column>
-
-            <Column header="Subtotal">
-              <template #body="slotProps">
-                <span class="font-bold text-primary">$ {{ formatearMoneda(slotProps.data.cantidadItem * (slotProps.data.precioUnitarioCalculado || 0)) }}</span>
-              </template>
-            </Column>
-
-            <Column header="Acciones" style="width: 8rem">
-              <template #body="slotProps">
-                <div class="flex gap-2">
-                  <Button icon="pi pi-list" severity="info" text rounded @click="abrirDetalleRecursos(slotProps.index)" v-tooltip.top="'Gestionar Insumos'" />
-                  <Button icon="pi pi-trash" severity="danger" text rounded @click="eliminarItem(slotProps.index)" />
-                </div>
-              </template>
-            </Column>
-          </DataTable>
-
-          <div class="flex justify-content-end mt-4">
-            <div class="w-full md:w-20rem surface-100 p-3 border-round">
-              <div class="flex justify-content-between mb-2">
-                <span class="text-700">Subtotal Neto:</span>
-                <span class="font-bold text-xl text-green-600">$ {{ formatearMoneda(totalCalculadoFrontend) }}</span>
-              </div>
-              <div class="text-xs text-500 text-right">
-                * El cálculo final (incluyendo IVA) se procesará al guardar.
-              </div>
-            </div>
+          <div class="text-xs text-500 text-right">
+            * El cálculo de IVA y Total se procesará al guardar.
           </div>
         </div>
       </div>
     </div>
 
     <!-- Modal Catálogo APU -->
-    <Dialog v-model:visible="mostrarModalCatalog" modal header="Seleccionar Estructura APU" :style="{ width: '65vw' }" :breakpoints="{ '960px': '85vw', '641px': '100vw' }">
-      <div class="flex flex-column md:flex-row gap-3 mb-3">
-        <InputText v-model="filtrosApu['global'].value" placeholder="Buscar APU por nombre..." class="w-full" />
-        <Select v-model="filtrosApu['etiquetasIds'].value" :options="catalogoEtiquetas" optionLabel="nombre" optionValue="id" placeholder="Filtrar por Etiqueta" showClear class="w-full md:w-15rem" />
+    <Dialog v-model:visible="mostrarModalCatalog" modal header="Seleccionar Estructura APU" :style="{ width: '90vw', maxWidth: '1000px' }" :breakpoints="{ '960px': '95vw' }">
+      <div class="flex flex-column sm:flex-row gap-3 mb-4">
+        <InputText v-model="filtrosApu.global.value" placeholder="Buscar APU por nombre..." class="w-full" />
+        <Select v-model="filtrosApu.etiquetasIds.value" :options="catalogoEtiquetas" optionLabel="nombre" optionValue="id" placeholder="Filtrar por Etiqueta" showClear class="w-full sm:w-15rem" appendTo="body" />
       </div>
 
-      <DataTable :value="apusCatalogo" :loading="cargandoApus" v-model:filters="filtrosApu" :globalFilterFields="['nombre']" paginator :rows="5" class="p-datatable-sm" selectionMode="single" @rowSelect="seleccionarApu">
-        <Column field="nombre" header="Nombre" class="font-bold"></Column>
-        <Column field="unidadMedidaNombre" header="Unidad"></Column>
-        <Column header="Costo Unitario">
-          <template #body="slotProps">
-            <span class="font-semibold text-green-600">$ {{ formatearMoneda(slotProps.data.costoTotalCalculado) }}</span>
-          </template>
-        </Column>
-        <Column header="Etiquetas" style="min-width: 12rem">
-          <template #body="slotProps">
+      <div v-if="apusFiltrados.length === 0" class="text-center p-4 text-500 border-round surface-100">
+        No se encontraron APUs con esos filtros.
+      </div>
+
+      <div class="grid">
+        <div v-for="apu in apusFiltrados" :key="apu.id" class="col-12 lg:col-6">
+          <div class="surface-ground border-1 surface-border border-round p-3 h-full flex flex-column gap-3">
+            <div>
+              <h4 class="m-0 text-700 mb-1">{{ apu.nombre }}</h4>
+              <span class="text-sm text-500">Unidad: {{ apu.unidadMedidaNombre }}</span>
+            </div>
+
             <div class="flex flex-wrap gap-1">
-              <span v-for="tagId in slotProps.data.etiquetasIds" :key="tagId" class="text-xs px-2 py-1 border-round font-semibold" :style="obtenerEstiloEtiqueta(tagId)">
+              <span v-for="tagId in apu.etiquetasIds" :key="tagId" class="text-xs px-2 py-1 border-round font-semibold" :style="obtenerEstiloEtiqueta(tagId)">
                 {{ obtenerNombreEtiqueta(tagId) }}
               </span>
             </div>
-          </template>
-        </Column>
-      </DataTable>
+
+            <div class="flex justify-content-between align-items-center mt-auto pt-3 border-top-1 surface-border">
+              <span class="font-bold text-green-600 text-lg">$ {{ formatearMoneda(apu.costoTotalCalculado) }}</span>
+              <Button label="Seleccionar" icon="pi pi-check" size="small" @click="seleccionarApu(apu)" />
+            </div>
+          </div>
+        </div>
+      </div>
     </Dialog>
 
-    <!-- Modal para Gestionar los Insumos de un Ítem Ad-Hoc -->
-    <Dialog v-model:visible="mostrarModalRecursos" modal :header="'Recursos del Ítem'" :style="{ width: '70vw' }" :breakpoints="{ '960px': '85vw', '641px': '100vw' }">
-      <div class="flex gap-2 mb-3">
-        <Select v-model="insumoTemporal" :options="insumosCatalogo" optionLabel="descripcion" placeholder="Selecciona un insumo para agregar..." filter class="w-full" />
-        <Button icon="pi pi-plus" @click="agregarRecursoAlItem" :disabled="!insumoTemporal" />
+    <!-- Modal para Gestionar los Insumos -->
+    <Dialog v-model:visible="mostrarModalRecursos" modal :header="'Recursos del Ítem'" :style="{ width: '90vw', maxWidth: '1200px' }" :breakpoints="{ '960px': '95vw' }">
+      <div class="flex flex-column sm:flex-row gap-2 mb-4">
+        <Select v-model="insumoTemporal" :options="insumosCatalogo" optionLabel="descripcion" placeholder="Buscar insumo para agregar..." filter class="w-full" appendTo="body">
+          <template #option="slotProps">
+            <div class="white-space-normal text-sm line-height-2" style="word-break: break-word; max-width: 80vw;">
+              {{ slotProps.option.descripcion }}
+            </div>
+          </template>
+        </Select>
+        <Button icon="pi pi-plus" label="Agregar" @click="agregarRecursoAlItem" :disabled="!insumoTemporal" class="w-full sm:w-auto flex-shrink-0" />
       </div>
 
-      <DataTable v-if="itemEnEdicion" :value="itemEnEdicion.recursos" class="p-datatable-sm" stripedRows>
-        <template #empty>
-          <div class="text-center p-3 text-500">Este ítem no tiene insumos. Agrega uno para calcular su precio.</div>
-        </template>
+      <div v-if="itemEnEdicion?.recursos.length === 0" class="text-center p-4 text-500 border-round surface-100 border-1 surface-border border-dashed">
+        Este ítem no tiene insumos. Agrega uno para calcular su precio.
+      </div>
 
-        <Column header="Insumo">
-          <template #body="slotProps">
-            <InputText v-model="slotProps.data.descripcionCongelada" class="w-full" />
-          </template>
-        </Column>
+      <div v-else class="grid">
+        <div v-for="(recurso, index) in itemEnEdicion?.recursos" :key="index" class="col-12 lg:col-6">
+          <div class="surface-ground border-1 surface-border border-round p-3 relative h-full flex flex-column">
 
-        <Column header="Unidad">
-          <template #body="slotProps">
-            <Select v-model="slotProps.data.unidadMedidaId" :options="unidadesCatalogo"
-                    optionLabel="nombre" optionValue="id" class="w-full md:w-8rem" />
-          </template>
-        </Column>
+            <Button icon="pi pi-times" severity="danger" text rounded class="absolute top-0 right-0 mt-1 mr-1" @click="eliminarRecurso(index)" />
 
-        <Column header="Cantidad">
-          <template #body="slotProps">
-            <!-- Reactividad delegada al watcher profundo -->
-            <InputNumber v-model="slotProps.data.cantidad" :minFractionDigits="0" :maxFractionDigits="4" class="w-6rem" />
-          </template>
-        </Column>
-        <Column header="Precio Referencia">
-          <template #body="slotProps">
-            <!-- Reactividad delegada al watcher profundo -->
-            <InputNumber v-model="slotProps.data.precioUnitarioCongelado" mode="currency" currency="CLP" locale="es-CL" class="w-8rem" />
-          </template>
-        </Column>
-        <Column header="Costo Total">
-          <template #body="slotProps">
-            <span class="font-bold">$ {{ formatearMoneda(slotProps.data.cantidad * slotProps.data.precioUnitarioCongelado) }}</span>
-          </template>
-        </Column>
-        <Column header="" style="width: 4rem">
-          <template #body="slotProps">
-            <Button icon="pi pi-times" severity="danger" text rounded @click="eliminarRecurso(slotProps.index)" />
-          </template>
-        </Column>
-      </DataTable>
+            <div class="grid formgrid p-fluid mt-2 flex-grow-1">
+              <div class="field col-12 md:col-11">
+                <label class="block mb-2 text-sm font-semibold text-600">Insumo</label>
+                <InputText v-model="recurso.descripcionCongelada" class="w-full" />
+              </div>
+
+              <div class="field col-12 sm:col-4">
+                <label class="block mb-2 text-sm font-semibold text-600">Unidad</label>
+                <Select v-model="recurso.unidadMedidaId" :options="unidadesCatalogo" optionLabel="nombre" optionValue="id" class="w-full" appendTo="body" />
+              </div>
+
+              <div class="field col-6 sm:col-4">
+                <label class="block mb-2 text-sm font-semibold text-600">Cantidad</label>
+                <InputNumber v-model="recurso.cantidad" :minFractionDigits="0" :maxFractionDigits="4" class="w-full" inputClass="w-full" />
+              </div>
+
+              <div class="field col-6 sm:col-4">
+                <label class="block mb-2 text-sm font-semibold text-600">Precio Ref.</label>
+                <InputNumber v-model="recurso.precioUnitarioCongelado" mode="currency" currency="CLP" locale="es-CL" class="w-full" inputClass="w-full" />
+              </div>
+
+              <div class="col-12 mt-auto">
+                <div class="flex justify-content-between align-items-center p-2 surface-100 border-round w-full">
+                  <span class="text-sm font-bold text-700">Costo Total:</span>
+                  <span class="font-bold text-green-600 text-lg">$ {{ formatearMoneda(recurso.cantidad * recurso.precioUnitarioCongelado) }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <template #footer>
-        <Button label="Cerrar" icon="pi pi-check" @click="mostrarModalRecursos = false" />
+        <div class="flex w-full justify-content-end mt-3">
+          <Button label="Cerrar Insumos" icon="pi pi-check" @click="mostrarModalRecursos = false" class="w-full sm:w-auto" />
+        </div>
       </template>
     </Dialog>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { ref, onMounted, computed, watch } from 'vue';
+  // SE AGREGÓ nextTick a la importación
+  import { ref, onMounted, computed, watch, nextTick } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
   import { presupuestoService } from '../../services/presupuestoService';
   import { clienteService } from '../../services/clienteService';
@@ -207,14 +216,11 @@
   import type { ICliente } from '../../interfaces/ICliente';
   import type { IEstructuraAPU } from '../../interfaces/IApu';
   import type { IEtiqueta, IInsumo, IUnidadMedida } from '../../interfaces/IInsumo';
-  import { FilterMatchMode } from "@primevue/core/api";
 
   import Button from 'primevue/button';
   import InputText from 'primevue/inputtext';
   import Select from 'primevue/select';
   import InputNumber from 'primevue/inputnumber';
-  import DataTable from 'primevue/datatable';
-  import Column from 'primevue/column';
   import Message from 'primevue/message';
   import Dialog from 'primevue/dialog';
 
@@ -234,8 +240,8 @@
 
   const mostrarModalCatalog = ref(false);
   const filtrosApu = ref({
-    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    etiquetasIds: { value: null, matchMode: FilterMatchMode.CONTAINS }
+    global: { value: '' },
+    etiquetasIds: { value: null }
   });
 
   const mostrarModalRecursos = ref(false);
@@ -250,34 +256,42 @@
     items: []
   });
 
-  // Motor de cálculo reactivo
-  // Vigila cualquier cambio profundo (deep) en el arreglo de ítems o sus recursos
+  const apusFiltrados = computed(() => {
+    return apusCatalogo.value.filter(apu => {
+      let coincideTexto = true;
+      let coincideEtiqueta = true;
+
+      if (filtrosApu.value.global.value) {
+        coincideTexto = apu.nombre.toLowerCase().includes(filtrosApu.value.global.value.toLowerCase());
+      }
+
+      if (filtrosApu.value.etiquetasIds.value) {
+        coincideEtiqueta = apu.etiquetasIds.includes(filtrosApu.value.etiquetasIds.value as string);
+      }
+
+      return coincideTexto && coincideEtiqueta;
+    });
+  });
+
   watch(() => formulario.value.items, (nuevosItems) => {
     let totalMonto = 0;
 
     if (nuevosItems && nuevosItems.length > 0) {
       nuevosItems.forEach(item => {
-        // 1. Recalcular el costo unitario del ítem sumando sus recursos
         let costoUnitarioItem = 0;
 
         if (item.recursos && item.recursos.length > 0) {
           item.recursos.forEach(r => {
-            // El costo es Cantidad del insumo * Precio negociado/congelado
             costoUnitarioItem += (r.cantidad * r.precioUnitarioCongelado);
           });
         }
 
-        // Actualizamos el costo unitario del ítem en tiempo real
         item.precioUnitarioCalculado = costoUnitarioItem;
-
-        // 2. Sumar al Subtotal General del presupuesto (Cantidad del ítem * Costo Unitario)
         totalMonto += (item.cantidadItem * item.precioUnitarioCalculado);
       });
     }
 
-    // Actualizamos la variable visual del total
     totalCalculadoFrontend.value = totalMonto;
-
   }, { deep: true });
 
   onMounted(async () => {
@@ -317,7 +331,6 @@
     try {
       const data = await presupuestoService.obtenerPorId(id);
 
-      // Saneamiento estricto de IDs para clonación
       if (esClonacion) {
         delete data.id;
         data.nombreProyecto = `${data.nombreProyecto} (Copia)`;
@@ -325,11 +338,8 @@
         if (data.items && data.items.length > 0) {
           data.items.forEach(i => {
             delete i.id;
-
             if (i.recursos && i.recursos.length > 0) {
-              i.recursos.forEach(r => {
-                delete r.id;
-              });
+              i.recursos.forEach(r => delete r.id);
             } else {
               i.recursos = [];
             }
@@ -345,18 +355,35 @@
     }
   };
 
-  const agregarItemManual = () => {
+  const hacerScrollAlNuevoItem = async () => {
+    await nextTick(); // Espera a que Vue repinte el DOM
+    const indiceNuevo = formulario.value.items.length - 1;
+    const elemento = document.getElementById(`item-tarjeta-${indiceNuevo}`);
+
+    if (elemento) {
+      elemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      // Opcional: Hacer auto-focus en el input de descripción para escribir de inmediato
+      const inputFocus = elemento.querySelector('.input-descripcion') as HTMLElement;
+      if (inputFocus) {
+        setTimeout(() => inputFocus.focus(), 300); // Pequeño retraso visual
+      }
+    }
+  };
+
+  const agregarItemManual = async () => {
     formulario.value.items.push({
-      descripcion: 'Nuevo Ítem Personalizado',
+      descripcion: '', // Dejamos en blanco para que escriba inmediatamente
       cantidadItem: 1,
       unidadMedidaId: 1,
       precioUnitarioCalculado: 0,
       recursos: []
     });
+
+    await hacerScrollAlNuevoItem();
   };
 
-  const seleccionarApu = async (event: any) => {
-    const apuSeleccionado = event.data as IEstructuraAPU;
+  const seleccionarApu = async (apuSeleccionado: IEstructuraAPU) => {
     try {
       const apuCompleto = await apuService.obtenerPorId(apuSeleccionado.id!);
 
@@ -379,6 +406,12 @@
       });
 
       mostrarModalCatalog.value = false;
+
+      // Al cerrar el modal, le damos tiempo a PrimeVue de ocultar el overlay antes de hacer scroll
+      setTimeout(async () => {
+        await hacerScrollAlNuevoItem();
+      }, 200);
+
     } catch (error: any) {
       errorGlobal.value = "Error al cargar la receta del APU: " + error.message;
     }
@@ -435,7 +468,6 @@
 
   const volver = () => router.push('/presupuestos');
 
-  // Utilidades visuales
   const formatearMoneda = (valor?: number) => valor === undefined ? '0' : valor.toLocaleString('es-CL');
 
   const obtenerNombreEtiqueta = (id: string): string => {

@@ -1,26 +1,28 @@
 <template>
-  <div class="flex flex-column gap-4 pb-4" style="height: calc(100vh - 120px);">
+  <div class="flex flex-column gap-3 md:gap-4 pb-4 h-full">
 
-    <div class="surface-card p-4 shadow-1 border-round flex flex-column flex-grow-1 overflow-hidden">
-      <!-- Cabecera -->
-      <div class="flex flex-column md:flex-row justify-content-between md:align-items-center mb-3 gap-3">
+    <div class="surface-card p-3 md:p-4 shadow-1 border-round flex flex-column flex-grow-1">
+
+      <!-- Cabecera Responsiva -->
+      <div class="flex flex-column md:flex-row justify-content-between md:align-items-center mb-4 gap-3">
         <div class="flex align-items-center gap-3 titulo-mantenedor">
           <div class="bg-indigo-500 text-white border-round-lg flex align-items-center justify-content-center flex-shrink-0" style="width: 3rem; height: 3rem;">
-            <i class="pi pi-file-invoice text-xl"></i>
+            <i class="pi pi-file-edit text-xl"></i>
           </div>
           <div>
-            <h2 class="m-0 text-900 text-xl font-bold">Gestión de Presupuestos</h2>
+            <h2 class="m-0 text-900 text-lg md:text-xl font-bold">Gestión de Presupuestos</h2>
             <span class="text-500 text-sm hidden md:block">Crea, duplica y administra tus cotizaciones comerciales</span>
           </div>
         </div>
 
-        <div class="flex gap-2 w-full md:w-auto justify-content-end flex-shrink-0">
+        <div class="flex flex-column sm:flex-row gap-2 w-full md:w-auto flex-shrink-0">
           <Button :icon="mostrarFiltros ? 'pi pi-filter-slash' : 'pi pi-filter'"
-                  :label="mostrarFiltros ? 'Ocultar Búsqueda' : 'Buscar'"
+                  :label="mostrarFiltros ? 'Ocultar Filtros' : 'Filtros'"
                   severity="secondary"
                   outlined
+                  class="w-full sm:w-auto"
                   @click="mostrarFiltros = !mostrarFiltros" />
-          <Button label="Nuevo Presupuesto" icon="pi pi-plus" @click="abrirFormulario()" />
+          <Button label="Nuevo Presupuesto" icon="pi pi-plus" class="w-full sm:w-auto" @click="abrirFormulario()" />
         </div>
       </div>
 
@@ -28,113 +30,97 @@
         {{ errorGlobal }}
       </Message>
 
-      <!-- Tabla -->
-      <DataTable :value="presupuestos"
-                 :loading="cargando"
-                 v-model:filters="filtros"
-                 :globalFilterFields="['nombreProyecto', 'clienteNombre']"
-                 responsiveLayout="scroll"
-                 stripedRows
-                 class="p-datatable-sm flex flex-column flex-grow-1"
-                 style="min-height: 0;"
-                 scrollable
-                 scrollHeight="flex"
-                 :virtualScroll="true"
-                 :rows="25">
+      <!-- Zona de Filtros -->
+      <div v-if="mostrarFiltros" class="flex flex-column md:flex-row gap-3 mb-4 p-3 surface-100 border-round">
 
-        <template #header>
-          <div v-if="mostrarFiltros" class="flex flex-column md:flex-row justify-content-between gap-3 transition-duration-200">
-            <div class="w-full md:w-20rem">
-              <InputText v-model="filtros['global'].value"
-                         placeholder="Buscar por proyecto o cliente..."
-                         class="w-full" />
-            </div>
+        <!-- Buscador con flex-1 y IconField -->
+        <div class="flex-1 w-full">
+          <IconField class="w-full">
+            <InputIcon class="pi pi-search" />
+            <InputText v-model="filtroTexto" placeholder="Buscar por proyecto o cliente..." class="w-full" />
+          </IconField>
+        </div>
 
-            <div class="w-full md:w-15rem">
-              <Select v-model="filtros['estado'].value"
-                      :options="estadosPermitidos"
-                      placeholder="Filtrar por Estado"
-                      showClear
-                      class="w-full" />
+        <!-- Selector con ancho fijo en escritorio (15rem) -->
+        <div class="w-full md:w-15rem flex-shrink-0">
+          <Select v-model="filtroEstado" :options="estadosPermitidos" placeholder="Filtrar por Estado" showClear class="w-full" />
+        </div>
+
+      </div>
+
+      <!-- Vista de Tarjetas (DataView) -->
+      <div class="flex-grow-1 overflow-auto">
+
+        <div v-if="cargando" class="flex justify-content-center align-items-center p-5">
+          <i class="pi pi-spin pi-spinner text-4xl text-primary"></i>
+        </div>
+
+        <div v-else-if="presupuestosFiltrados.length === 0" class="text-center p-5 text-500 border-round surface-100 border-1 surface-border border-dashed">
+          No se encontraron presupuestos que coincidan con la búsqueda.
+        </div>
+
+        <div v-else class="grid">
+          <div v-for="presupuesto in presupuestosFiltrados" :key="presupuesto.id" class="col-12 md:col-6 lg:col-4">
+            <!-- Tarjeta Individual -->
+            <div class="surface-card border-1 surface-border border-round shadow-1 flex flex-column h-full">
+
+              <!-- Header Tarjeta -->
+              <div class="flex justify-content-between align-items-start p-3 border-bottom-1 surface-border surface-50 border-round-top">
+                <div class="flex flex-column pr-2">
+                  <span class="text-900 font-bold text-lg line-height-2 mb-1" style="word-break: break-word;">
+                    {{ presupuesto.nombreProyecto }}
+                  </span>
+                  <span class="text-600 text-sm flex align-items-center gap-1">
+                    <i class="pi pi-user text-xs"></i>
+                    {{ presupuesto.clienteNombre || 'Sin Cliente Asignado' }}
+                  </span>
+                </div>
+                <div class="flex flex-column align-items-end gap-1 flex-shrink-0">
+                  <Tag :value="presupuesto.estado" :severity="obtenerSeveridadEstado(presupuesto.estado)" />
+                  <Tag v-if="presupuesto.esPlantilla" value="Plantilla" severity="info" class="text-xs" />
+                </div>
+              </div>
+
+              <!-- Body Tarjeta -->
+              <div class="p-3 flex-grow-1 flex flex-column gap-2 justify-content-center">
+                <div class="flex justify-content-between align-items-center">
+                  <span class="text-500 text-sm">Fecha Creación:</span>
+                  <span class="text-700 text-sm font-semibold">{{ formatearFecha(presupuesto.fechaCreacion) }}</span>
+                </div>
+                <div class="flex justify-content-between align-items-center">
+                  <span class="text-500 text-sm">Subtotal:</span>
+                  <span class="text-700 text-sm">$ {{ formatearMoneda(presupuesto.subtotal) }}</span>
+                </div>
+                <div class="flex justify-content-between align-items-center border-bottom-1 surface-border pb-2">
+                  <span class="text-500 text-sm">IVA (19%):</span>
+                  <span class="text-700 text-sm">$ {{ formatearMoneda(presupuesto.montoIva) }}</span>
+                </div>
+                <div class="flex justify-content-between align-items-center pt-1">
+                  <span class="text-700 font-bold">Total:</span>
+                  <span class="text-green-600 font-bold text-xl">$ {{ formatearMoneda(presupuesto.total) }}</span>
+                </div>
+              </div>
+
+              <div class="p-3 border-top-1 surface-border flex gap-2 justify-content-end surface-50 border-round-bottom">
+                <Button icon="pi pi-pencil" outlined rounded severity="info"
+                        @click="abrirFormulario(presupuesto.id)"
+                        :disabled="presupuesto.esPlantilla"
+                        v-tooltip.top="presupuesto.esPlantilla ? 'Las plantillas no se editan' : 'Editar'" />
+
+                <Button icon="pi pi-copy" outlined rounded severity="secondary"
+                        @click="duplicarPresupuesto(presupuesto.id!)"
+                        v-tooltip.top="'Duplicar a nuevo'" />
+
+                <Button icon="pi pi-trash" outlined rounded severity="danger"
+                        @click="confirmarEliminacion(presupuesto)"
+                        :disabled="presupuesto.esPlantilla || presupuesto.estado !== 'Borrador'"
+                        v-tooltip.top="'Eliminar'" />
+              </div>
+
             </div>
           </div>
-        </template>
-
-        <template #empty>
-          <div class="text-center p-4 text-500">
-            No se encontraron presupuestos. Presiona "Nuevo Presupuesto" para comenzar.
-          </div>
-        </template>
-
-        <Column field="nombreProyecto" header="Proyecto" :sortable="true" class="font-bold">
-          <template #body="slotProps">
-            <div class="flex align-items-center gap-2">
-              {{ slotProps.data.nombreProyecto }}
-              <span v-if="slotProps.data.esPlantilla" class="text-xs font-bold text-blue-600 bg-blue-50 border-round px-2 py-1" v-tooltip.top="'Plantilla del Sistema'">
-                Plantilla
-              </span>
-            </div>
-          </template>
-        </Column>
-        <Column field="clienteNombre" header="Cliente" :sortable="true"></Column>
-        <Column field="fechaCreacion" header="Fecha" :sortable="true">
-          <template #body="slotProps">
-            {{ formatearFecha(slotProps.data.fechaCreacion) }}
-          </template>
-        </Column>
-
-        <Column field="estado" header="Estado" :sortable="true">
-          <template #body="slotProps">
-            <span :class="obtenerClaseEstado(slotProps.data.estado)">
-              {{ slotProps.data.estado }}
-            </span>
-          </template>
-        </Column>
-
-        <Column header="Subtotal" :sortable="true" sortField="subtotal">
-          <template #body="slotProps">
-            <span>
-              $ {{ formatearMoneda(slotProps.data.subtotal) }}
-            </span>
-          </template>
-        </Column>
-
-        <Column header="IVA" :sortable="true" sortField="montoIva">
-          <template #body="slotProps">
-            <span class="text-500">
-              $ {{ formatearMoneda(slotProps.data.montoIva) }}
-            </span>
-          </template>
-        </Column>
-
-        <Column header="Total" :sortable="true" sortField="total">
-          <template #body="slotProps">
-            <span class="font-bold text-green-600">
-              $ {{ formatearMoneda(slotProps.data.total) }}
-            </span>
-          </template>
-        </Column>
-
-        <Column header="Acciones" :exportable="false" style="min-width: 12rem" alignFrozen="right" frozen>
-          <template #body="slotProps">
-            <div class="flex gap-2">
-              <Button icon="pi pi-pencil" outlined rounded severity="info"
-                      @click="abrirFormulario(slotProps.data.id)"
-                      :disabled="slotProps.data.esPlantilla"
-                      v-tooltip.top="slotProps.data.esPlantilla ? 'Las plantillas no se pueden editar' : 'Editar'" />
-
-              <Button icon="pi pi-copy" outlined rounded severity="secondary"
-                      @click="duplicarPresupuesto(slotProps.data.id)"
-                      v-tooltip.top="'Duplicar'" />
-
-              <Button icon="pi pi-trash" outlined rounded severity="danger"
-                      @click="confirmarEliminacion(slotProps.data)"
-                      :disabled="slotProps.data.esPlantilla || slotProps.data.estado !== 'Borrador'"
-                      v-tooltip.top="'Eliminar'" />
-            </div>
-          </template>
-        </Column>
-      </DataTable>
+        </div>
+      </div>
     </div>
 
     <ConfirmDialog />
@@ -142,20 +128,20 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, computed } from 'vue';
   import { useRouter } from 'vue-router';
   import { presupuestoService } from '../../services/presupuestoService';
   import type { IPresupuesto } from '../../interfaces/IPresupuesto';
 
-  import DataTable from 'primevue/datatable';
-  import Column from 'primevue/column';
   import Button from 'primevue/button';
   import Message from 'primevue/message';
   import InputText from 'primevue/inputtext';
   import Select from 'primevue/select';
+  import Tag from 'primevue/tag';
+  import IconField from 'primevue/iconfield';
+  import InputIcon from 'primevue/inputicon';
   import { useConfirm } from 'primevue/useconfirm';
   import ConfirmDialog from 'primevue/confirmdialog';
-  import { FilterMatchMode } from "@primevue/core/api";
 
   const router = useRouter();
   const confirm = useConfirm();
@@ -164,12 +150,11 @@
   const cargando = ref(false);
   const errorGlobal = ref('');
 
-  const filtros = ref({
-    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    estado: { value: null, matchMode: FilterMatchMode.EQUALS }
-  });
+  // Filtros Locales
+  const filtroTexto = ref('');
+  const filtroEstado = ref<string | null>(null);
   const estadosPermitidos = ref(['Borrador', 'Emitido', 'Aprobado', 'Rechazado']);
-  const mostrarFiltros = ref(window.innerHeight > 500);
+  const mostrarFiltros = ref(window.innerWidth > 768);
 
   onMounted(() => {
     cargarPresupuestos();
@@ -186,6 +171,26 @@
       cargando.value = false;
     }
   };
+
+  const presupuestosFiltrados = computed(() => {
+    return presupuestos.value.filter(p => {
+      let coincideTexto = true;
+      let coincideEstado = true;
+
+      if (filtroTexto.value) {
+        const busqueda = filtroTexto.value.toLowerCase();
+        const proyecto = p.nombreProyecto?.toLowerCase() || '';
+        const cliente = p.clienteNombre?.toLowerCase() || '';
+        coincideTexto = proyecto.includes(busqueda) || cliente.includes(busqueda);
+      }
+
+      if (filtroEstado.value) {
+        coincideEstado = p.estado === filtroEstado.value;
+      }
+
+      return coincideTexto && coincideEstado;
+    });
+  });
 
   const abrirFormulario = (id?: string) => {
     if (id) router.push(`/presupuestos/editar/${id}`);
@@ -223,16 +228,16 @@
 
   const formatearFecha = (fechaStr?: string) => {
     if (!fechaStr) return '';
-    return new Date(fechaStr).toLocaleDateString('es-CL');
+    return new Date(fechaStr).toLocaleDateString('es-CL', { timeZone: 'America/Santiago' });
   };
 
-  const obtenerClaseEstado = (estado?: string) => {
+  const obtenerSeveridadEstado = (estado?: string) => {
     switch (estado) {
-      case 'Borrador': return 'text-xs font-bold text-gray-600 bg-gray-100 border-round px-2 py-1';
-      case 'Emitido': return 'text-xs font-bold text-blue-600 bg-blue-50 border-round px-2 py-1';
-      case 'Aprobado': return 'text-xs font-bold text-green-600 bg-green-50 border-round px-2 py-1';
-      case 'Rechazado': return 'text-xs font-bold text-red-600 bg-red-50 border-round px-2 py-1';
-      default: return 'text-xs font-bold text-500 bg-100 border-round px-2 py-1';
+      case 'Borrador': return 'secondary';
+      case 'Emitido': return 'info';
+      case 'Aprobado': return 'success';
+      case 'Rechazado': return 'danger';
+      default: return 'secondary';
     }
   };
 </script>
