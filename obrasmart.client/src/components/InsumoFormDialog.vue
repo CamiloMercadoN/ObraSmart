@@ -86,30 +86,8 @@
 
     </form>
   </Dialog>
-  <Dialog v-model:visible="mostrarDialogoEtiqueta"
-          header="Nueva Etiqueta"
-          modal
-          :style="{ width: '300px' }"
-          :closable="!guardandoEtiqueta"
-          @hide="resetEtiquetaForm">
-    <div class="flex flex-column gap-3 mt-2">
-      <div class="flex flex-column gap-2">
-        <label for="nombreEtiqueta" class="font-bold text-sm">Nombre <span class="text-red-500">*</span></label>
-        <InputText id="nombreEtiqueta" v-model="nuevaEtiqueta.nombre" maxlength="50" autofocus />
-      </div>
-      <div class="flex flex-column gap-2">
-        <label for="colorEtiqueta" class="font-bold text-sm">Color</label>
-        <input type="color" id="colorEtiqueta" v-model="nuevaEtiqueta.colorHex" class="w-full h-2rem border-round cursor-pointer" style="border: 1px solid #cbd5e1;" />
-      </div>
-      <Message v-if="errorEtiqueta" severity="error" :closable="false" class="mt-2 mb-0 p-2 text-sm">
-        {{ errorEtiqueta }}
-      </Message>
-      <div class="flex justify-content-end gap-2 mt-3">
-        <Button label="Cancelar" text severity="secondary" size="small" @click="mostrarDialogoEtiqueta = false" :disabled="guardandoEtiqueta" />
-        <Button label="Crear" size="small" @click="guardarNuevaEtiqueta" :loading="guardandoEtiqueta" :disabled="!nuevaEtiqueta.nombre.trim()" />
-      </div>
-    </div>
-  </Dialog>
+  <EtiquetaFormDialog v-model:visible="mostrarDialogoEtiqueta"
+                      @etiqueta-creada="onEtiquetaCreada" />
 </template>
 
 <script setup lang="ts">
@@ -124,6 +102,7 @@
   import Select from 'primevue/select';
   import MultiSelect from 'primevue/multiselect';
   import { TIPOS_INSUMO } from '../utils/constantes';
+  import EtiquetaFormDialog from './EtiquetaFormDialog.vue';
 
   const props = defineProps({
     visible: {
@@ -223,45 +202,18 @@
     emit('guardar', { ...formulario.value });
   };
 
-  // --- Estado para la Creación Rápida de Etiquetas ---
+  // --- Creación Rápida de Etiquetas ---
   const mostrarDialogoEtiqueta = ref(false);
-  const guardandoEtiqueta = ref(false);
-  const errorEtiqueta = ref('');
 
-  const nuevaEtiqueta = ref({
-    nombre: '',
-    colorHex: '#3b82f6'
-  });
+  const onEtiquetaCreada = (tagCreada: { id: string, nombre: string, colorHex: string }) => {
+    // Agregamos la nueva etiqueta a la lista local para el MultiSelect
+    etiquetas.value.push({
+      ...tagCreada,
+      esPlantilla: false
+    });
 
-  const resetEtiquetaForm = () => {
-    nuevaEtiqueta.value = { nombre: '', colorHex: '#3b82f6' };
-    errorEtiqueta.value = '';
-  };
-
-  const guardarNuevaEtiqueta = async () => {
-    if (!nuevaEtiqueta.value.nombre.trim()) return;
-
-    guardandoEtiqueta.value = true;
-    errorEtiqueta.value = '';
-
-    try {
-      const nuevoId = await insumoService.crearEtiqueta(nuevaEtiqueta.value);
-
-      const tagAgregada = {
-        id: nuevoId,
-        nombre: nuevaEtiqueta.value.nombre.trim(),
-        colorHex: nuevaEtiqueta.value.colorHex,
-        esPlantilla: false
-      };
-
-      etiquetas.value.push(tagAgregada);
-      formulario.value.etiquetasIds.push(nuevoId);
-      mostrarDialogoEtiqueta.value = false;
-    } catch (err: any) {
-      errorEtiqueta.value = err.message;
-    } finally {
-      guardandoEtiqueta.value = false;
-    }
+    // Auto-seleccionamos en el formulario del insumo
+    formulario.value.etiquetasIds.push(tagCreada.id);
   };
 
 </script>

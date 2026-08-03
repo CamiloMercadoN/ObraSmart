@@ -118,6 +118,10 @@
                         :disabled="apu.esPlantilla"
                         v-tooltip.top="apu.esPlantilla ? 'Las plantillas no se pueden editar' : 'Editar'" />
 
+                <Button icon="pi pi-copy" outlined rounded severity="success"
+                        @click="duplicarApu(apu.id!)"
+                        v-tooltip.top="'Duplicar APU'" />
+
                 <Button icon="pi pi-refresh" outlined rounded severity="secondary"
                         @click="recalcularCosto(apu)"
                         :disabled="apu.esPlantilla || recargandoId === apu.id"
@@ -222,6 +226,10 @@
     } else {
       router.push('/apus/crear');
     }
+  };
+
+  const duplicarApu = (id: string) => {
+    router.push({ path: '/apus/crear', query: { cloneId: id } });
   };
 
   const recalcularCosto = async (apu: IEstructuraAPU) => {

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="ObraSmart.Domain.Entities.Cliente">
-    <Position X="4.25" Y="5.75" Width="1.5" />
+    <Position X="5.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIECAAAAAAAAgAAAACAAgAgAAIAAAAAAAAAEAgAAAAI=</HashCode>
       <FileName>Entities\Cliente.cs</FileName>
@@ -60,9 +60,12 @@
   <Class Name="ObraSmart.Domain.Entities.ItemPresupuesto">
     <Position X="9" Y="7" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>CIADAAAAAAAEAAAAAAAEIAABAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <HashCode>CIADAAAAAAAEAAAAAAAEIgABAAAAAAAAAAAAEAAAIAA=</HashCode>
       <FileName>Entities\ItemPresupuesto.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="UnidadMedida" />
+    </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="Recursos" />
     </ShowAsCollectionAssociation>
@@ -84,12 +87,15 @@
   <Class Name="ObraSmart.Domain.Entities.RecursoItemPresupuesto">
     <Position X="9" Y="10.25" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAACgAEAAAQAAAAAAEAAgAAAAAAAAAIAAAAAAAAAAEA=</HashCode>
+      <HashCode>AAACgAEAAAQAAAAAAEAAggAAAAAAAAIAAAAAEAAAAEA=</HashCode>
       <FileName>Entities\RecursoItemPresupuesto.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="UnidadMedida" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="ObraSmart.Domain.Entities.Usuario">
-    <Position X="4" Y="1.75" Width="2.5" />
+    <Position X="4.5" Y="1.75" Width="2.5" />
     <AssociationLine Name="Clientes" Type="ObraSmart.Domain.Entities.Cliente">
       <MemberNameLabel ManuallyPlaced="true">
         <Position X="0.079" Y="0.331" />
@@ -112,7 +118,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="ObraSmart.Domain.Entities.Pais">
-    <Position X="0.5" Y="8.5" Width="1.75" />
+    <Position X="1" Y="8.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAACAEAAAAAAAAAAAAAAgAAAABAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\Pais.cs</FileName>
@@ -122,7 +128,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="ObraSmart.Domain.Entities.Ciudad">
-    <Position X="0.5" Y="2.5" Width="2.5" />
+    <Position X="1" Y="2.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAIAAAAAAAAEAgAAAAAAAAAAAEABAAAAAAgA=</HashCode>
       <FileName>Entities\Ciudad.cs</FileName>
@@ -133,7 +139,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="ObraSmart.Domain.Entities.EstadoProvincia">
-    <Position X="0.5" Y="5.75" Width="1.75" />
+    <Position X="1" Y="5.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>gAACAAAAAAQAAAAgAAEAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\EstadoProvincia.cs</FileName>
@@ -149,8 +155,8 @@
       <FileName>Entities\Etiqueta.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Property Name="EstructurasAPU" />
       <Property Name="Insumos" />
+      <Property Name="EstructurasAPU" />
     </ShowAsCollectionAssociation>
     <Lollipop Position="0.2" />
   </Class>

@@ -23,7 +23,7 @@
       <h3 class="mt-0 mb-3 text-900 border-bottom-1 border-300 pb-2 text-lg">Datos Generales</h3>
 
       <div class="grid formgrid p-fluid">
-        <div class="field col-12 md:col-6">
+        <div class="field col-12 md:col-5">
           <label for="nombre" class="font-bold block mb-2 text-700">Nombre del APU <span class="text-red-500">*</span></label>
           <InputText id="nombre" v-model="formulario.nombre" placeholder="Ej: Hormigón H30" class="w-full" />
         </div>
@@ -34,11 +34,14 @@
                   optionLabel="nombre" optionValue="id" placeholder="Seleccione..." class="w-full" />
         </div>
 
-        <div class="field col-12 md:col-3">
+        <div class="field col-12 md:col-4">
           <label for="etiquetas" class="font-bold block mb-2 text-700">Clasificación</label>
-          <MultiSelect id="etiquetas" v-model="formulario.etiquetasIds" :options="etiquetas"
-                       optionLabel="nombre" optionValue="id" placeholder="Seleccione etiquetas"
-                       display="chip" class="w-full" />
+          <div class="flex gap-2 align-items-stretch">
+            <MultiSelect id="etiquetas" v-model="formulario.etiquetasIds" :options="etiquetas"
+                         optionLabel="nombre" optionValue="id" placeholder="Seleccione etiquetas"
+                         display="chip" class="flex-grow-1" style="min-width: 0;" />
+            <Button icon="pi pi-plus" severity="secondary" @click="mostrarDialogoEtiqueta = true" v-tooltip.top="'Nueva Etiqueta'" class="flex-shrink-0" />
+          </div>
         </div>
       </div>
     </div>
@@ -163,6 +166,10 @@
                       :loading="guardandoInsumo"
                       :error="errorModalInsumo"
                       @guardar="guardarNuevoInsumo" />
+
+    <EtiquetaFormDialog v-model:visible="mostrarDialogoEtiqueta"
+                        @etiqueta-creada="onEtiquetaCreada" />
+
   </div>
 </template>
 
@@ -174,6 +181,7 @@
   import type { IEstructuraAPUUpsert, IComponenteAPU } from '../../interfaces/IApu';
   import type { IInsumo, IUnidadMedida, IEtiqueta } from '../../interfaces/IInsumo';
   import InsumoFormDialog from '../../components/InsumoFormDialog.vue';
+  import EtiquetaFormDialog from '../../components/EtiquetaFormDialog.vue'
 
   interface IComponenteVisual extends IComponenteAPU {
     unidadMedidaNombre?: string;
@@ -190,7 +198,7 @@
   const route = useRoute();
   const router = useRouter();
 
-  const esEdicion = computed(() => !!route.params.id);
+  const esEdicion = computed(() => !!route.params.id && !route.query.cloneId);
   const guardando = ref(false);
   const errorGlobal = ref('');
 
@@ -228,8 +236,10 @@
 
   onMounted(async () => {
     await cargarCatalogos();
-    if (esEdicion.value) {
-      await cargarApuExistente(route.params.id as string);
+    if (route.params.id) {
+      await cargarApuExistente(route.params.id as string, false);
+    } else if (route.query.cloneId) {
+      await cargarApuExistente(route.query.cloneId as string, true);
     }
   });
 
@@ -248,12 +258,19 @@
     }
   };
 
-  const cargarApuExistente = async (id: string) => {
+const cargarApuExistente = async (id: string, esClonacion: boolean) => {
     try {
       const apu = await apuService.obtenerPorId(id);
-      formulario.value.nombre = apu.nombre;
+
+      if (esClonacion) {
+        formulario.value.nombre = `${apu.nombre} (Copia)`;
+      } else {
+        formulario.value.nombre = apu.nombre;
+      }
+
       formulario.value.unidadMedidaId = apu.unidadMedidaId;
       formulario.value.etiquetasIds = apu.etiquetasIds;
+
 
       // Enriquecemos la lista visual cruzando con el catálogo de insumos y unidades
       componentesVisuales.value = apu.componentes.map(comp => {
@@ -378,4 +395,17 @@
       guardandoInsumo.value = false;
     }
   };
+
+  // --- Estado para Nueva Etiqueta ---
+  const mostrarDialogoEtiqueta = ref(false);
+
+  const onEtiquetaCreada = async (tagCreada: { id: string, nombre: string, colorHex: string }) => {
+    // Recargamos la lista completa de etiquetas para asegurar consistencia
+    etiquetas.value = await insumoService.obtenerEtiquetas();
+
+    // Auto-seleccionar la etiqueta
+    if (!formulario.value.etiquetasIds) formulario.value.etiquetasIds = [];
+    formulario.value.etiquetasIds.push(tagCreada.id);
+  };
+
 </script>

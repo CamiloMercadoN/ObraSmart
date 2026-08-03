@@ -32,9 +32,16 @@ namespace ObraSmart.Server.Controllers
             var resultado = await _authService.RegistrarAsync(dto);
 
             if (!resultado.IsSuccess)
-                return BadRequest(new { error = resultado.ErrorMessage, code = resultado.ErrorCode });
+            {
+                if (resultado.ErrorCode == "EMAIL_DUPLICADO")
+                {
+                    return Conflict(new { error = resultado.ErrorMessage, code = resultado.ErrorCode });
+                }
 
-            return Ok(new { mensaje = "Usuario registrado exitosamente" });
+                return BadRequest(new { error = resultado.ErrorMessage, code = resultado.ErrorCode });
+            }
+
+            return Created("", new { mensaje = "Usuario registrado exitosamente" });
         }
 
         [HttpPost("login")]
