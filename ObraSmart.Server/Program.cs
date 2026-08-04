@@ -75,7 +75,7 @@ builder.Services.AddHttpContextAccessor();
 // Configurar las opciones pasándole la ruta del servidor web a la infraestructura
 builder.Services.Configure<StorageOptions>(options =>
 {
-    options.BasePath = builder.Environment.WebRootPath;
+    options.BasePath = builder.Environment.WebRootPath ?? Path.Combine(builder.Environment.ContentRootPath, "wwwroot");
 });
 
 // Configuración de capas
@@ -134,6 +134,7 @@ var app = builder.Build();
 
 app.UseDefaultFiles();
 app.MapStaticAssets();
+app.UseStaticFiles();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

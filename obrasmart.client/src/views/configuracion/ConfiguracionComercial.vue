@@ -5,7 +5,7 @@
     <div class="surface-card p-3 md:p-4 shadow-1 border-round flex flex-column md:flex-row justify-content-between md:align-items-center gap-3">
       <div class="flex align-items-center gap-3">
         <div class="bg-blue-500 text-white border-round-lg flex align-items-center justify-content-center flex-shrink-0" style="width: 3rem; height: 3rem;">
-          <i class="pi pi-building text-xl"></i>
+          <i class="pi pi-cog text-xl"></i>
         </div>
         <div>
           <h2 class="m-0 text-900 text-lg md:text-xl font-bold">Configuración Comercial</h2>
@@ -71,20 +71,13 @@
 
 <script setup lang="ts">
   import { ref, onMounted } from 'vue';
-  // Aquí importarías tu servicio, por ejemplo:
-  // import { configuracionService } from '../../services/configuracionService';
+  import { type IConfiguracionComercial } from '../../interfaces/IConfiguracionComercial';
+  import { configuracionService } from '../../services/configuracionService';
   import Button from 'primevue/button';
   import InputText from 'primevue/inputtext';
   import InputNumber from 'primevue/inputnumber';
   import Message from 'primevue/message';
   import FileUpload from 'primevue/fileupload';
-
-  interface IConfiguracionComercial {
-    razonSocial: string;
-    porcentajeIva: number;
-    diasValidez: number;
-    logoBase64: string | null;
-  }
 
   const guardando = ref(false);
   const mensaje = ref<{ tipo: string, texto: string } | null>(null);
@@ -92,8 +85,8 @@
 
   const formulario = ref<IConfiguracionComercial>({
     razonSocial: '',
-    porcentajeIva: 19, // Valor por defecto
-    diasValidez: 15,   // Valor por defecto
+    porcentajeIva: 19,
+    diasValidez: 15,
     logoBase64: null
   });
 
@@ -103,25 +96,17 @@
 
   const cargarConfiguracion = async () => {
     try {
-      // const config = await configuracionService.obtener();
-      // Simulamos la respuesta del backend por ahora:
-      const config = {
-        razonSocial: '',
-        porcentajeIva: 19,
-        diasValidez: 15,
-        logoBase64: null
-      };
-
+      const config = await configuracionService.obtener();
       if (config) {
         formulario.value = { ...config };
+        // Si el backend devuelve una URL estática, la usamos para el preview
         logoPreview.value = config.logoBase64;
       }
     } catch (error: any) {
-      mostrarMensaje('error', 'Error al cargar la configuración: ' + error.message);
+      mostrarMensaje('error', error.message);
     }
   };
 
-  // Procesa la imagen seleccionada y la convierte a Base64 para guardarla fácilmente
   const onLogoSeleccionado = async (event: any) => {
     const file = event.files[0];
     if (!file) return;
@@ -131,9 +116,10 @@
     reader.onload = () => {
       const base64String = reader.result as string;
       logoPreview.value = base64String;
-      formulario.value.logoBase64 = base64String; // Listo para enviar al backend en el DTO
+      // Sobrescribimos con el nuevo base64 para enviarlo al PUT
+      formulario.value.logoBase64 = base64String;
     };
-    reader.onerror = (error) => {
+    reader.onerror = () => {
       mostrarMensaje('error', 'Error al procesar la imagen.');
     };
   };
@@ -148,19 +134,17 @@
 
     guardando.value = true;
     try {
-      // await configuracionService.guardar(formulario.value);
-
-      // Simulación de guardado exitoso
-      await new Promise(resolve => setTimeout(resolve, 800));
+      await configuracionService.guardar(formulario.value);
       mostrarMensaje('success', 'Configuración comercial guardada con éxito.');
     } catch (error: any) {
-      mostrarMensaje('error', 'Error al guardar: ' + error.message);
+      mostrarMensaje('error', error.message);
     } finally {
       guardando.value = false;
     }
   };
 
   const mostrarMensaje = (tipo: string, texto: string) => {
+    // PrimeVue usa 'error', 'success', 'info', 'warn'
     mensaje.value = { tipo, texto };
     if (tipo === 'success') {
       setTimeout(() => { mensaje.value = null; }, 3000);

@@ -1,11 +1,5 @@
 import { apiClient, manejarErrorHttp } from '../utils/apiClient';
-
-export interface IConfiguracionComercial {
-  razonSocial: string;
-  porcentajeIva: number;
-  diasValidez: number;
-  logoBase64: string | null;
-}
+import type { IConfiguracionComercial } from '../interfaces/IConfiguracionComercial';
 
 export const configuracionService = {
   obtener: async (): Promise<IConfiguracionComercial> => {

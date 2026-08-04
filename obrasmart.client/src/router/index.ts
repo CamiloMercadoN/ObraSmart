@@ -68,6 +68,11 @@ const router = createRouter({
           path: 'presupuestos/editar/:id',
           name: 'EditarPresupuesto',
           component: () => import('../views/presupuestos/PresupuestoForm.vue'),
+        },
+        {
+          path: 'configuracion',
+          name: 'ConfiguracionComercial',
+          component: () => import('../views/configuracion/ConfiguracionComercial.vue'),
         }
       ]
     },
