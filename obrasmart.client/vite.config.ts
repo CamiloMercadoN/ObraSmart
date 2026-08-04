@@ -1,6 +1,7 @@
 import { fileURLToPath, URL } from 'node:url';
 
-import { defineConfig } from 'vite';
+// import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import plugin from '@vitejs/plugin-vue';
 import { VitePWA } from 'vite-plugin-pwa';
 import fs from 'fs';
@@ -56,7 +57,7 @@ export default defineConfig({
         display: 'standalone',
         icons: []
       }
-    })
+    }),
   ],
     resolve: {
         alias: {
@@ -80,5 +81,9 @@ export default defineConfig({
             key: fs.readFileSync(keyFilePath),
             cert: fs.readFileSync(certFilePath),
         }
-    }
+  },
+  test: {
+    environment: 'jsdom',
+    globals: true
+  }
 })

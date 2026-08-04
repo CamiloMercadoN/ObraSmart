@@ -7,7 +7,6 @@ using ObraSmart.Application.Interfaces.Services;
 using ObraSmart.Infrastructure;
 using ObraSmart.Infrastructure.Data;
 using ObraSmart.Infrastructure.Options;
-using ObraSmart.Infrastructure.Services;
 using ObraSmart.Server.Services;
 using ObraSmart.Server.Validators.Usuarios;
 using Scalar.AspNetCore;
@@ -178,3 +177,5 @@ app.MapControllers();
 app.MapFallbackToFile("/index.html");
 
 app.Run();
+
+public partial class Program { }
