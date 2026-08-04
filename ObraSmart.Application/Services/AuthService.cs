@@ -39,8 +39,7 @@ namespace ObraSmart.Application.Services
                 ValidezCotizacionDias = _configuracionNegocio.ValidezCotizacionDiasDefecto
             };
 
-            await _usuarioRepository.AgregarAsync(nuevoUsuario);
-            await _usuarioRepository.GuardarCambiosAsync();
+            await _usuarioRepository.AddAsync(nuevoUsuario);
 
             return Result.Success();
         }

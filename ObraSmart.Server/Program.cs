@@ -6,6 +6,8 @@ using ObraSmart.Application;
 using ObraSmart.Application.Interfaces.Services;
 using ObraSmart.Infrastructure;
 using ObraSmart.Infrastructure.Data;
+using ObraSmart.Infrastructure.Options;
+using ObraSmart.Infrastructure.Services;
 using ObraSmart.Server.Services;
 using ObraSmart.Server.Validators.Usuarios;
 using Scalar.AspNetCore;
@@ -69,6 +71,12 @@ builder.Services.AddOpenApi(options =>
 });
 
 builder.Services.AddHttpContextAccessor();
+
+// Configurar las opciones pasándole la ruta del servidor web a la infraestructura
+builder.Services.Configure<StorageOptions>(options =>
+{
+    options.BasePath = builder.Environment.WebRootPath;
+});
 
 // Configuración de capas
 builder.Services.AddInfrastructureServices(builder.Configuration);

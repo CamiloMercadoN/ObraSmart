@@ -2,10 +2,8 @@
 
 namespace ObraSmart.Domain.Interfaces.Repositories
 {
-    public interface IUsuarioRepository
+    public interface IUsuarioRepository : IRepository<Usuario, Guid>
     {
         Task<Usuario?> ObtenerPorCorreoAsync(string correo);
-        Task AgregarAsync(Usuario usuario);
-        Task GuardarCambiosAsync();
     }
 }

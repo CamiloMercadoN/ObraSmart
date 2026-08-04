@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ObraSmart.Application.Interfaces.Services;
 using ObraSmart.Domain.Interfaces.Repositories;
 using ObraSmart.Infrastructure.Data;
 using ObraSmart.Infrastructure.Repositories;
+using ObraSmart.Infrastructure.Services;
 using System.Reflection;
 
 namespace ObraSmart.Infrastructure
@@ -28,6 +30,8 @@ namespace ObraSmart.Infrastructure
 
             // Registro del repositorio genérico abierto (Scoped)
             services.AddScoped(typeof(IRepository<,>), typeof(RepositoryBase<,>));
+
+            services.AddScoped<IFileService, LocalFileService>();
 
             return services;
         }
