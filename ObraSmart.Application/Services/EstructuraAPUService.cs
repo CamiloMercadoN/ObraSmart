@@ -37,7 +37,7 @@ namespace ObraSmart.Application.Services
             var apu = await _apuRepository.GetByIdWithDependenciesAsync(id);
 
             if (apu == null)
-                return Result<EstructuraAPUDto>.Failure("La estructura APU no fue encontrada.");
+                return Result<EstructuraAPUDto>.Failure("La estructura APU no fue encontrada.", "NOT_FOUND");
 
             return Result<EstructuraAPUDto>.Success(apu.ToDto());
         }
@@ -48,7 +48,7 @@ namespace ObraSmart.Application.Services
             var insumosActuales = await _insumoRepository.GetByIdsAsync(insumosIds);
 
             if (insumosActuales.Count() != insumosIds.Count)
-                return Result<Guid>.Failure("Uno o más insumos proporcionados no existen en el catálogo.");
+                return Result<Guid>.Failure("Uno o más insumos proporcionados no existen en el catálogo.","BAD_REQUEST");
 
             var etiquetas = new List<Etiqueta>();
             if (dto.EtiquetasIds.Count != 0)

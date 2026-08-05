@@ -42,7 +42,7 @@ namespace ObraSmart.Server.Controllers
 
             if (!result.IsSuccess)
             {
-                return BadRequest(new { Error = result.ErrorMessage, Code = result.ErrorCode });
+                return NotFound(new { Error = result.ErrorMessage, Code = result.ErrorCode });
             }
 
             return Ok(result.Data);
