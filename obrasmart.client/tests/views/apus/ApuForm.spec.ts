@@ -6,7 +6,9 @@ import ApuForm from '@/views/apus/ApuForm.vue';
 // Mockeamos los servicios para que no hagan peticiones HTTP reales
 vi.mock('@/services/apuService', () => ({
   apuService: {
-    obtenerPorId: vi.fn()
+    obtenerPorId: vi.fn(),
+    crear: vi.fn(),
+    actualizar: vi.fn()
   }
 }));
 
@@ -113,5 +115,130 @@ describe('ApuForm.vue', () => {
     // Assert: Validamos que la computada costoTotalApu hizo la suma matemática y se formateó
     const htmlRenderizado = wrapper.html();
     expect(htmlRenderizado).toContain('Costo Directo Total: $ 9.500');
+  });
+
+  it('Guardar_EnModoClonacion_DebeCrearNuevaApuSinActualizarOriginal', async () => {
+    // Arrange
+    const apuOriginalId = 'apu-original-123';
+
+    (useRoute as any).mockReturnValue({
+      params: {},
+      query: {
+        cloneId: apuOriginalId
+      }
+    });
+
+    const { apuService } = await import('@/services/apuService');
+
+    (apuService.obtenerPorId as any).mockResolvedValue({
+      id: apuOriginalId,
+      nombre: 'Instalación de lavaplatos',
+      unidadMedidaId: 1,
+      etiquetasIds: ['etiqueta-sanitaria'],
+      componentes: [
+        {
+          insumoId: 'insumo-tuberia',
+          descripcionInsumo: 'Tubería PPR 20 mm',
+          tipoInsumo: 'Material',
+          precioUnitarioReferencia: 1500,
+          cantidad: 2,
+          subtotal: 3000
+        },
+        {
+          insumoId: 'insumo-mano-obra',
+          descripcionInsumo: 'Maestro gasfíter',
+          tipoInsumo: 'Mano de Obra',
+          precioUnitarioReferencia: 6500,
+          cantidad: 1,
+          subtotal: 6500
+        }
+      ]
+    });
+
+    (apuService.crear as any).mockResolvedValue(
+      'apu-copia-456'
+    );
+
+    const wrapper = mount(ApuForm, {
+      global: {
+        stubs: {
+          /*
+           * Se utiliza un botón real simplificado para poder
+           * ejecutar el evento click de Guardar APU.
+           */
+          Button: {
+            props: ['label'],
+            emits: ['click'],
+            template: `
+            <button
+              type="button"
+              :data-label="label"
+              @click="$emit('click')">
+              {{ label }}
+            </button>
+          `
+          },
+          Message: true,
+          InputText: true,
+          Select: true,
+          MultiSelect: true,
+          InputNumber: true,
+          Tag: true,
+          InsumoFormDialog: true,
+          EtiquetaFormDialog: true
+        },
+        directives: {
+          tooltip: () => { }
+        }
+      }
+    });
+
+    await flushPromises();
+
+    // Verifica que se cargó el registro original.
+    expect(apuService.obtenerPorId)
+      .toHaveBeenCalledTimes(1);
+
+    expect(apuService.obtenerPorId)
+      .toHaveBeenCalledWith(apuOriginalId);
+
+    /*
+     * El clon debe abrirse como una estructura nueva,
+     * no como edición del registro original.
+     */
+    expect(wrapper.html())
+      .toContain('Nueva Estructura APU');
+
+    // Act
+    const botonGuardar = wrapper.get(
+      '[data-label="Guardar APU"]'
+    );
+
+    await botonGuardar.trigger('click');
+    await flushPromises();
+
+    // Assert
+    expect(apuService.crear)
+      .toHaveBeenCalledTimes(1);
+
+    expect(apuService.actualizar)
+      .not.toHaveBeenCalled();
+
+    expect(apuService.crear)
+      .toHaveBeenCalledWith({
+        nombre: 'Instalación de lavaplatos (Copia)',
+        unidadMedidaId: 1,
+        etiquetasIds: ['etiqueta-sanitaria'],
+        componentes: [
+          {
+            insumoId: 'insumo-tuberia',
+            cantidad: 2
+          },
+          {
+            insumoId: 'insumo-mano-obra',
+            cantidad: 1
+          }
+        ]
+      });
   });
 });
