@@ -30,4 +30,5 @@ export interface IPresupuesto {
   montoIva?: number; // Calculado por el backend
   total?: number; // Calculado por el backend
   items: IItemPresupuesto[];
+  esPlantilla: boolean;
 }

@@ -253,7 +253,8 @@
   const formulario = ref<IPresupuesto>({
     nombreProyecto: '',
     clienteId: null,
-    items: []
+    items: [],
+    esPlantilla: false
   });
 
   const apusFiltrados = computed(() => {

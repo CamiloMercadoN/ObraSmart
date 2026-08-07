@@ -75,7 +75,7 @@
         </div>
 
         <div v-else class="grid">
-          <div v-for="insumo in insumosFiltrados" :key="insumo.id" class="col-12 md:col-6 lg:col-4 xl:col-3">
+          <div v-for="insumo in insumosFiltrados" :key="insumo.id ?? ''" class="col-12 md:col-6 lg:col-4 xl:col-3">
 
             <!-- Tarjeta Individual -->
             <div class="surface-card border-1 surface-border border-round shadow-1 flex flex-column h-full">

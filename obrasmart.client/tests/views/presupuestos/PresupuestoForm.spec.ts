@@ -71,6 +71,7 @@ describe('PresupuestoForm.vue', () => {
       subtotal: 11000,
       montoIva: 2090,
       total: 13090,
+      esPlantilla: false,
       items: [
         {
           id: 'item-original-1',

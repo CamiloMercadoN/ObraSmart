@@ -1,5 +1,6 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using ObraSmart.Application;
@@ -12,9 +13,9 @@ using ObraSmart.Server.Validators.Usuarios;
 using Scalar.AspNetCore;
 using System.Text;
 
-Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
-
 var builder = WebApplication.CreateBuilder(args);
+
+Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = builder.Environment.IsDevelopment();
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -153,6 +154,13 @@ if (app.Environment.IsDevelopment())
             PreferredSecuritySchemes = ["Bearer"]
         };
     });
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ObraSmartDbContext>();
+    // Aplica las migraciones pendientes de EF Core automáticamente en la nube
+    await context.Database.MigrateAsync();
 }
 
 if (args.Contains("--seed"))

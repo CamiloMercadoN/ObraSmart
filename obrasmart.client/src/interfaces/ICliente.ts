@@ -5,6 +5,6 @@ export interface ICliente {
   correo: string;
   telefono: string;
   direccion: string;
-  RegionId?: number | null;
+  regionId?: number | null;
   ciudadId?: number | null;
 }
