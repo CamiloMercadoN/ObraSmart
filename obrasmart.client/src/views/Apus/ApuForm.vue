@@ -1,10 +1,11 @@
 <template>
   <div class="flex flex-column gap-3 md:gap-4 pb-4">
+
     <!-- Cabecera y Acciones Responsivas -->
     <div class="flex flex-column md:flex-row md:align-items-center justify-content-between gap-3">
       <div class="flex align-items-center gap-2">
         <Button icon="pi pi-arrow-left" text rounded @click="volver" class="p-0 flex-shrink-0" style="width: 2.5rem; height: 2.5rem;" />
-        <h2 class="m-0 text-900 text-lg md:text-xl font-bold line-height-2">
+        <h2 class="m-0 app-text text-lg md:text-xl font-bold line-height-2">
           {{ esEdicion ? 'Editar Estructura APU' : 'Nueva Estructura APU' }}
         </h2>
       </div>
@@ -14,28 +15,29 @@
       </div>
     </div>
 
+
     <Message v-if="errorGlobal" severity="error" :closable="true" @close="errorGlobal = ''" class="m-0">
       {{ errorGlobal }}
     </Message>
 
     <!-- Datos Generales -->
-    <div class="surface-card p-3 md:p-4 shadow-1 border-round">
-      <h3 class="mt-0 mb-3 text-900 border-bottom-1 border-300 pb-2 text-lg">Datos Generales</h3>
+    <div class="app-panel p-3 md:p-4">
+      <h3 class="mt-0 mb-3 app-text border-bottom-1 app-border-color pb-2 text-lg">Datos Generales</h3>
 
       <div class="grid formgrid p-fluid">
         <div class="field col-12 md:col-5">
-          <label for="nombre" class="font-bold block mb-2 text-700">Nombre del APU <span class="text-red-500">*</span></label>
+          <label for="nombre" class="font-bold block mb-2 app-text">Nombre del APU <span class="text-red-500">*</span></label>
           <InputText id="nombre" v-model="formulario.nombre" placeholder="Ej: Hormigón H30" class="w-full" />
         </div>
 
         <div class="field col-12 md:col-3">
-          <label for="unidad" class="font-bold block mb-2 text-700">Unidad de Medida <span class="text-red-500">*</span></label>
+          <label for="unidad" class="font-bold block mb-2 app-text">Unidad de Medida <span class="text-red-500">*</span></label>
           <Select id="unidad" v-model="formulario.unidadMedidaId" :options="unidades"
                   optionLabel="nombre" optionValue="id" placeholder="Seleccione..." class="w-full" />
         </div>
 
         <div class="field col-12 md:col-4">
-          <label for="etiquetas" class="font-bold block mb-2 text-700">Clasificación</label>
+          <label for="etiquetas" class="font-bold block mb-2 app-text">Clasificación</label>
           <div class="flex gap-2 align-items-stretch">
             <MultiSelect id="etiquetas" v-model="formulario.etiquetasIds" :options="etiquetas"
                          optionLabel="nombre" optionValue="id" placeholder="Seleccione etiquetas"
@@ -47,20 +49,20 @@
     </div>
 
     <!-- Receta (Componentes) -->
-    <div class="surface-card p-3 md:p-4 shadow-1 border-round">
-      <div class="flex flex-column lg:flex-row justify-content-between align-items-start lg:align-items-center mb-4 border-bottom-1 border-300 pb-3 gap-3">
-        <h3 class="m-0 text-900 text-lg">Desglose de Insumos (Receta)</h3>
-        <div class="text-xl font-bold text-primary surface-100 p-2 border-round">
+    <div class="app-panel p-3 md:p-4">
+      <div class="flex flex-column lg:flex-row justify-content-between align-items-start lg:align-items-center mb-4 border-bottom-1 app-border-color pb-3 gap-3">
+        <h3 class="m-0 app-text text-lg">Desglose de Insumos (Receta)</h3>
+        <div class="text-xl font-bold text-primary app-subcard p-2">
           Costo Directo Total: $ {{ formatearMoneda(costoTotalApu) }}
         </div>
       </div>
 
       <!-- Buscador y Agregador Responsivo -->
-      <div class="surface-ground border-1 surface-border p-3 border-round mb-4 flex flex-column md:flex-row gap-3 md:align-items-end">
+      <div class="app-subcard border-1 app-border-color p-3 mb-4 flex flex-column md:flex-row gap-3 md:align-items-end">
 
         <!-- Contenedor del Buscador de Insumos -->
         <div class="flex-grow-1 w-full">
-          <label class="font-bold text-sm block mb-2 text-700">Buscar Insumo / Equipo / Mano de Obra</label>
+          <label class="font-bold text-sm block mb-2 app-text">Buscar Insumo / Equipo / Mano de Obra</label>
 
           <div class="flex flex-column sm:flex-row gap-2">
             <Select v-model="insumoSeleccionado"
@@ -76,18 +78,18 @@
                   <span class="white-space-nowrap text-overflow-ellipsis overflow-hidden">
                     {{ slotProps.value.descripcion }}
                     <!-- Usamos directamente la propiedad que viene del backend -->
-                    <span class="text-500 font-semibold">({{ slotProps.value.unidadMedidaNombre || 'S/U' }})</span>
+                    <span class="app-text-muted font-semibold">({{ slotProps.value.unidadMedidaNombre || 'S/U' }})</span>
                   </span>
                 </div>
                 <span v-else>{{ slotProps.placeholder }}</span>
               </template>
               <template #option="slotProps">
                 <div class="flex flex-column w-full" style="max-width: 85vw;">
-                  <span class="font-bold white-space-normal text-sm line-height-2" style="word-break: break-word;">{{ slotProps.option.descripcion }}</span>
-                  <span class="text-sm text-500 mt-1 flex align-items-center flex-wrap gap-2">
+                  <span class="font-bold white-space-normal text-sm line-height-2 app-text" style="word-break: break-word;">{{ slotProps.option.descripcion }}</span>
+                  <span class="text-sm app-text-muted mt-1 flex align-items-center flex-wrap gap-2">
                     <Tag :value="slotProps.option.tipoInsumo" severity="info" style="font-size: 0.6rem; padding: 2px 4px;" />
                     <!-- Usamos directamente la propiedad que viene del backend -->
-                    <span class="font-semibold text-600">{{ slotProps.option.unidadMedidaNombre || 'S/U' }}</span>
+                    <span class="font-semibold app-text-muted">{{ slotProps.option.unidadMedidaNombre || 'S/U' }}</span>
                     <span>|</span>
                     <span>Precio Ref: $ {{ formatearMoneda(slotProps.option.precioReferencia) }}</span>
                   </span>
@@ -107,7 +109,7 @@
         <!-- Contenedor de Cantidad y Agregar -->
         <div class="flex flex-column sm:flex-row gap-3 w-full md:w-auto">
           <div class="w-full sm:w-15rem">
-            <label class="font-bold text-sm block mb-2 text-700">Cantidad / Rendimiento</label>
+            <label class="font-bold text-sm block mb-2 app-text">Cantidad / Rendimiento</label>
             <InputNumber v-model="cantidadInput" :minFractionDigits="2" :maxFractionDigits="4" class="w-full" inputClass="w-full" />
           </div>
 
@@ -118,41 +120,41 @@
       </div>
 
       <!-- Estado Vacío -->
-      <div v-if="componentesVisuales.length === 0" class="text-center p-4 text-500 border-round surface-100 border-1 surface-border border-dashed">
+      <div v-if="componentesVisuales.length === 0" class="text-center p-4 app-text-muted app-subcard border-1 app-border-color border-dashed">
         No hay insumos agregados a esta receta. Búscalos arriba y añádelos.
       </div>
 
       <!-- Tarjetas de Componentes (Reemplazo del DataTable) -->
       <div v-else class="grid">
         <div v-for="(componente, index) in componentesVisuales" :key="index" class="col-12 lg:col-6 xl:col-4">
-          <div class="surface-ground border-1 surface-border border-round p-3 relative h-full flex flex-column">
+          <div class="app-card p-3 relative h-full flex flex-column">
 
             <Button icon="pi pi-times" severity="danger" text rounded class="absolute top-0 right-0 mt-1 mr-1" @click="eliminarComponente(index)" />
 
             <div class="flex flex-column gap-2 mt-2 flex-grow-1 pr-4">
-              <span class="text-xs font-semibold text-600 mb-1">
+              <span class="text-xs font-semibold app-text-muted mb-1">
                 <Tag :value="componente.tipoInsumo" severity="secondary" class="mr-1" />
               </span>
-              <span class="font-bold text-700 line-height-2" style="word-break: break-word;">{{ componente.descripcionInsumo }}</span>
+              <span class="font-bold app-text line-height-2" style="word-break: break-word;">{{ componente.descripcionInsumo }}</span>
             </div>
 
             <div class="grid formgrid p-fluid mt-3">
               <div class="field col-6">
-                <label class="block mb-2 text-sm font-semibold text-600">Precio Ref.</label>
-                <div class="surface-100 p-2 border-round text-sm font-semibold text-700 text-center">
+                <label class="block mb-2 text-sm font-semibold app-text-muted">Precio Ref.</label>
+                <div class="app-subcard p-2 text-sm font-semibold app-text text-center">
                   $ {{ formatearMoneda(componente.precioUnitarioReferencia) }}
                 </div>
               </div>
               <div class="field col-6">
-                <label class="block mb-2 text-sm font-semibold text-600">Cantidad <span class="text-400 font-normal">({{ componente.unidadMedidaNombre }})</span></label>
+                <label class="block mb-2 text-sm font-semibold app-text-muted">Cantidad <span class="app-text-muted font-normal">({{ componente.unidadMedidaNombre }})</span></label>
                 <!-- Ojo aquí: Vinculado al v-model para edición rápida desde la tarjeta -->
                 <InputNumber v-model="componente.cantidad" :minFractionDigits="0" :maxFractionDigits="4" class="w-full" inputClass="w-full text-center" />
               </div>
             </div>
 
             <div class="col-12 mt-auto p-0">
-              <div class="flex justify-content-between align-items-center p-2 surface-100 border-round w-full border-1 surface-border">
-                <span class="text-sm font-bold text-700">Subtotal:</span>
+              <div class="flex justify-content-between align-items-center p-2 app-subcard w-full border-1 app-border-color">
+                <span class="text-sm font-bold app-text">Subtotal:</span>
                 <span class="font-bold text-green-600 text-lg">$ {{ formatearMoneda(componente.precioUnitarioReferencia * componente.cantidad) }}</span>
               </div>
             </div>

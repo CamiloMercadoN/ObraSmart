@@ -7,8 +7,8 @@
         <i class="pi pi-chart-line text-xl"></i>
       </div>
       <div>
-        <h2 class="m-0 text-900 text-xl font-bold">Actualización de Precios Base</h2>
-        <span class="text-500 text-sm">Gestiona reajustes masivos por lotes o mediante importación de archivos</span>
+        <h2 class="m-0 app-text text-xl font-bold">Actualización de Precios Base</h2>
+        <span class="app-text-muted text-sm">Gestiona reajustes masivos por lotes o mediante importación de archivos</span>
       </div>
     </div>
 
@@ -33,32 +33,33 @@
     </Message>
 
     <div class="grid">
+
       <!-- Reajuste por Lote -->
       <div class="col-12 md:col-6">
-        <div class="surface-card p-4 shadow-1 border-round h-full flex flex-column gap-4">
+        <div class="app-panel p-4 h-full flex flex-column gap-4">
           <div>
-            <h3 class="m-0 text-lg font-bold text-900 mb-1">Reajuste por Filtros</h3>
-            <span class="text-500 text-sm">Aplica un porcentaje o monto fijo a un grupo específico de insumos.</span>
+            <h3 class="m-0 text-lg font-bold app-text mb-1">Reajuste por Filtros</h3>
+            <span class="app-text-muted text-sm">Aplica un porcentaje o monto fijo a un grupo específico de insumos.</span>
           </div>
 
           <div class="flex flex-column gap-3">
             <div class="flex flex-column gap-2">
-              <label class="font-bold text-sm">1. Selecciona el Tipo de Insumo (Opcional)</label>
+              <label class="font-bold text-sm app-text">1. Selecciona el Tipo de Insumo (Opcional)</label>
               <Select v-model="loteData.tipoInsumo" :options="tiposInsumo" placeholder="Todos los tipos" showClear class="w-full" />
             </div>
 
             <div class="flex flex-column gap-2">
-              <label class="font-bold text-sm">2. Selecciona la Etiqueta (Opcional)</label>
+              <label class="font-bold text-sm app-text">2. Selecciona la Etiqueta (Opcional)</label>
               <Select v-model="loteData.etiquetaId" :options="etiquetas" optionLabel="nombre" optionValue="id" placeholder="Todas las etiquetas" showClear class="w-full" />
             </div>
 
             <div class="flex flex-column gap-2">
-              <label class="font-bold text-sm">3. Tipo de Ajuste</label>
+              <label class="font-bold text-sm app-text">3. Tipo de Ajuste</label>
               <Select v-model="loteData.esPorcentaje" :options="tiposAjuste" optionLabel="label" optionValue="value" class="w-full" />
             </div>
 
             <div class="flex flex-column gap-2">
-              <label class="font-bold text-sm">4. Valor a aplicar (Usa negativo para descuentos)</label>
+              <label class="font-bold text-sm app-text">4. Valor a aplicar (Usa negativo para descuentos)</label>
               <InputNumber v-model="loteData.valor"
                            :prefix="!loteData.esPorcentaje ? '$ ' : ''"
                            :suffix="loteData.esPorcentaje ? ' %' : ''"
@@ -76,10 +77,10 @@
 
       <!-- Importación CSV -->
       <div class="col-12 md:col-6">
-        <div class="surface-card p-4 shadow-1 border-round h-full flex flex-column gap-4">
+        <div class="app-panel p-4 h-full flex flex-column gap-4">
           <div>
-            <h3 class="m-0 text-lg font-bold text-900 mb-1">Importación desde CSV</h3>
-            <span class="text-500 text-sm">Sube un archivo con los precios actualizados por tu proveedor.</span>
+            <h3 class="m-0 text-lg font-bold app-text mb-1">Importación desde CSV</h3>
+            <span class="app-text-muted text-sm">Sube un archivo con los precios actualizados por tu proveedor.</span>
           </div>
 
           <div class="bg-blue-50 text-blue-900 p-3 border-round text-sm flex flex-column gap-2">
@@ -96,12 +97,12 @@
             </div>
           </div>
 
-          <div class="border-2 border-dashed border-300 border-round p-4 flex flex-column align-items-center justify-content-center gap-3" style="min-height: 200px;">
-            <i class="pi pi-cloud-upload text-4xl text-500"></i>
+          <div class="border-2 border-dashed app-border-color border-round p-4 flex flex-column align-items-center justify-content-center gap-3" style="min-height: 200px;">
+            <i class="pi pi-cloud-upload text-4xl app-text-muted"></i>
 
             <div class="text-center">
-              <span class="block text-900 font-bold mb-1">{{ archivoSeleccionado ? archivoSeleccionado.name : 'Ningún archivo seleccionado' }}</span>
-              <span v-if="archivoSeleccionado" class="text-500 text-sm">{{ (archivoSeleccionado.size / 1024).toFixed(2) }} KB</span>
+              <span class="block app-text font-bold mb-1">{{ archivoSeleccionado ? archivoSeleccionado.name : 'Ningún archivo seleccionado' }}</span>
+              <span v-if="archivoSeleccionado" class="app-text-muted text-sm">{{ (archivoSeleccionado.size / 1024).toFixed(2) }} KB</span>
             </div>
 
             <div class="flex gap-2">
@@ -119,6 +120,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </template>

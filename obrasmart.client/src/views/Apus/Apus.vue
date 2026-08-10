@@ -1,147 +1,145 @@
 <template>
-  <div class="flex flex-column gap-3 md:gap-4 pb-4 h-full">
+  <div class="app-panel p-3 md:p-4 flex flex-column flex-grow-1 overflow-hidden">
 
-    <div class="surface-card p-3 md:p-4 shadow-1 border-round flex flex-column flex-grow-1 overflow-hidden">
-
-      <!-- Cabecera y Acciones -->
-      <div class="flex flex-column md:flex-row justify-content-between md:align-items-center mb-4 gap-3">
-        <div class="flex align-items-center gap-3 titulo-mantenedor">
-          <div class="bg-primary text-white border-round-lg flex align-items-center justify-content-center flex-shrink-0" style="width: 3rem; height: 3rem;">
-            <i class="pi pi-book text-xl"></i>
-          </div>
-          <div>
-            <h2 class="m-0 text-900 text-lg md:text-xl font-bold">Catálogo de APUs</h2>
-            <span class="text-500 text-sm hidden md:block">Gestiona tus análisis de precios unitarios base</span>
-          </div>
+    <!-- Cabecera y Acciones -->
+    <div class="flex flex-column md:flex-row justify-content-between md:align-items-center mb-4 gap-3">
+      <div class="flex align-items-center gap-3 titulo-mantenedor">
+        <div class="bg-primary text-white border-round-lg flex align-items-center justify-content-center flex-shrink-0" style="width: 3rem; height: 3rem;">
+          <i class="pi pi-book text-xl"></i>
         </div>
-
-        <div class="flex flex-column sm:flex-row gap-2 w-full md:w-auto flex-shrink-0">
-          <Button :icon="mostrarFiltros ? 'pi pi-filter-slash' : 'pi pi-filter'"
-                  :label="mostrarFiltros ? 'Ocultar Filtros' : 'Filtros'"
-                  severity="secondary"
-                  outlined
-                  class="w-full sm:w-auto"
-                  @click="mostrarFiltros = !mostrarFiltros" />
-          <Button label="Nuevo APU" icon="pi pi-plus" class="w-full sm:w-auto" @click="abrirFormulario()" />
+        <div>
+          <h2 class="m-0 app-text text-lg md:text-xl font-bold">Catálogo de APUs</h2>
+          <span class="app-text-muted text-sm hidden md:block">Gestiona tus análisis de precios unitarios base</span>
         </div>
       </div>
 
-      <!-- Mensaje de Error -->
-      <Message v-if="errorGlobal" severity="error" :closable="true" @close="errorGlobal = ''" class="mb-3">
-        {{ errorGlobal }}
-      </Message>
+      <div class="flex flex-column sm:flex-row gap-2 w-full md:w-auto flex-shrink-0">
+        <Button :icon="mostrarFiltros ? 'pi pi-filter-slash' : 'pi pi-filter'"
+                :label="mostrarFiltros ? 'Ocultar Filtros' : 'Filtros'"
+                severity="secondary"
+                outlined
+                class="w-full sm:w-auto"
+                @click="mostrarFiltros = !mostrarFiltros" />
+        <Button label="Nuevo APU" icon="pi pi-plus" class="w-full sm:w-auto" @click="abrirFormulario()" />
+      </div>
+    </div>
 
-      <!-- Zona de Filtros -->
-      <div v-if="mostrarFiltros" class="flex flex-column md:flex-row gap-3 mb-4 p-3 surface-100 border-round">
+    <!-- Mensaje de Error -->
+    <Message v-if="errorGlobal" severity="error" :closable="true" @close="errorGlobal = ''" class="mb-3">
+      {{ errorGlobal }}
+    </Message>
 
-        <!-- Buscador con flex-1 y IconField -->
-        <div class="flex-1 w-full">
-          <IconField class="w-full">
-            <InputIcon class="pi pi-search" />
-            <InputText v-model="filtroTexto" placeholder="Buscar por nombre..." class="w-full" />
-          </IconField>
-        </div>
+    <!-- Zona de Filtros -->
+    <div v-if="mostrarFiltros" class="app-subcard flex flex-column md:flex-row gap-3 mb-4 p-3">
 
-        <!-- Selector con ancho fijo en escritorio -->
-        <div class="w-full md:w-15rem flex-shrink-0">
-          <Select v-model="filtroEtiqueta"
-                  :options="catalogoEtiquetas"
-                  optionLabel="nombre"
-                  optionValue="id"
-                  placeholder="Filtrar por Etiqueta"
-                  showClear
-                  class="w-full" />
-        </div>
-
+      <!-- Buscador con flex-1 y IconField -->
+      <div class="flex-1 w-full">
+        <IconField class="w-full">
+          <InputIcon class="pi pi-search" />
+          <InputText v-model="filtroTexto" placeholder="Buscar por nombre..." class="w-full" />
+        </IconField>
       </div>
 
-      <!-- Vista de Tarjetas -->
-      <div class="flex-grow-1 overflow-auto">
+      <!-- Selector con ancho fijo en escritorio -->
+      <div class="w-full md:w-15rem flex-shrink-0">
+        <Select v-model="filtroEtiqueta"
+                :options="catalogoEtiquetas"
+                optionLabel="nombre"
+                optionValue="id"
+                placeholder="Filtrar por Etiqueta"
+                showClear
+                class="w-full" />
+      </div>
 
-        <div v-if="cargando" class="flex justify-content-center align-items-center p-5">
-          <i class="pi pi-spin pi-spinner text-4xl text-primary"></i>
-        </div>
+    </div>
 
-        <div v-else-if="apusFiltrados.length === 0" class="text-center p-5 text-500 border-round surface-100 border-1 surface-border border-dashed">
-          No se encontraron estructuras APU. Modifica los filtros o crea la primera para comenzar.
-        </div>
+    <!-- Vista de Tarjetas -->
+    <div class="flex-grow-1 overflow-auto">
 
-        <div v-else class="grid">
-          <div v-for="apu in apusFiltrados" :key="apu.id" class="col-12 md:col-6 lg:col-4 xl:col-3">
-            <!-- Tarjeta Individual -->
-            <div class="surface-card border-1 surface-border border-round shadow-1 flex flex-column h-full">
+      <div v-if="cargando" class="flex justify-content-center align-items-center p-5">
+        <i class="pi pi-spin pi-spinner text-4xl text-primary"></i>
+      </div>
 
-              <!-- Header Tarjeta -->
-              <div class="flex justify-content-between align-items-start p-3 border-bottom-1 surface-border surface-50 border-round-top">
-                <span class="text-900 font-bold text-lg line-height-2 mb-1 pr-2" style="word-break: break-word;">
-                  {{ apu.nombre }}
-                </span>
-                <div class="flex-shrink-0 mt-1">
-                  <Tag v-if="apu.esPlantilla" value="Plantilla" severity="info" class="text-xs" v-tooltip.top="'Plantilla del Sistema'" />
-                  <Tag v-else value="Personalizado" severity="success" class="text-xs" />
+      <div v-else-if="apusFiltrados.length === 0" class="text-center p-5 app-text-muted app-subcard border-1 app-border-color border-dashed">
+        No se encontraron estructuras APU. Modifica los filtros o crea la primera para comenzar.
+      </div>
+
+      <div v-else class="grid">
+        <div v-for="apu in apusFiltrados" :key="apu.id" class="col-12 md:col-6 lg:col-4 xl:col-3">
+
+          <!-- Tarjeta Individual -->
+          <div class="app-card flex flex-column h-full">
+
+            <!-- Header Tarjeta -->
+            <div class="app-surface-subtle flex justify-content-between align-items-start p-3 border-bottom-1 app-border-color border-round-top">
+              <span class="app-text font-bold text-lg line-height-2 mb-1 pr-2" style="word-break: break-word;">
+                {{ apu.nombre }}
+              </span>
+              <div class="flex-shrink-0 mt-1">
+                <Tag v-if="apu.esPlantilla" value="Plantilla" severity="info" class="text-xs" v-tooltip.top="'Plantilla del Sistema'" />
+                <Tag v-else value="Personalizado" severity="success" class="text-xs" />
+              </div>
+            </div>
+
+            <!-- Body Tarjeta -->
+            <div class="p-3 flex-grow-1 flex flex-column gap-3 justify-content-between">
+
+              <div class="flex justify-content-between align-items-center">
+                <span class="app-text-muted text-sm">Unidad:</span>
+                <span class="app-text text-sm font-semibold">{{ apu.unidadMedidaNombre }}</span>
+              </div>
+
+              <!-- Etiquetas -->
+              <div v-if="apu.etiquetasIds && apu.etiquetasIds.length > 0">
+                <span class="app-text-muted text-sm block mb-2">Etiquetas:</span>
+                <div class="flex flex-wrap gap-1">
+                  <span v-for="tagId in apu.etiquetasIds"
+                        :key="tagId"
+                        class="text-xs px-2 py-1 border-round font-semibold"
+                        :style="obtenerEstiloEtiqueta(tagId)">
+                    {{ obtenerNombreEtiqueta(tagId) }}
+                  </span>
                 </div>
               </div>
 
-              <!-- Body Tarjeta -->
-              <div class="p-3 flex-grow-1 flex flex-column gap-3 justify-content-between">
-
-                <div class="flex justify-content-between align-items-center">
-                  <span class="text-500 text-sm">Unidad:</span>
-                  <span class="text-700 text-sm font-semibold">{{ apu.unidadMedidaNombre }}</span>
-                </div>
-
-                <!-- Etiquetas -->
-                <div v-if="apu.etiquetasIds && apu.etiquetasIds.length > 0">
-                  <span class="text-500 text-sm block mb-2">Etiquetas:</span>
-                  <div class="flex flex-wrap gap-1">
-                    <span v-for="tagId in apu.etiquetasIds"
-                          :key="tagId"
-                          class="text-xs px-2 py-1 border-round font-semibold"
-                          :style="obtenerEstiloEtiqueta(tagId)">
-                      {{ obtenerNombreEtiqueta(tagId) }}
-                    </span>
-                  </div>
-                </div>
-
-                <!-- Costo Total -->
-                <div class="flex justify-content-between align-items-center pt-3 border-top-1 surface-border mt-auto">
-                  <span class="text-700 font-bold text-sm">Costo Calculado:</span>
-                  <span class="text-green-600 font-bold text-xl">$ {{ formatearMoneda(apu.costoTotalCalculado) }}</span>
-                </div>
-
-              </div>
-
-              <!-- Footer Tarjeta (Acciones) -->
-              <div class="p-3 border-top-1 surface-border flex gap-2 justify-content-end surface-50 border-round-bottom">
-                <Button icon="pi pi-pencil" outlined rounded severity="info"
-                        @click="abrirFormulario(apu.id)"
-                        :disabled="apu.esPlantilla"
-                        v-tooltip.top="apu.esPlantilla ? 'Las plantillas no se pueden editar' : 'Editar'" />
-
-                <Button icon="pi pi-copy" outlined rounded severity="success"
-                        @click="duplicarApu(apu.id!)"
-                        v-tooltip.top="'Duplicar APU'" />
-
-                <Button icon="pi pi-refresh" outlined rounded severity="secondary"
-                        @click="recalcularCosto(apu)"
-                        :disabled="apu.esPlantilla || recargandoId === apu.id"
-                        :loading="recargandoId === apu.id"
-                        v-tooltip.top="'Recalcular costo con precios actuales de insumos'" />
-
-                <Button icon="pi pi-trash" outlined rounded severity="danger"
-                        @click="confirmarEliminacion(apu)"
-                        :disabled="apu.esPlantilla"
-                        v-tooltip.top="apu.esPlantilla ? 'Las plantillas no se pueden eliminar' : 'Eliminar'" />
+              <!-- Costo Total -->
+              <div class="flex justify-content-between align-items-center pt-3 border-top-1 app-border-color mt-auto">
+                <span class="app-text font-bold text-sm">Costo Calculado:</span>
+                <span class="text-green-600 font-bold text-xl">$ {{ formatearMoneda(apu.costoTotalCalculado) }}</span>
               </div>
 
             </div>
+
+            <!-- Footer Tarjeta (Acciones) -->
+            <div class="app-surface-subtle p-3 border-top-1 app-border-color flex gap-2 justify-content-end border-round-bottom">
+              <Button icon="pi pi-pencil" outlined rounded severity="info"
+                      @click="abrirFormulario(apu.id)"
+                      :disabled="apu.esPlantilla"
+                      v-tooltip.top="apu.esPlantilla ? 'Las plantillas no se pueden editar' : 'Editar'" />
+
+              <Button icon="pi pi-copy" outlined rounded severity="success"
+                      @click="duplicarApu(apu.id!)"
+                      v-tooltip.top="'Duplicar APU'" />
+
+              <Button icon="pi pi-refresh" outlined rounded severity="secondary"
+                      @click="recalcularCosto(apu)"
+                      :disabled="apu.esPlantilla || recargandoId === apu.id"
+                      :loading="recargandoId === apu.id"
+                      v-tooltip.top="'Recalcular costo con precios actuales de insumos'" />
+
+              <Button icon="pi pi-trash" outlined rounded severity="danger"
+                      @click="confirmarEliminacion(apu)"
+                      :disabled="apu.esPlantilla"
+                      v-tooltip.top="apu.esPlantilla ? 'Las plantillas no se pueden eliminar' : 'Eliminar'" />
+            </div>
+
           </div>
         </div>
       </div>
     </div>
-
-    <ConfirmDialog />
   </div>
+
+  <ConfirmDialog />
 </template>
 
 <script setup lang="ts">

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-column gap-3 md:gap-4 pb-4 h-full">
 
-    <div class="surface-card p-3 md:p-4 shadow-1 border-round flex flex-column flex-grow-1 overflow-hidden">
+    <div class="app-panel p-3 md:p-4 flex flex-column flex-grow-1 overflow-hidden">
 
       <!-- Cabecera Responsiva -->
       <div class="flex flex-column md:flex-row justify-content-between md:align-items-center mb-4 gap-3">
@@ -10,8 +10,8 @@
             <i class="pi pi-users text-xl"></i>
           </div>
           <div>
-            <h2 class="m-0 text-900 text-lg md:text-xl font-bold">Directorio de Clientes</h2>
-            <span class="text-500 text-sm hidden md:block">Gestiona tus contactos para los presupuestos</span>
+            <h2 class="m-0 app-text text-lg md:text-xl font-bold">Directorio de Clientes</h2>
+            <span class="app-text-muted text-sm hidden md:block">Gestiona tus contactos para los presupuestos</span>
           </div>
         </div>
 
@@ -32,7 +32,7 @@
       </Message>
 
       <!-- Zona de Filtros -->
-      <div v-if="mostrarFiltros" class="flex mb-4 p-3 surface-100 border-round">
+      <div v-if="mostrarFiltros" class="app-subcard flex mb-4 p-3">
         <!-- Buscador con flex-1 y IconField -->
         <div class="w-full">
           <IconField class="w-full">
@@ -49,7 +49,7 @@
           <i class="pi pi-spin pi-spinner text-4xl text-primary"></i>
         </div>
 
-        <div v-else-if="clientesFiltrados.length === 0" class="text-center p-5 text-500 border-round surface-100 border-1 surface-border border-dashed">
+        <div v-else-if="clientesFiltrados.length === 0" class="text-center p-5 app-text-muted app-subcard border-1 app-border-color border-dashed">
           No se encontraron clientes registrados o que coincidan con la búsqueda.
         </div>
 
@@ -57,11 +57,11 @@
           <div v-for="cliente in clientesFiltrados" :key="cliente.id ?? ''" class="col-12 md:col-6 lg:col-4 xl:col-3">
 
             <!-- Tarjeta Individual -->
-            <div class="surface-card border-1 surface-border border-round shadow-1 flex flex-column h-full">
+            <div class="app-card flex flex-column h-full">
 
               <!-- Header Tarjeta -->
-              <div class="p-3 border-bottom-1 surface-border surface-50 border-round-top">
-                <span class="text-900 font-bold text-lg line-height-2" style="word-break: break-word;">
+              <div class="app-surface-subtle p-3 border-bottom-1 app-border-color border-round-top">
+                <span class="app-text font-bold text-lg line-height-2" style="word-break: break-word;">
                   {{ cliente.nombre }}
                 </span>
               </div>
@@ -70,26 +70,26 @@
               <div class="p-3 flex-grow-1 flex flex-column gap-3 justify-content-center">
 
                 <div class="flex align-items-center gap-3">
-                  <i class="pi pi-id-card text-500 text-lg"></i>
-                  <span class="text-700 font-semibold">{{ cliente.rut || 'Sin RUT' }}</span>
+                  <i class="pi pi-id-card app-text-muted text-lg"></i>
+                  <span class="app-text font-semibold">{{ cliente.rut || 'Sin RUT' }}</span>
                 </div>
 
                 <div class="flex align-items-center gap-3">
-                  <i class="pi pi-envelope text-500 text-lg"></i>
-                  <span class="text-700 text-sm overflow-hidden text-overflow-ellipsis" :title="cliente.correo">
+                  <i class="pi pi-envelope app-text-muted text-lg"></i>
+                  <span class="app-text text-sm overflow-hidden text-overflow-ellipsis" :title="cliente.correo">
                     {{ cliente.correo || 'Sin correo' }}
                   </span>
                 </div>
 
                 <div class="flex align-items-center gap-3">
-                  <i class="pi pi-phone text-500 text-lg"></i>
-                  <span class="text-700">{{ cliente.telefono || 'Sin teléfono' }}</span>
+                  <i class="pi pi-phone app-text-muted text-lg"></i>
+                  <span class="app-text">{{ cliente.telefono || 'Sin teléfono' }}</span>
                 </div>
 
               </div>
 
               <!-- Footer Tarjeta (Acciones) -->
-              <div class="p-3 border-top-1 surface-border flex gap-2 justify-content-end surface-50 border-round-bottom">
+              <div class="app-surface-subtle p-3 border-top-1 app-border-color flex gap-2 justify-content-end border-round-bottom">
                 <Button icon="pi pi-pencil" outlined rounded severity="info"
                         @click="abrirEditar(cliente)"
                         v-tooltip.top="'Editar Cliente'" />
