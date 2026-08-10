@@ -2,6 +2,7 @@
   <Folder Name="/docs/" />
   <Folder Name="/docs/releases/">
     <File Path="v1.0.0-mvp.md" />
+    <File Path="v1.0.1-mvp.md" />
   </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
