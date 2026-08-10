@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-column gap-3 md:gap-4 pb-4 h-full">
 
-    <div class="surface-card p-3 md:p-4 shadow-1 border-round flex flex-column flex-grow-1 overflow-hidden">
+    <div class="app-panel p-3 md:p-4 flex flex-column flex-grow-1 overflow-hidden">
 
       <!-- Cabecera Responsiva -->
       <div class="flex flex-column md:flex-row justify-content-between md:align-items-center mb-4 gap-3">
@@ -10,8 +10,8 @@
             <i class="pi pi-box text-xl"></i>
           </div>
           <div>
-            <h2 class="m-0 text-900 text-lg md:text-xl font-bold">Catálogo de Insumos</h2>
-            <span class="text-500 text-sm hidden md:block">Administra los materiales, mano de obra y equipos</span>
+            <h2 class="m-0 app-text text-lg md:text-xl font-bold">Catálogo de Insumos</h2>
+            <span class="app-text-muted text-sm hidden md:block">Administra los materiales, mano de obra y equipos</span>
           </div>
         </div>
 
@@ -32,7 +32,7 @@
       </Message>
 
       <!-- Zona de Filtros -->
-      <div v-if="mostrarFiltros" class="flex flex-column md:flex-row gap-3 mb-4 p-3 surface-100 border-round">
+      <div v-if="mostrarFiltros" class="app-subcard flex flex-column md:flex-row gap-3 mb-4 p-3">
 
         <!-- Buscador con flex-1 y IconField -->
         <div class="flex-1 w-full">
@@ -70,7 +70,7 @@
           <i class="pi pi-spin pi-spinner text-4xl text-primary"></i>
         </div>
 
-        <div v-else-if="insumosFiltrados.length === 0" class="text-center p-5 text-500 border-round surface-100 border-1 surface-border border-dashed">
+        <div v-else-if="insumosFiltrados.length === 0" class="text-center p-5 app-text-muted app-subcard border-1 app-border-color border-dashed">
           No se encontraron insumos que coincidan con la búsqueda.
         </div>
 
@@ -78,11 +78,11 @@
           <div v-for="insumo in insumosFiltrados" :key="insumo.id ?? ''" class="col-12 md:col-6 lg:col-4 xl:col-3">
 
             <!-- Tarjeta Individual -->
-            <div class="surface-card border-1 surface-border border-round shadow-1 flex flex-column h-full">
+            <div class="app-card flex flex-column h-full">
 
               <!-- Header Tarjeta -->
-              <div class="flex justify-content-between align-items-start p-3 border-bottom-1 surface-border surface-50 border-round-top">
-                <span class="text-900 font-bold text-lg line-height-2 mb-1 pr-2" style="word-break: break-word;">
+              <div class="app-surface-subtle flex justify-content-between align-items-start p-3 border-bottom-1 app-border-color border-round-top">
+                <span class="app-text font-bold text-lg line-height-2 mb-1 pr-2" style="word-break: break-word;">
                   {{ insumo.descripcion }}
                 </span>
                 <div class="flex-shrink-0 mt-1">
@@ -95,20 +95,20 @@
               <div class="p-3 flex-grow-1 flex flex-column gap-3 justify-content-between">
 
                 <div class="flex justify-content-between align-items-center">
-                  <span class="text-500 text-sm">Tipo:</span>
+                  <span class="app-text-muted text-sm">Tipo:</span>
                   <span :class="OBTENER_CLASE_TIPO_INSUMO(insumo.tipoInsumo)">
                     {{ insumo.tipoInsumo }}
                   </span>
                 </div>
 
                 <div class="flex justify-content-between align-items-center">
-                  <span class="text-500 text-sm">Unidad:</span>
-                  <span class="text-700 text-sm font-semibold">{{ insumo.unidadMedidaNombre }}</span>
+                  <span class="app-text-muted text-sm">Unidad:</span>
+                  <span class="app-text text-sm font-semibold">{{ insumo.unidadMedidaNombre }}</span>
                 </div>
 
                 <!-- Etiquetas -->
                 <div v-if="insumo.etiquetasIds && insumo.etiquetasIds.length > 0">
-                  <span class="text-500 text-sm block mb-2">Etiquetas:</span>
+                  <span class="app-text-muted text-sm block mb-2">Etiquetas:</span>
                   <div class="flex flex-wrap gap-1">
                     <span v-for="tagId in insumo.etiquetasIds"
                           :key="tagId"
@@ -120,15 +120,15 @@
                 </div>
 
                 <!-- Precio Referencia -->
-                <div class="flex justify-content-between align-items-center pt-3 border-top-1 surface-border mt-auto">
-                  <span class="text-700 font-bold text-sm">Precio Referencia:</span>
+                <div class="flex justify-content-between align-items-center pt-3 border-top-1 app-border-color mt-auto">
+                  <span class="app-text font-bold text-sm">Precio Referencia:</span>
                   <span class="text-blue-600 font-bold text-xl">{{ formatMonedaChilena(insumo.precioReferencia) }}</span>
                 </div>
 
               </div>
 
               <!-- Footer Tarjeta (Acciones) -->
-              <div class="p-3 border-top-1 surface-border flex gap-2 justify-content-end surface-50 border-round-bottom">
+              <div class="app-surface-subtle p-3 border-top-1 app-border-color flex gap-2 justify-content-end border-round-bottom">
                 <Button icon="pi pi-pencil" outlined rounded severity="info"
                         @click="abrirEditar(insumo)"
                         :disabled="insumo.esPlantilla"
@@ -154,6 +154,7 @@
                       @guardar="procesarGuardado" />
 
     <ConfirmDialog />
+
   </div>
 </template>
 

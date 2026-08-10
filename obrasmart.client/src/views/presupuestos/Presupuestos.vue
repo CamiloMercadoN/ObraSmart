@@ -1,130 +1,173 @@
 <template>
-  <div class="flex flex-column gap-3 md:gap-4 pb-4 h-full">
+  <div class="app-panel p-3 md:p-4 flex flex-column flex-grow-1">
 
-    <div class="surface-card p-3 md:p-4 shadow-1 border-round flex flex-column flex-grow-1">
-
-      <!-- Cabecera Responsiva -->
-      <div class="flex flex-column md:flex-row justify-content-between md:align-items-center mb-4 gap-3">
-        <div class="flex align-items-center gap-3 titulo-mantenedor">
-          <div class="bg-indigo-500 text-white border-round-lg flex align-items-center justify-content-center flex-shrink-0" style="width: 3rem; height: 3rem;">
-            <i class="pi pi-file-edit text-xl"></i>
-          </div>
-          <div>
-            <h2 class="m-0 text-900 text-lg md:text-xl font-bold">Gestión de Presupuestos</h2>
-            <span class="text-500 text-sm hidden md:block">Crea, duplica y administra tus cotizaciones comerciales</span>
-          </div>
+    <!-- Cabecera Responsiva -->
+    <div class="flex flex-column md:flex-row justify-content-between md:align-items-center mb-4 gap-3">
+      <div class="flex align-items-center gap-3 titulo-mantenedor">
+        <div class="bg-indigo-500 text-white border-round-lg flex align-items-center justify-content-center flex-shrink-0" style="width: 3rem; height: 3rem;">
+          <i class="pi pi-file-edit text-xl"></i>
         </div>
 
-        <div class="flex flex-column sm:flex-row gap-2 w-full md:w-auto flex-shrink-0">
-          <Button :icon="mostrarFiltros ? 'pi pi-filter-slash' : 'pi pi-filter'"
-                  :label="mostrarFiltros ? 'Ocultar Filtros' : 'Filtros'"
-                  severity="secondary"
-                  outlined
-                  class="w-full sm:w-auto"
-                  @click="mostrarFiltros = !mostrarFiltros" />
-          <Button label="Nuevo Presupuesto" icon="pi pi-plus" class="w-full sm:w-auto" @click="abrirFormulario()" />
+        <div>
+          <h2 class="m-0 app-text text-lg md:text-xl font-bold">Gestión de Presupuestos</h2>
+          <span class="app-text-muted text-sm hidden md:block">Crea, duplica y administra tus cotizaciones comerciales</span>
         </div>
       </div>
 
-      <Message v-if="errorGlobal" severity="error" :closable="true" @close="errorGlobal = ''" class="mb-3">
-        {{ errorGlobal }}
-      </Message>
+      <div class="flex flex-column sm:flex-row gap-2 w-full md:w-auto flex-shrink-0">
+        <Button :icon="mostrarFiltros ? 'pi pi-filter-slash' : 'pi pi-filter'"
+                :label="mostrarFiltros ? 'Ocultar Filtros' : 'Filtros'"
+                severity="secondary"
+                outlined
+                class="w-full sm:w-auto"
+                @click="mostrarFiltros = !mostrarFiltros" />
 
-      <!-- Zona de Filtros -->
-      <div v-if="mostrarFiltros" class="flex flex-column md:flex-row gap-3 mb-4 p-3 surface-100 border-round">
+        <Button label="Nuevo Presupuesto"
+                icon="pi pi-plus"
+                class="w-full sm:w-auto"
+                @click="abrirFormulario()" />
+      </div>
+    </div>
 
-        <!-- Buscador con flex-1 y IconField -->
-        <div class="flex-1 w-full">
-          <IconField class="w-full">
-            <InputIcon class="pi pi-search" />
-            <InputText v-model="filtroTexto" placeholder="Buscar por proyecto o cliente..." class="w-full" />
-          </IconField>
-        </div>
+    <Message v-if="errorGlobal"
+             severity="error"
+             :closable="true"
+             class="mb-3"
+             @close="errorGlobal = ''">
+      {{ errorGlobal }}
+    </Message>
 
-        <!-- Selector con ancho fijo en escritorio (15rem) -->
-        <div class="w-full md:w-15rem flex-shrink-0">
-          <Select v-model="filtroEstado" :options="estadosPermitidos" placeholder="Filtrar por Estado" showClear class="w-full" />
-        </div>
+    <!-- Zona de Filtros -->
+    <div v-if="mostrarFiltros" class="app-subcard flex flex-column md:flex-row gap-3 mb-4 p-3">
 
+      <!-- Buscador -->
+      <div class="flex-1 w-full">
+        <IconField class="w-full">
+          <InputIcon class="pi pi-search" />
+          <InputText v-model="filtroTexto"
+                     placeholder="Buscar por proyecto o cliente..."
+                     class="w-full" />
+        </IconField>
       </div>
 
-      <!-- Vista de Tarjetas (DataView) -->
-      <div class="flex-grow-1 overflow-auto">
+      <!-- Selector Estado -->
+      <div class="w-full md:w-15rem flex-shrink-0">
+        <Select v-model="filtroEstado"
+                :options="estadosPermitidos"
+                placeholder="Filtrar por Estado"
+                showClear
+                class="w-full" />
+      </div>
 
-        <div v-if="cargando" class="flex justify-content-center align-items-center p-5">
-          <i class="pi pi-spin pi-spinner text-4xl text-primary"></i>
-        </div>
+    </div>
 
-        <div v-else-if="presupuestosFiltrados.length === 0" class="text-center p-5 text-500 border-round surface-100 border-1 surface-border border-dashed">
-          No se encontraron presupuestos que coincidan con la búsqueda.
-        </div>
+    <!-- Vista de Tarjetas -->
+    <div class="flex-grow-1 overflow-auto">
 
-        <div v-else class="grid">
-          <div v-for="presupuesto in presupuestosFiltrados" :key="presupuesto.id" class="col-12 md:col-6 lg:col-4">
-            <!-- Tarjeta Individual -->
-            <div class="surface-card border-1 surface-border border-round shadow-1 flex flex-column h-full">
+      <!-- Cargando -->
+      <div v-if="cargando" class="flex justify-content-center align-items-center p-5">
+        <i class="pi pi-spin pi-spinner text-4xl text-primary"></i>
+      </div>
 
-              <!-- Header Tarjeta -->
-              <div class="flex justify-content-between align-items-start p-3 border-bottom-1 surface-border surface-50 border-round-top">
-                <div class="flex flex-column pr-2">
-                  <span class="text-900 font-bold text-lg line-height-2 mb-1" style="word-break: break-word;">
-                    {{ presupuesto.nombreProyecto }}
-                  </span>
-                  <span class="text-600 text-sm flex align-items-center gap-1">
-                    <i class="pi pi-user text-xs"></i>
-                    {{ presupuesto.clienteNombre || 'Sin Cliente Asignado' }}
-                  </span>
-                </div>
-                <div class="flex flex-column align-items-end gap-1 flex-shrink-0">
-                  <Tag :value="presupuesto.estado" :severity="obtenerSeveridadEstado(presupuesto.estado)" />
-                  <Tag v-if="presupuesto.esPlantilla" value="Plantilla" severity="info" class="text-xs" />
-                </div>
+      <!-- Sin resultados -->
+      <div v-else-if="presupuestosFiltrados.length === 0" class="app-subcard app-text-muted text-center p-5 border-1 app-border-color border-dashed">
+        No se encontraron presupuestos que coincidan con la búsqueda.
+      </div>
+
+      <!-- Presupuestos -->
+      <div v-else class="grid">
+
+        <div v-for="presupuesto in presupuestosFiltrados"
+             :key="presupuesto.id"
+             class="col-12 md:col-6 lg:col-4">
+
+          <!-- Tarjeta Individual -->
+          <div class="app-card flex flex-column h-full">
+
+            <!-- Header Tarjeta -->
+            <div class="app-surface-subtle flex justify-content-between align-items-start p-3 border-bottom-1 app-border-color border-round-top">
+
+              <div class="flex flex-column pr-2">
+                <span class="app-text font-bold text-lg line-height-2 mb-1" style="word-break: break-word;">
+                  {{ presupuesto.nombreProyecto }}
+                </span>
+
+                <span class="app-text-muted text-sm flex align-items-center gap-1">
+                  <i class="pi pi-user text-xs"></i>
+                  {{ presupuesto.clienteNombre || 'Sin Cliente Asignado' }}
+                </span>
               </div>
 
-              <!-- Body Tarjeta -->
-              <div class="p-3 flex-grow-1 flex flex-column gap-2 justify-content-center">
-                <div class="flex justify-content-between align-items-center">
-                  <span class="text-500 text-sm">Fecha Creación:</span>
-                  <span class="text-700 text-sm font-semibold">{{ formatearFecha(presupuesto.fechaCreacion) }}</span>
-                </div>
-                <div class="flex justify-content-between align-items-center">
-                  <span class="text-500 text-sm">Subtotal:</span>
-                  <span class="text-700 text-sm">$ {{ formatearMoneda(presupuesto.subtotal) }}</span>
-                </div>
-                <div class="flex justify-content-between align-items-center border-bottom-1 surface-border pb-2">
-                  <span class="text-500 text-sm">IVA (19%):</span>
-                  <span class="text-700 text-sm">$ {{ formatearMoneda(presupuesto.montoIva) }}</span>
-                </div>
-                <div class="flex justify-content-between align-items-center pt-1">
-                  <span class="text-700 font-bold">Total:</span>
-                  <span class="text-green-600 font-bold text-xl">$ {{ formatearMoneda(presupuesto.total) }}</span>
-                </div>
+              <div class="flex flex-column align-items-end gap-1 flex-shrink-0">
+                <Tag :value="presupuesto.estado"
+                     :severity="obtenerSeveridadEstado(presupuesto.estado)" />
+
+                <Tag v-if="presupuesto.esPlantilla"
+                     value="Plantilla"
+                     severity="info"
+                     class="text-xs" />
               </div>
 
-              <div class="p-3 border-top-1 surface-border flex gap-2 justify-content-end surface-50 border-round-bottom">
-                <Button icon="pi pi-pencil" outlined rounded severity="info"
-                        @click="abrirFormulario(presupuesto.id)"
-                        :disabled="presupuesto.esPlantilla"
-                        v-tooltip.top="presupuesto.esPlantilla ? 'Las plantillas no se editan' : 'Editar'" />
+            </div>
 
-                <Button icon="pi pi-copy" outlined rounded severity="secondary"
-                        @click="duplicarPresupuesto(presupuesto.id!)"
-                        v-tooltip.top="'Duplicar a nuevo'" />
+            <!-- Body Tarjeta -->
+            <div class="p-3 flex-grow-1 flex flex-column gap-2 justify-content-center">
 
-                <Button icon="pi pi-trash" outlined rounded severity="danger"
-                        @click="confirmarEliminacion(presupuesto)"
-                        :disabled="presupuesto.esPlantilla || presupuesto.estado !== 'Borrador'"
-                        v-tooltip.top="'Eliminar'" />
+              <div class="flex justify-content-between align-items-center gap-3">
+                <span class="app-text-muted text-sm">Fecha Creación:</span>
+                <span class="app-text text-sm font-semibold">{{ formatearFecha(presupuesto.fechaCreacion) }}</span>
               </div>
+
+              <div class="flex justify-content-between align-items-center gap-3">
+                <span class="app-text-muted text-sm">Subtotal:</span>
+                <span class="app-text text-sm">$ {{ formatearMoneda(presupuesto.subtotal) }}</span>
+              </div>
+
+              <div class="flex justify-content-between align-items-center gap-3 border-bottom-1 app-border-color pb-2">
+                <span class="app-text-muted text-sm">IVA (19%):</span>
+                <span class="app-text text-sm">$ {{ formatearMoneda(presupuesto.montoIva) }}</span>
+              </div>
+
+              <div class="flex justify-content-between align-items-center gap-3 pt-1">
+                <span class="app-text font-bold">Total:</span>
+                <span class="text-green-600 font-bold text-xl">$ {{ formatearMoneda(presupuesto.total) }}</span>
+              </div>
+
+            </div>
+
+            <!-- Acciones -->
+            <div class="app-surface-subtle p-3 border-top-1 app-border-color flex gap-2 justify-content-end border-round-bottom">
+
+              <Button icon="pi pi-pencil"
+                      outlined
+                      rounded
+                      severity="info"
+                      @click="abrirFormulario(presupuesto.id)"
+                      :disabled="presupuesto.esPlantilla"
+                      v-tooltip.top="presupuesto.esPlantilla ? 'Las plantillas no se editan' : 'Editar'" />
+
+              <Button icon="pi pi-copy"
+                      outlined
+                      rounded
+                      severity="secondary"
+                      @click="duplicarPresupuesto(presupuesto.id!)"
+                      v-tooltip.top="'Duplicar a nuevo'" />
+
+              <Button icon="pi pi-trash"
+                      outlined
+                      rounded
+                      severity="danger"
+                      @click="confirmarEliminacion(presupuesto)"
+                      :disabled="presupuesto.esPlantilla || presupuesto.estado !== 'Borrador'"
+                      v-tooltip.top="'Eliminar'" />
 
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <ConfirmDialog />
   </div>
+  <ConfirmDialog />
 </template>
 
 <script setup lang="ts">

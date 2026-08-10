@@ -6,7 +6,7 @@
           :closable="!loading"
           @hide="resetForm">
 
-    <form @submit.prevent="handleSubmit" class="flex flex-column gap-3 mt-2">
+    <form @submit.prevent="handleSubmit" class="flex flex-column gap-3 mt-2 app-text">
 
       <div class="flex flex-column gap-2">
         <label for="nombre" class="font-bold">Nombre o Razón Social <span class="text-red-500">*</span></label>
@@ -55,25 +55,26 @@
         <div class="col-12 md:col-6 p-0 md:pr-2 flex flex-column gap-2">
           <label for="region" class="font-bold">Región</label>
           <Select id="region"
-                    v-model="regionSeleccionada"
-                    :options="regiones"
-                    optionLabel="nombre"
-                    optionValue="id"
-                    placeholder="Seleccione Región"
-                    class="w-full"
-                    :disabled="cargandoTerritorios"
-                    @change="onRegionChange"/>
+                  v-model="regionSeleccionada"
+                  :options="regiones"
+                  optionLabel="nombre"
+                  optionValue="id"
+                  placeholder="Seleccione Región"
+                  class="w-full"
+                  :disabled="cargandoTerritorios"
+                  @change="onRegionChange" />
         </div>
+
         <div class="col-12 md:col-6 p-0 md:pl-2 flex flex-column gap-2 mt-3 md:mt-0">
           <label for="comuna" class="font-bold">Comuna</label>
           <Select id="comuna"
-                    v-model="formulario.ciudadId"
-                    :options="comunas"
-                    optionLabel="nombre"
-                    optionValue="id"
-                    placeholder="Seleccione Comuna"
-                    :disabled="!regionSeleccionada || cargandoTerritorios"
-                    class="w-full" />
+                  v-model="formulario.ciudadId"
+                  :options="comunas"
+                  optionLabel="nombre"
+                  optionValue="id"
+                  placeholder="Seleccione Comuna"
+                  :disabled="!regionSeleccionada || cargandoTerritorios"
+                  class="w-full" />
         </div>
       </div>
 
@@ -95,6 +96,7 @@
       </div>
 
     </form>
+
   </Dialog>
 </template>
 

@@ -39,7 +39,7 @@ namespace ObraSmart.Application.Tests.Services
             {
                 Nombre = "Instalación de Sanitario",
                 UnidadMedidaId = 1,
-                EtiquetasIds = new List<Guid>(), // Inicializamos para evitar NullReferenceException
+                EtiquetasIds = new List<Guid>(),
                 Componentes = new List<ComponenteAPUInputDto>
                 {
                     new ComponenteAPUInputDto { InsumoId = insumo1Id, Cantidad = 2 },
@@ -47,7 +47,7 @@ namespace ObraSmart.Application.Tests.Services
                 }
             };
 
-            // Simulamos la respuesta de la base de datos al buscar los insumos como lista
+            // Simula la respuesta de la base de datos al buscar los insumos como lista
             var insumosSimulados = new List<Insumo>
             {
                 new Insumo { Id = insumo1Id, PrecioReferencia = 1000m },
@@ -58,12 +58,12 @@ namespace ObraSmart.Application.Tests.Services
                 .Setup(r => r.GetByIdsAsync(It.IsAny<IEnumerable<Guid>>()))
                 .ReturnsAsync(insumosSimulados);
 
-            // Configuramos el repositorio de APU para capturar la entidad que se intenta guardar
+            // Configura el repositorio de APU para capturar la entidad que se intenta guardar
             EstructuraAPU? apuGuardada = null;
             _apuRepositoryMock.Setup(r => r.AddAsync(It.IsAny<EstructuraAPU>()))
                 .Callback<EstructuraAPU>(apu =>
                 {
-                    // Simulamos el comportamiento de Entity Framework generando el Id
+                    // Simula el comportamiento de Entity Framework generando el Id
                     apu.Id = Guid.NewGuid();
                     apuGuardada = apu;
                 })
@@ -78,7 +78,7 @@ namespace ObraSmart.Application.Tests.Services
 
             _apuRepositoryMock.Verify(r => r.AddAsync(It.IsAny<EstructuraAPU>()), Times.Once);
 
-            // Validamos la regla de negocio crítica: El cálculo matemático
+            // Valida la regla de negocio crítica: El cálculo matemático
             // Costo esperado: (2 * 1000) + (1.5 * 2000) = 2000 + 3000 = 5000
             apuGuardada.Should().NotBeNull();
             apuGuardada!.CostoTotalCalculado.Should().Be(5000m);

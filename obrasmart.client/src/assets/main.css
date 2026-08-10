@@ -1,8 +1,107 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: var(--p-font-family, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif);
-  background-color: var(--p-surface-50);
-  color: var(--p-text-color);
+@import 'primeflex/primeflex.css' layer(primeflex);
+
+@layer utilidades {
+  :root {
+    /* Fondo general */
+    --app-bg: var(--p-surface-100);
+    /* Superficies principales */
+    --app-topbar-bg: var(--p-surface-0);
+    --app-card-bg: var(--p-surface-0);
+    --app-subcard-bg: var(--p-surface-100);
+    --app-panel-bg: var(--p-surface-0);
+    /* Bordes y texto */
+    --app-border: rgba(15, 23, 42, 0.08);
+    --app-text: var(--p-text-color);
+    --app-text-muted: var(--p-text-muted-color);
+    /* Sombras light */
+    --app-shadow-soft: 0 1px 2px rgba(15, 23, 42, 0.04), 0 6px 16px rgba(15, 23, 42, 0.05);
+    --app-shadow-card: 0 1px 3px rgba(15, 23, 42, 0.06), 0 10px 24px rgba(15, 23, 42, 0.06);
+  }
+
+    :root.app-dark {
+      /* Fondo más oscuro para separar mejor cards */
+      --app-bg: var(--p-surface-950);
+      /* Cards y topbar ligeramente más claros que el fondo */
+      --app-topbar-bg: var(--p-surface-900);
+      --app-card-bg: var(--p-surface-900);
+      --app-subcard-bg: var(--p-surface-800);
+      --app-panel-bg: var(--p-surface-900);
+      --app-border: rgba(255, 255, 255, 0.05);
+      --app-text: var(--p-text-color);
+      --app-text-muted: var(--p-text-muted-color);
+      /* Sombras dark: más visibles */
+      --app-shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.35), 0 8px 20px rgba(0, 0, 0, 0.18);
+      --app-shadow-card: 0 1px 3px rgba(0, 0, 0, 0.45), 0 12px 28px rgba(0, 0, 0, 0.28);
+    }
+
+  html,
+  body,
+  #app {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+  }
+
+  html,
+  body {
+    box-sizing: border-box;
+    background-color: var(--app-bg);
+    color: var(--app-text);
+    font-family: var(--p-font-family, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+
+  .app-shell {
+    min-height: 100vh;
+    background: var(--app-bg);
+    color: var(--app-text);
+  }
+
+  .app-topbar {
+    background: var(--app-topbar-bg);
+    border-bottom: 1px solid var(--app-border);
+    box-shadow: var(--app-shadow-soft);
+  }
+
+  .app-card {
+    background: var(--app-card-bg);
+    border: 1px solid var(--app-border);
+    border-radius: 12px;
+    box-shadow: var(--app-shadow-card);
+  }
+
+  .app-panel {
+    background: var(--app-panel-bg);
+    border: 1px solid var(--app-border);
+    border-radius: 18px;
+    box-shadow: var(--app-shadow-card);
+  }
+
+  .app-subcard {
+    background: var(--app-subcard-bg);
+    border-radius: 12px;
+  }
+
+  .app-text {
+    color: var(--app-text);
+  }
+
+  .app-text-muted {
+    color: var(--app-text-muted);
+  }
+
+  .app-surface-subtle {
+    background: var(--app-subcard-bg);
+  }
+
+  .app-border-color {
+    border-color: var(--app-border) !important;
+  }
 }

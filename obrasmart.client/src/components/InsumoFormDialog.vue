@@ -6,7 +6,7 @@
           :closable="!loading"
           @hide="resetForm">
 
-    <form @submit.prevent="handleSubmit" class="flex flex-column gap-3 mt-2">
+    <form @submit.prevent="handleSubmit" class="flex flex-column gap-3 mt-2 app-text">
 
       <div class="flex flex-column gap-2">
         <label for="descripcion" class="font-bold">Descripción del Insumo <span class="text-red-500">*</span></label>
@@ -66,11 +66,12 @@
                          class="flex-grow-1"
                          style="min-width: 0;" />
             <Button icon="pi pi-plus"
-                          outlined
-                          severity="secondary"
-                          @click="mostrarDialogoEtiqueta = true"
-                          :disabled="cargandoAuxiliares"
-                          class="flex-shrink-0" v-tooltip.top="'Crear nueva etiqueta'" />
+                    outlined
+                    severity="secondary"
+                    @click="mostrarDialogoEtiqueta = true"
+                    :disabled="cargandoAuxiliares"
+                    class="flex-shrink-0"
+                    v-tooltip.top="'Crear nueva etiqueta'" />
           </div>
         </div>
       </div>
@@ -86,6 +87,7 @@
 
     </form>
   </Dialog>
+
   <EtiquetaFormDialog v-model:visible="mostrarDialogoEtiqueta"
                       @etiqueta-creada="onEtiquetaCreada" />
 </template>

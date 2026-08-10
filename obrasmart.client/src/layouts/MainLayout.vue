@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen flex flex-column surface-100">
+  <div class="app-shell flex flex-column">
 
-    <div class="flex justify-content-between align-items-center px-4 py-3 surface-0 shadow-1">
+    <div class="app-topbar flex justify-content-between align-items-center px-4 py-3">
       <div class="flex align-items-center gap-3">
         <Button icon="pi pi-bars" text rounded aria-label="Menú" @click="menuVisible = true" />
         <span class="text-xl font-bold text-primary">ObraSmart</span>
