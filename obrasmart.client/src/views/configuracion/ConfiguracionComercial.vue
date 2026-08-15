@@ -37,7 +37,6 @@
 
             <!-- Uploader -->
             <div class="flex flex-column gap-2 text-center sm:text-left">
-              <!-- Usamos un FileUpload básico auto-procesado en local para la vista previa -->
               <FileUpload mode="basic" name="logo" accept="image/*" :maxFileSize="2000000"
                           chooseLabel="Seleccionar Imagen" customUpload @uploader="onLogoSeleccionado" auto
                           class="p-button-outlined" />
@@ -52,16 +51,23 @@
           <InputText id="razonSocial" v-model="formulario.razonSocial" placeholder="Ej: Construcciones y Remodelaciones SpA" class="w-full" />
         </div>
 
-        <!-- IVA -->
-        <div class="field col-12 md:col-6">
-          <label for="iva" class="font-bold block mb-2 app-text">Porcentaje de IVA (%) <span class="text-red-500">*</span></label>
+        <!-- IVA (Ajustado a col-4 en escritorio) -->
+        <div class="field col-12 md:col-4">
+          <label for="iva" class="font-bold block mb-2 app-text">Porcentaje IVA <span class="text-red-500">*</span></label>
           <InputNumber id="iva" v-model="formulario.porcentajeIva" :min="0" :max="100" suffix=" %" class="w-full" />
         </div>
 
-        <!-- Validez -->
-        <div class="field col-12 md:col-6">
-          <label for="validez" class="font-bold block mb-2 app-text">Validez de Cotización <span class="text-red-500">*</span></label>
+        <!-- Validez (Ajustado a col-4 en escritorio) -->
+        <div class="field col-12 md:col-4">
+          <label for="validez" class="font-bold block mb-2 app-text">Validez Cotización <span class="text-red-500">*</span></label>
           <InputNumber id="validez" v-model="formulario.diasValidez" :min="1" :max="365" suffix=" días" class="w-full" />
+        </div>
+
+        <!-- Último Número Cotización (NUEVO CAMPO, col-4 en escritorio) -->
+        <div class="field col-12 md:col-4">
+          <label for="ultimoNumero" class="font-bold block mb-2 app-text">Último N° Cotización</label>
+          <InputNumber id="ultimoNumero" v-model="formulario.ultimoNumeroCotizacion" :min="0" class="w-full" />
+          <small class="app-text-muted mt-1 block line-height-2">El sistema evitará que ingreses un valor menor al actual.</small>
         </div>
 
       </div>
@@ -84,11 +90,13 @@
   const mensaje = ref<{ tipo: string, texto: string } | null>(null);
   const logoPreview = ref<string | null>(null);
 
+  // Se inicializa el formulario con el nuevo campo en 0
   const formulario = ref<IConfiguracionComercial>({
     razonSocial: '',
     porcentajeIva: 19,
     diasValidez: 15,
-    logoBase64: null
+    logoBase64: null,
+    ultimoNumeroCotizacion: 0
   });
 
   onMounted(async () => {
@@ -100,8 +108,9 @@
       const config = await configuracionService.obtener();
       if (config) {
         formulario.value = { ...config };
-        // Si el backend devuelve una URL estática, la usamos para el preview
-        logoPreview.value = config.logoBase64;
+        if (config.logoBase64) {
+          logoPreview.value = config.logoBase64;
+        }
       }
     } catch (error: any) {
       mostrarMensaje('error', error.message);
@@ -117,7 +126,6 @@
     reader.onload = () => {
       const base64String = reader.result as string;
       logoPreview.value = base64String;
-      // Sobrescribimos con el nuevo base64 para enviarlo al PUT
       formulario.value.logoBase64 = base64String;
     };
     reader.onerror = () => {
@@ -145,7 +153,6 @@
   };
 
   const mostrarMensaje = (tipo: string, texto: string) => {
-    // PrimeVue usa 'error', 'success', 'info', 'warn'
     mensaje.value = { tipo, texto };
     if (tipo === 'success') {
       setTimeout(() => { mensaje.value = null; }, 3000);

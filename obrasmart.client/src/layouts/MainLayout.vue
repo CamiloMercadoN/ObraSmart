@@ -64,6 +64,11 @@
           command: () => { router.push('/presupuestos'); menuVisible.value = false; }
       },
       {
+        label: 'Cotizaciones',
+        icon: 'pi pi-send',
+        command: () => { router.push('/cotizaciones'); menuVisible.value = false; }
+      },
+      {
             label: 'Clientes',
             icon: 'pi pi-users',
             command: () => { router.push('/clientes'); menuVisible.value = false; }

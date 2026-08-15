@@ -16,6 +16,7 @@ namespace ObraSmart.Domain.Entities
         public int ValidezCotizacionDias { get; set; }
         public string FormaPagoPredeterminada { get; set; } = string.Empty;
         public string LogoUrl { get; set; } = string.Empty;
+        public int UltimoNumeroCotizacion { get; set; } = 0;
 
         // Propiedades de Navegación
         public Ciudad? Ciudad { get; set; }

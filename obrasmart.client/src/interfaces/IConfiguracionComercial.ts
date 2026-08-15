@@ -3,4 +3,5 @@ export interface IConfiguracionComercial {
   porcentajeIva: number;
   diasValidez: number;
   logoBase64: string | null;
+  ultimoNumeroCotizacion: number;
 }

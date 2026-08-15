@@ -13,5 +13,6 @@ namespace ObraSmart.Application.DTOs.ConfiguracionComercial
         // En consultas devolverá la URL estática ("/uploads/..."). 
         // Al guardar, si el usuario subió imagen, traerá el string "data:image/png;base64,..."
         public string? LogoBase64 { get; set; }
+        public int UltimoNumeroCotizacion { get; set; }
     }
 }

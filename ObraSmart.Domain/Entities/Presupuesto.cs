@@ -21,6 +21,6 @@ namespace ObraSmart.Domain.Entities
         public Usuario? Usuario { get; set; }
         public Cliente? Cliente { get; set; }
         public ICollection<ItemPresupuesto> Items { get; set; } = new List<ItemPresupuesto>();
-        public Cotizacion? Cotizacion { get; set; } // Relación 1:1 o 1:0
+        public ICollection<Cotizacion> Cotizaciones { get; set; } = new List<Cotizacion>();
     }
 }

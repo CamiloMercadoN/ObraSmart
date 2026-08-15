@@ -12,6 +12,7 @@
       <div class="flex gap-2 w-full md:w-auto">
         <Button label="Cancelar" severity="secondary" outlined @click="volver" class="flex-1 md:flex-none" />
         <Button label="Guardar" icon="pi pi-save" @click="guardar" :loading="guardando" class="flex-1 md:flex-none" />
+        <Button label="Generar Cotización" icon="pi pi-send" severity="info" @click="abrirModalCotizacion" :disabled="!formulario.id" />
       </div>
     </div>
 
@@ -201,6 +202,10 @@
         </div>
       </template>
     </Dialog>
+
+    <GenerarCotizacionDialog v-model:visible="mostrarModalCotizacion"
+                             :presupuestoId="formulario.id!" />
+
   </div>
 </template>
 
@@ -215,6 +220,7 @@
   import type { ICliente } from '../../interfaces/ICliente';
   import type { IEstructuraAPU } from '../../interfaces/IApu';
   import type { IEtiqueta, IInsumo, IUnidadMedida } from '../../interfaces/IInsumo';
+  import GenerarCotizacionDialog from '../../components/GenerarCotizacionDialog.vue';
 
   import Button from 'primevue/button';
   import InputText from 'primevue/inputtext';
@@ -483,5 +489,19 @@
       color: tag.colorHex,
       border: `1px solid ${tag.colorHex}`
     };
+  };
+
+  const mostrarModalCotizacion = ref(false);
+
+  const abrirModalCotizacion = () => {
+    if (!formulario.value.id) {
+      errorGlobal.value = "Debes guardar el presupuesto antes de generar una cotización.";
+      return;
+    }
+    if (!formulario.value.clienteId) {
+      errorGlobal.value = "Debes asignar un cliente al presupuesto para cotizar.";
+      return;
+    }
+    mostrarModalCotizacion.value = true;
   };
 </script>

@@ -70,6 +70,11 @@ const router = createRouter({
           component: () => import('../views/presupuestos/PresupuestoForm.vue'),
         },
         {
+          path: 'cotizaciones',
+          name: 'Cotizaciones',
+          component: () => import('../views/cotizaciones/Cotizaciones.vue'),
+        },
+        {
           path: 'configuracion',
           name: 'ConfiguracionComercial',
           component: () => import('../views/configuracion/ConfiguracionComercial.vue'),

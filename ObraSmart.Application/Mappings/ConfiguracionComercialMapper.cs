@@ -12,7 +12,8 @@ namespace ObraSmart.Application.Mappings
                 RazonSocial = usuario.RazonSocial,
                 PorcentajeIva = usuario.PorcentajeIva,
                 DiasValidez = usuario.ValidezCotizacionDias,
-                LogoBase64 = usuario.LogoUrl // Mapeamos la URL a la propiedad del front
+                LogoBase64 = usuario.LogoUrl, // Mapeamos la URL a la propiedad del front
+                UltimoNumeroCotizacion = usuario.UltimoNumeroCotizacion
             };
         }
 
@@ -27,6 +28,7 @@ namespace ObraSmart.Application.Mappings
             {
                 usuario.LogoUrl = nuevaLogoUrl;
             }
+            usuario.UltimoNumeroCotizacion = dto.UltimoNumeroCotizacion;
         }
     }
 }

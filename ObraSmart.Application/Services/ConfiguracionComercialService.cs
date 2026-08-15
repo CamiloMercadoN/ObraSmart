@@ -31,6 +31,11 @@ namespace ObraSmart.Application.Services
                 return Result.Failure("Usuario no encontrado.", "USER_NOT_FOUND");
             }
 
+            if (dto.UltimoNumeroCotizacion < usuario.UltimoNumeroCotizacion)
+            {
+                return Result.Failure($"El número de cotización no puede ser menor al actual ({usuario.UltimoNumeroCotizacion}).", "INVALID_DATA");
+            }
+
             string? nuevaRutaLogo = null;
 
             // Identificamos si el front envió un Base64 nuevo o si es la misma URL estática
@@ -51,6 +56,7 @@ namespace ObraSmart.Application.Services
 
             // Aplicamos los cambios a la entidad
             usuario.UpdateEntity(dto, nuevaRutaLogo);
+
 
             await usuarioRepository.UpdateAsync(usuario);
 

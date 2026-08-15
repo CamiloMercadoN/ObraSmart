@@ -56,9 +56,10 @@ namespace ObraSmart.Infrastructure.Data
 
             // Configurar la relación 1 a 1 entre Presupuesto y Cotización
             modelBuilder.Entity<Presupuesto>()
-                .HasOne(p => p.Cotizacion)
+                .HasMany(p => p.Cotizaciones)
                 .WithOne(c => c.Presupuesto)
-                .HasForeignKey<Cotizacion>(c => c.PresupuestoId);
+                .HasForeignKey(c => c.PresupuestoId)
+                .OnDelete(DeleteBehavior.Restrict);
 
 
             // Configuración para evitar eliminación en cascada en todas las relaciones
