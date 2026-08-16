@@ -4,7 +4,9 @@
       <Message v-if="errorCotizacion" severity="error" :closable="true" @close="errorCotizacion = ''">
         {{ errorCotizacion }}
       </Message>
-
+      <Message v-if="tieneVigentes" severity="warn" :closable="false">
+        Ya existe una cotización vigente para este presupuesto. Generar una nueva no anulará la anterior automáticamente.
+      </Message>
       <div class="field">
         <label class="font-bold app-text mb-2 block">Fecha de Vencimiento *</label>
         <DatePicker v-model="fechaVencimiento" dateFormat="dd/mm/yy" class="w-full" :minDate="new Date()" appendTo="body" />
@@ -30,6 +32,7 @@
   import { ref, watch, onMounted } from 'vue';
   import { useRouter } from 'vue-router';
   import { useConfirm } from 'primevue/useconfirm';
+  import { useToast } from 'primevue/usetoast';
   import { cotizacionService } from '../services/cotizacionService';
   import { configuracionService } from '../services/configuracionService';
 
@@ -51,13 +54,14 @@
 
   const router = useRouter();
   const confirm = useConfirm();
+  const toast = useToast();
 
   const generando = ref(false);
   const errorCotizacion = ref('');
   const fechaVencimiento = ref<Date>(new Date());
   const numeroCotizacionOpcional = ref<number | null>(null);
-
   const diasValidezDefecto = ref(15); // Fallback inicial
+  const tieneVigentes = ref(false);
 
   onMounted(async () => {
     try {
@@ -71,14 +75,25 @@
   });
 
   // Resetear valores cada vez que se abre el modal, usando el valor configurado
-  watch(() => props.visible, (nuevoValor) => {
+  watch(() => props.visible, async (nuevoValor) => {
     if (nuevoValor) {
       const fecha = new Date();
       fecha.setDate(fecha.getDate() + diasValidezDefecto.value);
-
       fechaVencimiento.value = fecha;
       numeroCotizacionOpcional.value = null;
       errorCotizacion.value = '';
+      tieneVigentes.value = false;
+
+      // EVALUACIÓN DE COTIZACIONES VIGENTES
+      try {
+        const historial = await cotizacionService.obtenerTodas();
+        const hoy = new Date();
+        tieneVigentes.value = historial.some(c =>
+          c.presupuestoId === props.presupuestoId &&
+          c.estado === 'Emitida' &&
+          new Date(c.fechaVencimiento) >= hoy
+        );
+      } catch (e) { }
     }
   });
 
@@ -103,14 +118,22 @@
       cerrarDialogo();
       emit('generada');
 
+      toast.add({
+        severity: 'success',
+        summary: 'Cotización Generada',
+        detail: `La cotización ${nuevaCotizacion.numeroCotizacion} fue creada con éxito.`,
+        life: 4000
+      });
+
       confirm.require({
-        message: `La cotización ${nuevaCotizacion.numeroCotizacion} fue generada exitosamente. ¿Deseas compartirla ahora?`,
-        header: 'Cotización Generada',
-        icon: 'pi pi-check-circle',
+        message: `¿Deseas descargar o compartir la cotización ${nuevaCotizacion.numeroCotizacion} ahora mismo?`,
+        header: 'Siguiente paso',
+        icon: 'pi pi-send',
         acceptLabel: 'Compartir PDF',
         rejectLabel: 'Ir al Gestor',
         accept: async () => {
-          await cotizacionService.compartirPdf(nuevaCotizacion.id, nuevaCotizacion.numeroCotizacion);
+          await cotizacionService.compartirPdf(nuevaCotizacion.id, nuevaCotizacion.numeroCotizacion, false);
+          await cotizacionService.actualizarEstado(nuevaCotizacion.id, { nuevoEstado: 'Emitida' });
           router.push('/cotizaciones');
         },
         reject: () => {

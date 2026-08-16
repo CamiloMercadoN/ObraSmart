@@ -149,7 +149,7 @@ namespace ObraSmart.Application.Services
             return Result<Cotizacion>.Success(cotizacion);
         }
 
-        public async Task<Result<byte[]>> ExportarPdfAsync(Guid id)
+        public async Task<Result<byte[]>> ExportarPdfAsync(Guid id, bool incluirRecursos)
         {
             var cotizacion = await _cotizacionRepository.GetByIdWithDependenciesAsync(id);
 
@@ -162,8 +162,23 @@ namespace ObraSmart.Application.Services
                 return Result<byte[]>.Failure("No autorizado para exportar esta cotización.", "UNAUTHORIZED");
             }
 
-            return await _pdfGeneratorService.GenerarCotizacionPdfAsync(cotizacion);
+            return await _pdfGeneratorService.GenerarCotizacionPdfAsync(cotizacion, incluirRecursos);
         }
+
+        public async Task<Result> EliminarAsync(Guid id)
+        {
+            var cotizacion = await _cotizacionRepository.GetByIdAsync(id);
+
+            if (cotizacion == null)
+                return Result.Failure("Cotización no encontrada.", "NOT_FOUND");
+
+            if (cotizacion.Estado != "Borrador")
+                return Result.Failure("Solo se pueden eliminar cotizaciones en estado Borrador.", "INVALID_STATE");
+
+            await _cotizacionRepository.DeleteAsync(cotizacion);
+            return Result.Success();
+        }
+
 
         // Método auxiliar para validar propiedad (dado que el UsuarioId reside en el Presupuesto)
         private async Task<Result<bool>> ValidarPropiedadCotizacion(Guid presupuestoId)

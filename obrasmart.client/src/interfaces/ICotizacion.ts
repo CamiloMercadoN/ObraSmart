@@ -6,6 +6,8 @@ export interface ICotizacion {
   fechaVencimiento: string;
   estado: string;
   archivoPdfUrl: string;
+  nombreProyecto: string;
+  clienteNombre: string;
 }
 
 export interface ICrearCotizacionRequest {

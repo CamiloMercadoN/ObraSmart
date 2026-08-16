@@ -41,6 +41,13 @@ export const cotizacionService = {
     return response.json();
   },
 
+  async eliminar(id: string): Promise<void> {
+    const response = await apiClient(`${BASE_URL}/${id}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) await manejarErrorHttp(response);
+  },
+
   async renovarVigencia(id: string, request: IRenovarVigenciaCotizacionRequest): Promise<ICotizacion> {
     const response = await apiClient(`${BASE_URL}/${id}/vigencia`, {
       method: 'PATCH',
@@ -51,8 +58,8 @@ export const cotizacionService = {
   },
 
   // Descarga tradicional del PDF
-  async descargarPdf(id: string, numeroCotizacion: string): Promise<void> {
-    const response = await apiClient(`${BASE_URL}/${id}/pdf`);
+  async descargarPdf(id: string, numeroCotizacion: string, incluirRecursos: boolean = false): Promise<void> {
+    const response = await apiClient(`${BASE_URL}/${id}/pdf?incluirRecursos=${incluirRecursos}`);
     if (!response.ok) await manejarErrorHttp(response);
 
     const blob = await response.blob();
@@ -67,8 +74,8 @@ export const cotizacionService = {
   },
 
   // Integración PWA - Compartir PDF nativo (WhatsApp, Correo, etc.)
-  async compartirPdf(id: string, numeroCotizacion: string): Promise<void> {
-    const response = await apiClient(`${BASE_URL}/${id}/pdf`);
+  async compartirPdf(id: string, numeroCotizacion: string, incluirRecursos: boolean = false): Promise<void> {
+    const response = await apiClient(`${BASE_URL}/${id}/pdf?incluirRecursos=${incluirRecursos}`);
     if (!response.ok) await manejarErrorHttp(response);
 
     const blob = await response.blob();

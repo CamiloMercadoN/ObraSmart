@@ -44,8 +44,9 @@
 
             <div class="app-surface-subtle flex justify-content-between align-items-start p-3 border-bottom-1 app-border-color border-round-top">
               <div class="flex flex-column pr-2">
-                <span class="app-text font-bold text-lg mb-1">{{ cot.numeroCotizacion }}</span>
-                <span class="app-text-muted text-sm"><i class="pi pi-calendar text-xs"></i> Emisión: {{ formatearFecha(cot.fechaEmision) }}</span>
+                <span class="app-text font-bold text-lg mb-1">{{ cot.numeroCotizacion }} - {{ cot.nombreProyecto }}</span>
+                <span class="app-text-muted text-sm"><i class="pi pi-user text-xs"></i> {{ cot.clienteNombre }}</span>
+                <span class="app-text-muted text-sm mt-1"><i class="pi pi-calendar text-xs"></i> Emisión: {{ formatearFecha(cot.fechaEmision) }}</span>
               </div>
               <Tag :value="cot.estado" :severity="obtenerSeveridad(cot.estado)" />
             </div>
@@ -59,8 +60,8 @@
 
             <div class="app-surface-subtle p-3 border-top-1 app-border-color flex gap-2 justify-content-end border-round-bottom">
               <Button icon="pi pi-sync" outlined rounded severity="info" v-tooltip.top="'Cambiar Estado'" @click="abrirModalEstado(cot)" />
-              <Button icon="pi pi-download" outlined rounded severity="secondary" v-tooltip.top="'Descargar PDF'" @click="descargar(cot)" />
-              <Button icon="pi pi-share-alt" outlined rounded severity="success" v-tooltip.top="'Compartir'" @click="compartir(cot)" />
+              <Button icon="pi pi-eye" outlined rounded severity="primary" v-tooltip.top="'Ver Cotización'" @click="abrirVistaPrevia(cot)" />
+              <Button icon="pi pi-trash" outlined rounded severity="danger" v-tooltip.top="'Eliminar'" v-if="cot.estado === 'Borrador'" @click="confirmarEliminacion(cot)" />
             </div>
           </div>
         </div>
@@ -84,6 +85,10 @@
       </template>
     </Dialog>
 
+    <VistaPreviaCotizacion v-if="cotizacionSeleccionada"
+                           v-model:visible="mostrarVistaPrevia"
+                           :cotizacion="cotizacionSeleccionada" />
+
   </div>
 </template>
 
@@ -91,6 +96,7 @@
   import { ref, onMounted, computed } from 'vue';
   import { cotizacionService } from '../../services/cotizacionService';
   import type { ICotizacion } from '../../interfaces/ICotizacion';
+  import VistaPreviaCotizacion from '../../components/VistaPreviaCotizacion.vue';
   import Button from 'primevue/button';
   import Message from 'primevue/message';
   import InputText from 'primevue/inputtext';
@@ -100,6 +106,8 @@
   import InputIcon from 'primevue/inputicon';
   import Dialog from 'primevue/dialog';
   import DatePicker from 'primevue/datepicker';
+  import { useConfirm } from 'primevue/useconfirm';
+  import { useToast } from 'primevue/usetoast';
 
   const cotizaciones = ref<ICotizacion[]>([]);
   const cargando = ref(false);
@@ -114,6 +122,9 @@
   const cotizacionEnEdicion = ref<ICotizacion | null>(null);
   const nuevoEstado = ref('');
   const nuevaVigencia = ref<Date | null>(null);
+
+  const confirm = useConfirm();
+  const toast = useToast();
 
   onMounted(async () => {
     await cargarCotizaciones();
@@ -134,12 +145,19 @@
     return cotizaciones.value.filter(c => {
       let coincideTexto = true;
       let coincideEstado = true;
+
       if (filtroTexto.value) {
-        coincideTexto = c.numeroCotizacion.toLowerCase().includes(filtroTexto.value.toLowerCase());
+        const termino = filtroTexto.value.toLowerCase();
+        coincideTexto =
+          c.numeroCotizacion.toLowerCase().includes(termino) ||
+          (c.clienteNombre?.toLowerCase().includes(termino) ?? false) ||
+          (c.nombreProyecto?.toLowerCase().includes(termino) ?? false);
       }
+
       if (filtroEstado.value) {
         coincideEstado = c.estado === filtroEstado.value;
       }
+
       return coincideTexto && coincideEstado;
     });
   });
@@ -200,4 +218,34 @@
       default: return 'secondary';
     }
   };
+  const mostrarVistaPrevia = ref(false);
+  const cotizacionSeleccionada = ref<ICotizacion | null>(null);
+
+  const abrirVistaPrevia = (cotizacion: ICotizacion) => {
+    cotizacionSeleccionada.value = cotizacion;
+    mostrarVistaPrevia.value = true;
+  };
+
+  const confirmarEliminacion = (cotizacion: ICotizacion) => {
+    confirm.require({
+      message: `¿Estás seguro de eliminar la cotización ${cotizacion.numeroCotizacion}?`,
+      header: 'Confirmar Eliminación',
+      icon: 'pi pi-exclamation-triangle',
+      rejectProps: { label: 'Cancelar', severity: 'secondary', outlined: true },
+      acceptProps: { label: 'Eliminar', severity: 'danger' },
+      accept: async () => {
+        try {
+          cargando.value = true;
+          await cotizacionService.eliminar(cotizacion.id);
+          await cargarCotizaciones();
+          toast.add({ severity: 'success', summary: 'Eliminada', detail: 'Cotización eliminada correctamente.', life: 3000 });
+        } catch (error: any) {
+          errorGlobal.value = error.message;
+        } finally {
+          cargando.value = false;
+        }
+      }
+    });
+  };
+
 </script>

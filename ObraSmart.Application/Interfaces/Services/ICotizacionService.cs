@@ -11,6 +11,7 @@ namespace ObraSmart.Application.Interfaces.Services
         Task<Result<Cotizacion>> ObtenerCotizacionPorIdAsync(Guid id);
         Task<Result<Cotizacion>> ActualizarEstadoAsync(Guid id, ActualizarEstadoCotizacionRequestDto request);
         Task<Result<Cotizacion>> RenovarVigenciaAsync(Guid id, RenovarVigenciaCotizacionRequestDto request);
-        Task<Result<byte[]>> ExportarPdfAsync(Guid id);
+        Task<Result<byte[]>> ExportarPdfAsync(Guid id, bool incluirRecursos);
+        Task<Result> EliminarAsync(Guid id);
     }
 }

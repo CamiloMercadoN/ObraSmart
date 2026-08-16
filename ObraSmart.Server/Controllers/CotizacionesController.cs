@@ -99,9 +99,9 @@ namespace ObraSmart.Server.Controllers
         }
 
         [HttpGet("{id}/pdf")]
-        public async Task<IActionResult> DescargarPdf(Guid id)
+        public async Task<IActionResult> DescargarPdf(Guid id, [FromQuery] bool incluirRecursos = false)
         {
-            var result = await _cotizacionService.ExportarPdfAsync(id);
+            var result = await _cotizacionService.ExportarPdfAsync(id, incluirRecursos);
 
             if (!result.IsSuccess)
             {
@@ -114,6 +114,14 @@ namespace ObraSmart.Server.Controllers
             var numeroCotizacion = cotizacionResult.IsSuccess ? cotizacionResult.Data!.NumeroCotizacion : id.ToString();
 
             return File(result.Data!, "application/pdf", $"Cotizacion-{numeroCotizacion}.pdf");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Eliminar(Guid id)
+        {
+            var result = await _cotizacionService.EliminarAsync(id);
+            if (!result.IsSuccess) return BadRequest(new { Error = result.ErrorMessage });
+            return Ok();
         }
     }
 }

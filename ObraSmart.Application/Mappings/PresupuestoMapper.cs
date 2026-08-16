@@ -54,6 +54,7 @@ namespace ObraSmart.Application.Mappings
                     PrecioUnitarioCalculado = i.PrecioUnitarioCalculado,
                     Subtotal = i.Subtotal,
                     UnidadMedidaId = i.UnidadMedidaId,
+                    UnidadMedidaNombre = i.UnidadMedida?.Nombre ?? string.Empty,
                     Recursos = i.Recursos.Select(r => new RecursoItemPresupuestoDto
                     {
                         Id = r.Id,
@@ -62,7 +63,8 @@ namespace ObraSmart.Application.Mappings
                         Cantidad = r.Cantidad,
                         PrecioUnitarioCongelado = r.PrecioUnitarioCongelado,
                         CostoTotalRecurso = r.CostoTotalRecurso,
-                        UnidadMedidaId = r.UnidadMedidaId
+                        UnidadMedidaId = r.UnidadMedidaId,
+                        UnidadMedidaNombre = r.UnidadMedida?.Nombre ?? string.Empty
                     }).ToList()
                 }).ToList()
             };

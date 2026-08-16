@@ -15,7 +15,9 @@ namespace ObraSmart.Application.Mappings
                 FechaEmision = cotizacion.FechaEmision,
                 FechaVencimiento = cotizacion.FechaVencimiento,
                 Estado = cotizacion.Estado,
-                ArchivoPdfUrl = cotizacion.ArchivoPdfUrl
+                ArchivoPdfUrl = cotizacion.ArchivoPdfUrl,
+                NombreProyecto = cotizacion.Presupuesto?.NombreProyecto ?? "Sin Proyecto",
+                ClienteNombre = cotizacion.Presupuesto?.Cliente?.Nombre ?? "Sin Cliente"
             };
         }
     }

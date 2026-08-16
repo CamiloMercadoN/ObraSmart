@@ -7,7 +7,8 @@ import PrimeVue from 'primevue/config';
 import ConfirmationService from 'primevue/confirmationservice';
 import Aura from '@primeuix/themes/aura';
 import Tooltip from 'primevue/tooltip';
-// import 'primeflex/primeflex.css';
+import ToastService from 'primevue/toastservice';
+
 import 'primeicons/primeicons.css';
 import './assets/main.css';
 
@@ -31,5 +32,6 @@ app.use(PrimeVue, {
   }
 });
 app.use(ConfirmationService);
+app.use(ToastService);
 
 app.mount('#app');

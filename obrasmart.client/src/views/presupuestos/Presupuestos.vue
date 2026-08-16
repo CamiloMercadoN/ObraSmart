@@ -138,6 +138,13 @@
             <!-- Acciones -->
             <div class="app-surface-subtle p-3 border-top-1 app-border-color flex gap-2 justify-content-end border-round-bottom">
 
+              <Button icon="pi pi-send"
+                      outlined
+                      rounded
+                      severity="info"
+                      v-tooltip.top="'Generar Cotización'"
+                      @click="abrirModalCotizacion(presupuesto)"
+                      :disabled="presupuesto.esPlantilla"/>
               <Button icon="pi pi-pencil"
                       outlined
                       rounded
@@ -152,6 +159,7 @@
                       severity="secondary"
                       @click="duplicarPresupuesto(presupuesto.id!)"
                       v-tooltip.top="'Duplicar a nuevo'" />
+
 
               <Button icon="pi pi-trash"
                       outlined
@@ -168,6 +176,10 @@
     </div>
   </div>
   <ConfirmDialog />
+  <GenerarCotizacionDialog v-if="presupuestoParaCotizar"
+                           v-model:visible="mostrarModalCotizacion"
+                           :presupuestoId="presupuestoParaCotizar.id"
+                           @generada="onCotizacionGenerada" />
 </template>
 
 <script setup lang="ts">
@@ -175,6 +187,7 @@
   import { useRouter } from 'vue-router';
   import { presupuestoService } from '../../services/presupuestoService';
   import type { IPresupuesto } from '../../interfaces/IPresupuesto';
+  import GenerarCotizacionDialog from '../../components/GenerarCotizacionDialog.vue';
 
   import Button from 'primevue/button';
   import Message from 'primevue/message';
@@ -185,9 +198,11 @@
   import InputIcon from 'primevue/inputicon';
   import { useConfirm } from 'primevue/useconfirm';
   import ConfirmDialog from 'primevue/confirmdialog';
+  import { useToast } from 'primevue/usetoast';
 
   const router = useRouter();
   const confirm = useConfirm();
+  const toast = useToast();
 
   const presupuestos = ref<IPresupuesto[]>([]);
   const cargando = ref(false);
@@ -198,10 +213,17 @@
   const filtroEstado = ref<string | null>(null);
   const estadosPermitidos = ref(['Borrador', 'Emitido', 'Aprobado', 'Rechazado']);
   const mostrarFiltros = ref(window.innerWidth > 768);
+  const mostrarModalCotizacion = ref(false);
+  const presupuestoParaCotizar = ref<any>(null);
 
   onMounted(() => {
     cargarPresupuestos();
   });
+
+  const onCotizacionGenerada = () => {
+    cargarPresupuestos();
+    mostrarModalCotizacion.value = false;
+  };
 
   const cargarPresupuestos = async () => {
     cargando.value = true;
@@ -282,6 +304,15 @@
       case 'Rechazado': return 'danger';
       default: return 'secondary';
     }
+  };
+
+  const abrirModalCotizacion = (presupuesto: any) => {
+    if (!presupuesto.clienteId) {
+      toast.add({ severity: 'warn', summary: 'Falta Cliente', detail: 'Este presupuesto no tiene un cliente asignado. Edítalo primero.', life: 4000 });
+      return;
+    }
+    presupuestoParaCotizar.value = presupuesto;
+    mostrarModalCotizacion.value = true;
   };
 </script>
 

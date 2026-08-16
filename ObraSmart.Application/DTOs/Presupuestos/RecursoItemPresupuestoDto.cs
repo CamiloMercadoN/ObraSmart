@@ -10,5 +10,6 @@ namespace ObraSmart.Application.DTOs.Presupuestos
         public decimal PrecioUnitarioCongelado { get; set; }
         public decimal CostoTotalRecurso { get; set; }
         public int UnidadMedidaId { get; set; }
+        public string UnidadMedidaNombre { get; set; } = string.Empty;
     }
 }

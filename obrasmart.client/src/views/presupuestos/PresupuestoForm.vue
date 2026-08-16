@@ -11,8 +11,8 @@
       </div>
       <div class="flex gap-2 w-full md:w-auto">
         <Button label="Cancelar" severity="secondary" outlined @click="volver" class="flex-1 md:flex-none" />
-        <Button label="Guardar" icon="pi pi-save" @click="guardar" :loading="guardando" class="flex-1 md:flex-none" />
-        <Button label="Generar Cotización" icon="pi pi-send" severity="info" @click="abrirModalCotizacion" :disabled="!formulario.id" />
+        <Button label="Guardar" icon="pi pi-save" @click="guardarYVolver" :loading="guardando" class="flex-1 md:flex-none" />
+        <Button label="Guardar y Cotizar" icon="pi pi-send" severity="info" @click="guardarYCotizar" :disabled="!formulario.clienteId" />
       </div>
     </div>
 
@@ -203,8 +203,9 @@
       </template>
     </Dialog>
 
-    <GenerarCotizacionDialog v-model:visible="mostrarModalCotizacion"
-                             :presupuestoId="formulario.id!" />
+    <GenerarCotizacionDialog v-if="formulario.id"
+                             v-model:visible="mostrarModalCotizacion"
+                             :presupuestoId="formulario.id" />
 
   </div>
 </template>
@@ -452,23 +453,35 @@
     }
   };
 
-  const guardar = async () => {
+  const guardar = async (): Promise<boolean> => {
     if (!formulario.value.nombreProyecto || formulario.value.items.length === 0) {
       errorGlobal.value = "El proyecto requiere nombre y al menos un ítem.";
-      return;
+      return false;
     }
 
     guardando.value = true;
     errorGlobal.value = '';
 
     try {
-      if (esEdicion.value) await presupuestoService.actualizar(formulario.value.id!, formulario.value);
-      else await presupuestoService.crear(formulario.value);
-      volver();
+      if (esEdicion.value) {
+        await presupuestoService.actualizar(formulario.value.id!, formulario.value);
+      } else {
+        const nuevoPresupuesto = await presupuestoService.crear(formulario.value);
+        formulario.value.id = nuevoPresupuesto.id;
+      }
+      return true;
     } catch (err: any) {
       errorGlobal.value = err.message;
+      return false;
     } finally {
       guardando.value = false;
+    }
+  };
+
+  const guardarYVolver = async () => {
+    const guardadoExitoso = await guardar();
+    if (guardadoExitoso) {
+      volver();
     }
   };
 
@@ -493,15 +506,17 @@
 
   const mostrarModalCotizacion = ref(false);
 
-  const abrirModalCotizacion = () => {
-    if (!formulario.value.id) {
-      errorGlobal.value = "Debes guardar el presupuesto antes de generar una cotización.";
-      return;
-    }
+  const guardarYCotizar = async () => {
     if (!formulario.value.clienteId) {
       errorGlobal.value = "Debes asignar un cliente al presupuesto para cotizar.";
       return;
     }
-    mostrarModalCotizacion.value = true;
+
+    const guardadoExitoso = await guardar();
+
+    // Si guardó bien y ya tenemos el ID, abrimos el modal SIN redirigir
+    if (guardadoExitoso && formulario.value.id) {
+      mostrarModalCotizacion.value = true;
+    }
   };
 </script>

@@ -6,6 +6,7 @@ export interface IRecursoItemPresupuesto {
   precioUnitarioCongelado: number;
   costoTotalRecurso?: number; // Calculado por el backend
   unidadMedidaId: number | null;
+  unidadMedidaNombre?: string;
 }
 
 export interface IItemPresupuesto {
@@ -16,6 +17,7 @@ export interface IItemPresupuesto {
   precioUnitarioCalculado?: number; // Calculado por el backend
   subtotal?: number; // Calculado por el backend
   unidadMedidaId: number | null;
+  unidadMedidaNombre?: string;
   recursos: IRecursoItemPresupuesto[];
 }
 

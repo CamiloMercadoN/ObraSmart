@@ -5,6 +5,6 @@ namespace ObraSmart.Application.Interfaces.Services
 {
     public interface IPdfGeneratorService
     {
-        Task<Result<byte[]>> GenerarCotizacionPdfAsync(Cotizacion cotizacion);
+        Task<Result<byte[]>> GenerarCotizacionPdfAsync(Cotizacion cotizacion, bool incluirRecursos);
     }
 }

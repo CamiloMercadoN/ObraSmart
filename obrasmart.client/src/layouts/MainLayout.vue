@@ -1,5 +1,7 @@
 <template>
   <div class="app-shell flex flex-column">
+    <Toast />
+    <ConfirmDialog />
 
     <div class="app-topbar flex justify-content-between align-items-center px-4 py-3">
       <div class="flex align-items-center gap-3">
@@ -33,6 +35,8 @@
   import Drawer from 'primevue/drawer';
   import Menu from 'primevue/menu';
   import Button from 'primevue/button';
+  import Toast from 'primevue/toast';
+  import ConfirmDialog from 'primevue/confirmdialog';
 
   const router = useRouter();
   const authStore = useAuthStore();

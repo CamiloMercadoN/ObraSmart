@@ -23,6 +23,9 @@ namespace ObraSmart.Infrastructure.Repositories
                             .Include(p => p.Cliente)
                             .Include(p => p.Items)
                                 .ThenInclude(i => i.Recursos)
+                                    .ThenInclude(i => i.UnidadMedida)
+                            .Include(p => p.Items)
+                                .ThenInclude(i => i.UnidadMedida)
                             .FirstOrDefaultAsync(p => p.Id == id);
         }
 
