@@ -213,7 +213,7 @@ namespace ObraSmart.Application.Tests.Services
             result.IsSuccess.Should().BeFalse();
             result.ErrorCode.Should().Be("INVALID_STATE");
             result.ErrorMessage.Should()
-                .Be("Solo se pueden editar presupuestos en estado Borrador.");
+                .Be("Solo se pueden editar presupuestos en estado Borrador o Rechazado.");
 
             // La entidad debe permanecer sin modificaciones.
             presupuestoExistente.NombreProyecto.Should()

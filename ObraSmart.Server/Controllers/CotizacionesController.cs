@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ObraSmart.Application.DTOs.Cotizaciones;
 using ObraSmart.Application.Interfaces.Services;
@@ -8,6 +9,7 @@ namespace ObraSmart.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CotizacionesController(
         ICotizacionService _cotizacionService,
         IValidator<CrearCotizacionRequestDto> _crearValidator,

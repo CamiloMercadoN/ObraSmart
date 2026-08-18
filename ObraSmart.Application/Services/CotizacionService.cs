@@ -228,6 +228,9 @@ namespace ObraSmart.Application.Services
             if (cotizacion.Estado != "Borrador")
                 return Result.Failure("Solo se pueden eliminar cotizaciones en estado Borrador.", "INVALID_STATE");
 
+            Result<bool> validacionPropiedad = await ValidarPropiedadCotizacion(cotizacion.PresupuestoId);
+            if (!validacionPropiedad.IsSuccess) return Result<Cotizacion>.Failure(validacionPropiedad.ErrorMessage ?? "", validacionPropiedad.ErrorCode ?? "");
+
             await _cotizacionRepository.DeleteAsync(cotizacion);
             return Result.Success();
         }

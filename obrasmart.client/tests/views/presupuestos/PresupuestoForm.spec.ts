@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { mount, flushPromises } from '@vue/test-utils';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import PresupuestoForm from '@/views/presupuestos/PresupuestoForm.vue';
 import type { IPresupuesto } from '@/interfaces/IPresupuesto';
 
@@ -126,23 +126,134 @@ describe('PresupuestoForm.vue', () => {
     };
 
     /*
-     * Entregamos una copia para que el componente pueda eliminar
-     * identificadores sin modificar la constante usada por la prueba.
+     * Entregamos una copia para evitar que las transformaciones
+     * realizadas por el componente modifiquen el objeto utilizado
+     * como referencia en la prueba.
      */
     (presupuestoService.obtenerPorId as any).mockResolvedValue(
       JSON.parse(JSON.stringify(presupuestoOriginal))
     );
 
-    (presupuestoService.crear as any).mockResolvedValue(
-      'presupuesto-copia-456'
+    /*
+     * Las comprobaciones del payload se realizan exactamente en el
+     * momento en que el componente llama al servicio de creación.
+     *
+     * Esto es importante porque, una vez creado el presupuesto,
+     * PresupuestoForm asigna al formulario el nuevo ID retornado
+     * por el backend.
+     */
+    (presupuestoService.crear as any).mockImplementationOnce(
+      async (presupuesto: IPresupuesto) => {
+        // El nuevo presupuesto no debe reutilizar el ID original.
+        expect(presupuesto.id).toBeUndefined();
+
+        expect(presupuesto.nombreProyecto)
+          .toBe('Instalación sanitaria vivienda (Copia)');
+
+        expect(presupuesto.clienteId)
+          .toBe('cliente-123');
+
+        expect(presupuesto.items)
+          .toHaveLength(2);
+
+        // Ningún ítem debe conservar su identificador original.
+        expect(
+          presupuesto.items.every(
+            item => item.id === undefined
+          )
+        ).toBe(true);
+
+        // Ningún recurso debe conservar su identificador original.
+        expect(
+          presupuesto.items.every(
+            item => item.recursos.every(
+              recurso => recurso.id === undefined
+            )
+          )
+        ).toBe(true);
+
+        const itemInstalacion = presupuesto.items.find(
+          item =>
+            item.descripcion === 'Instalación de lavaplatos'
+        );
+
+        expect(itemInstalacion).toBeDefined();
+
+        /*
+         * Se conserva la referencia funcional al APU de origen,
+         * pero no el ID del ítem perteneciente al presupuesto original.
+         */
+        expect(itemInstalacion!.estructuraAPUOrigenId)
+          .toBe('apu-origen-123');
+
+        expect(itemInstalacion!.cantidadItem)
+          .toBe(2);
+
+        expect(itemInstalacion!.recursos)
+          .toHaveLength(2);
+
+        const material = itemInstalacion!.recursos.find(
+          recurso =>
+            recurso.descripcionCongelada ===
+            'Tubería PPR 20 mm'
+        );
+
+        expect(material).toBeDefined();
+        expect(material!.id).toBeUndefined();
+        expect(material!.tipoInsumo).toBe('Material');
+        expect(material!.cantidad).toBe(2);
+        expect(material!.precioUnitarioCongelado).toBe(1000);
+
+        const manoObra = itemInstalacion!.recursos.find(
+          recurso =>
+            recurso.descripcionCongelada ===
+            'Maestro gasfíter'
+        );
+
+        expect(manoObra).toBeDefined();
+        expect(manoObra!.id).toBeUndefined();
+        expect(manoObra!.cantidad).toBe(1);
+        expect(manoObra!.precioUnitarioCongelado).toBe(2000);
+
+        /*
+         * Comprobación explícita de independencia:
+         * ninguno de los IDs originales debe estar presente
+         * en el payload enviado al backend.
+         */
+        const payloadSerializado = JSON.stringify(presupuesto);
+
+        expect(payloadSerializado)
+          .not.toContain('presupuesto-original-123');
+
+        expect(payloadSerializado)
+          .not.toContain('item-original-1');
+
+        expect(payloadSerializado)
+          .not.toContain('item-original-2');
+
+        expect(payloadSerializado)
+          .not.toContain('recurso-original-1');
+
+        expect(payloadSerializado)
+          .not.toContain('recurso-original-2');
+
+        expect(payloadSerializado)
+          .not.toContain('recurso-original-3');
+
+        /*
+         * Simulamos el ID que devuelve el backend después
+         * de crear correctamente el nuevo presupuesto.
+         */
+        return 'presupuesto-copia-456';
+      }
     );
 
     const wrapper = mount(PresupuestoForm, {
       global: {
         stubs: {
           /*
-           * Se utiliza un botón simplificado real para poder disparar
-           * el evento click del botón Guardar.
+           * Botón simplificado que permite disparar realmente
+           * el evento click utilizado por PresupuestoForm.
            */
           Button: {
             props: ['label'],
@@ -160,7 +271,8 @@ describe('PresupuestoForm.vue', () => {
           InputText: true,
           Select: true,
           InputNumber: true,
-          Dialog: true
+          Dialog: true,
+          GenerarCotizacionDialog: true
         }
       }
     });
@@ -177,8 +289,8 @@ describe('PresupuestoForm.vue', () => {
       .toHaveBeenCalledWith(presupuestoOriginalId);
 
     /*
-     * Aunque se cargó un presupuesto existente, la pantalla debe
-     * funcionar como creación y no como edición.
+     * Aunque se cargó un presupuesto existente, la pantalla
+     * debe funcionar como creación y no como edición.
      */
     expect(wrapper.text()).toContain('Nuevo Presupuesto');
     expect(wrapper.text()).not.toContain('Editar Presupuesto');
@@ -197,105 +309,229 @@ describe('PresupuestoForm.vue', () => {
 
     expect(presupuestoService.actualizar)
       .not.toHaveBeenCalled();
+  });
 
-    const presupuestoEnviado = (
-      presupuestoService.crear as any
-    ).mock.calls[0][0] as IPresupuesto;
+  it('GuardarYCotizar_ConPresupuestoNuevo_DebeCrearYMostrarDialogoConNuevoId', async () => {
+    // Arrange
+    const nuevoPresupuestoId = 'presupuesto-nuevo-789';
+    const routerPushMock = vi.fn();
 
-    // El nuevo presupuesto no debe reutilizar el ID del original.
-    expect(presupuestoEnviado.id).toBeUndefined();
+    (useRoute as any).mockReturnValue({
+      params: {},
+      query: {}
+    });
 
-    expect(presupuestoEnviado.nombreProyecto)
-      .toBe('Instalación sanitaria vivienda (Copia)');
+    (useRouter as any).mockReturnValue({
+      push: routerPushMock
+    });
 
-    expect(presupuestoEnviado.clienteId)
-      .toBe('cliente-123');
-
-    expect(presupuestoEnviado.items)
-      .toHaveLength(2);
-
-    // Ningún ítem debe conservar su identificador original.
-    expect(
-      presupuestoEnviado.items.every(
-        item => item.id === undefined
-      )
-    ).toBe(true);
-
-    // Ningún recurso debe conservar su identificador original.
-    expect(
-      presupuestoEnviado.items.every(
-        item => item.recursos.every(
-          recurso => recurso.id === undefined
-        )
-      )
-    ).toBe(true);
-
-    const itemInstalacion = presupuestoEnviado.items.find(
-      item =>
-        item.descripcion === 'Instalación de lavaplatos'
+    const { presupuestoService } = await import(
+      '@/services/presupuestoService'
     );
-
-    expect(itemInstalacion).toBeDefined();
 
     /*
-     * Se conserva la referencia funcional al APU de origen,
-     * pero no el ID del ítem del presupuesto anterior.
+     * Verificamos el estado del presupuesto exactamente
+     * cuando se envía al servicio de creación.
      */
-    expect(itemInstalacion!.estructuraAPUOrigenId)
-      .toBe('apu-origen-123');
+    (presupuestoService.crear as any).mockImplementationOnce(
+      async (presupuesto: IPresupuesto) => {
+        expect(presupuesto.id).toBeUndefined();
 
-    expect(itemInstalacion!.cantidadItem)
-      .toBe(2);
+        expect(presupuesto.nombreProyecto)
+          .toBe('Instalación sanitaria nueva');
 
-    expect(itemInstalacion!.recursos)
-      .toHaveLength(2);
+        expect(presupuesto.clienteId)
+          .toBe('cliente-123');
 
-    const material = itemInstalacion!.recursos.find(
-      recurso =>
-        recurso.descripcionCongelada ===
-        'Tubería PPR 20 mm'
+        expect(presupuesto.items)
+          .toHaveLength(1);
+
+        return nuevoPresupuestoId;
+      }
     );
-
-    expect(material).toBeDefined();
-    expect(material!.id).toBeUndefined();
-    expect(material!.tipoInsumo).toBe('Material');
-    expect(material!.cantidad).toBe(2);
-    expect(material!.precioUnitarioCongelado).toBe(1000);
-
-    const manoObra = itemInstalacion!.recursos.find(
-      recurso =>
-        recurso.descripcionCongelada ===
-        'Maestro gasfíter'
-    );
-
-    expect(manoObra).toBeDefined();
-    expect(manoObra!.id).toBeUndefined();
-    expect(manoObra!.cantidad).toBe(1);
-    expect(manoObra!.precioUnitarioCongelado).toBe(2000);
 
     /*
-     * Comprobación explícita de independencia:
-     * ninguno de los IDs originales aparece en el payload.
+     * jsdom no implementa scrollIntoView.
+     * El componente lo utiliza después de agregar un ítem manual.
      */
-    const payloadSerializado =
-      JSON.stringify(presupuestoEnviado);
+    const scrollIntoViewMock = vi.fn();
 
-    expect(payloadSerializado)
-      .not.toContain('presupuesto-original-123');
+    Object.defineProperty(
+      HTMLElement.prototype,
+      'scrollIntoView',
+      {
+        configurable: true,
+        value: scrollIntoViewMock
+      }
+    );
 
-    expect(payloadSerializado)
-      .not.toContain('item-original-1');
+    const wrapper = mount(PresupuestoForm, {
+      global: {
+        stubs: {
+          Button: {
+            props: ['label', 'disabled'],
+            emits: ['click'],
+            template: `
+            <button
+              type="button"
+              :data-label="label"
+              :disabled="disabled"
+              @click="$emit('click')">
+              {{ label }}
+            </button>
+          `
+          },
 
-    expect(payloadSerializado)
-      .not.toContain('item-original-2');
+          /*
+           * Input simplificado con soporte real de v-model.
+           */
+          InputText: {
+            props: ['modelValue'],
+            emits: ['update:modelValue'],
+            template: `
+            <input
+              v-bind="$attrs"
+              :value="modelValue ?? ''"
+              @input="$emit(
+                'update:modelValue',
+                $event.target.value
+              )"
+            />
+          `
+          },
 
-    expect(payloadSerializado)
-      .not.toContain('recurso-original-1');
+          /*
+           * Para esta prueba basta tratar Select como un input.
+           * Nos interesa modificar formulario.clienteId.
+           */
+          Select: {
+            props: ['modelValue'],
+            emits: ['update:modelValue'],
+            template: `
+            <input
+              v-bind="$attrs"
+              :value="modelValue ?? ''"
+              @input="$emit(
+                'update:modelValue',
+                $event.target.value
+              )"
+            />
+          `
+          },
 
-    expect(payloadSerializado)
-      .not.toContain('recurso-original-2');
+          InputNumber: true,
+          Message: true,
+          Dialog: true,
 
-    expect(payloadSerializado)
-      .not.toContain('recurso-original-3');
+          /*
+           * Este stub nos permite comprobar que el diálogo
+           * recibe el ID retornado por presupuestoService.crear().
+           */
+          GenerarCotizacionDialog: {
+            props: ['visible', 'presupuestoId'],
+            emits: ['update:visible'],
+            template: `
+            <div
+              v-if="visible"
+              data-testid="generar-cotizacion-dialog"
+              :data-presupuesto-id="presupuestoId">
+            </div>
+          `
+          }
+        }
+      }
+    });
+
+    await flushPromises();
+    await wrapper.vm.$nextTick();
+
+    /*
+     * Control inicial:
+     * estamos creando un presupuesto completamente nuevo.
+     */
+    expect(wrapper.text())
+      .toContain('Nuevo Presupuesto');
+
+    expect(wrapper.text())
+      .not.toContain('Editar Presupuesto');
+
+    expect(presupuestoService.obtenerPorId)
+      .not.toHaveBeenCalled();
+
+    // Ingresamos nombre del proyecto.
+    await wrapper.get('#proyecto')
+      .setValue('Instalación sanitaria nueva');
+
+    // Asignamos cliente.
+    await wrapper.get('#cliente')
+      .setValue('cliente-123');
+
+    await wrapper.vm.$nextTick();
+
+    /*
+     * Agregamos el mínimo requerido para que guardar()
+     * considere válido el presupuesto.
+     */
+    const botonNuevoItem = wrapper.get(
+      '[data-label="Nuevo Ítem Ad-Hoc"]'
+    );
+
+    await botonNuevoItem.trigger('click');
+
+    await flushPromises();
+    await wrapper.vm.$nextTick();
+
+    /*
+     * El botón debe estar habilitado porque ya existe
+     * un cliente seleccionado.
+     */
+    const botonGuardarYCotizar = wrapper.get(
+      '[data-label="Guardar y Cotizar"]'
+    );
+
+    expect(
+      botonGuardarYCotizar.attributes('disabled')
+    ).toBeUndefined();
+
+    // Act
+    await botonGuardarYCotizar.trigger('click');
+
+    await flushPromises();
+    await wrapper.vm.$nextTick();
+
+    // Assert
+
+    /*
+     * Como es un presupuesto nuevo, debe utilizar crear()
+     * y nunca actualizar().
+     */
+    expect(presupuestoService.crear)
+      .toHaveBeenCalledTimes(1);
+
+    expect(presupuestoService.actualizar)
+      .not.toHaveBeenCalled();
+
+    /*
+     * Guardar y Cotizar no debe regresar al listado.
+     */
+    expect(routerPushMock)
+      .not.toHaveBeenCalled();
+
+    /*
+     * Después de crear el presupuesto debe aparecer
+     * GenerarCotizacionDialog.
+     */
+    const dialogo = wrapper.get(
+      '[data-testid="generar-cotizacion-dialog"]'
+    );
+
+    /*
+     * La parte fundamental:
+     * el diálogo debe recibir exactamente el ID que
+     * presupuestoService.crear() acaba de devolver.
+     */
+    expect(
+      dialogo.attributes('data-presupuesto-id')
+    ).toBe(nuevoPresupuestoId);
   });
 });
