@@ -119,6 +119,19 @@ namespace ObraSmart.Application.Services
             }
 
             cotizacion.Estado = request.NuevoEstado;
+
+            // SINCRONIZACIÓN DE PRESUPUESTO
+            var presupuesto = await _presupuestoRepository.GetByIdAsync(cotizacion.PresupuestoId);
+            if (presupuesto != null)
+            {
+                if (request.NuevoEstado == "Emitida") presupuesto.Estado = "Emitido";
+                else if (request.NuevoEstado == "Aceptada") presupuesto.Estado = "Aprobado";
+                else if (request.NuevoEstado == "Rechazada") presupuesto.Estado = "Rechazado";
+
+                await _presupuestoRepository.UpdateAsync(presupuesto);
+            }
+
+
             await _cotizacionRepository.UpdateAsync(cotizacion);
 
             return Result<Cotizacion>.Success(cotizacion);
@@ -156,13 +169,53 @@ namespace ObraSmart.Application.Services
             if (cotizacion == null)
                 return Result<byte[]>.Failure("Cotización no encontrada.", "NOT_FOUND");
 
-            var usuarioId = _currentUserService.GetUserId();
-            if (usuarioId == null || cotizacion.Presupuesto?.UsuarioId != usuarioId.Value)
+            var usuarioId = cotizacion.Presupuesto!.UsuarioId.ToString();
+            string fileName = $"Cotizacion_{cotizacion.NumeroCotizacion}_{id}.pdf";
+            string rutaRelativa = $"Cotizaciones/{usuarioId}/{fileName}";
+            string baseStoragePath = Path.Combine(Directory.GetCurrentDirectory(), "Storage");
+            string absolutePath = Path.Combine(baseStoragePath, "Cotizaciones", usuarioId, fileName);
+
+            // Reconstruimos la ruta absoluta basada en el registro relativo de la BD
+            if (!string.IsNullOrEmpty(cotizacion.ArchivoPdfUrl))
             {
-                return Result<byte[]>.Failure("No autorizado para exportar esta cotización.", "UNAUTHORIZED");
+                // Reemplazamos el '/' estándar por el separador del SO actual (\ en Windows, / en Linux)
+                string rutaHistoricaAbsoluta = Path.Combine(Directory.GetCurrentDirectory(), "Storage", cotizacion.ArchivoPdfUrl.Replace("/", Path.DirectorySeparatorChar.ToString()));
+
+                if (File.Exists(rutaHistoricaAbsoluta))
+                {
+                    var bytes = await File.ReadAllBytesAsync(rutaHistoricaAbsoluta);
+                    return Result<byte[]>.Success(bytes);
+                }
             }
 
-            return await _pdfGeneratorService.GenerarCotizacionPdfAsync(cotizacion, incluirRecursos);
+            // Si es Borrador o el archivo no existe, generamos el PDF
+            var pdfResult = await _pdfGeneratorService.GenerarCotizacionPdfAsync(cotizacion, incluirRecursos);
+            if (!pdfResult.IsSuccess) return pdfResult;
+
+            // Guardado físico
+            Directory.CreateDirectory(Path.GetDirectoryName(absolutePath)!);
+            await File.WriteAllBytesAsync(absolutePath, pdfResult.Data);
+
+            // Actualización en BD guardando ruta relativa
+            cotizacion.ArchivoPdfUrl = rutaRelativa;
+
+            if (cotizacion.Estado == "Borrador")
+            {
+                cotizacion.Estado = "Emitida";
+                var presupuesto = await _presupuestoRepository.GetByIdAsync(cotizacion.PresupuestoId);
+
+                if (presupuesto != null && presupuesto.Estado == "Borrador")
+                {
+                    presupuesto.Estado = "Emitido";
+                    await _presupuestoRepository.UpdateAsync(presupuesto);
+                }
+                        
+            }
+
+            cotizacion.Presupuesto = null;
+            await _cotizacionRepository.UpdateAsync(cotizacion);
+
+            return Result<byte[]>.Success(pdfResult.Data);
         }
 
         public async Task<Result> EliminarAsync(Guid id)

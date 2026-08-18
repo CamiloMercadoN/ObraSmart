@@ -84,15 +84,22 @@
       errorCotizacion.value = '';
       tieneVigentes.value = false;
 
-      // EVALUACIÓN DE COTIZACIONES VIGENTES
+      // EVALUACIÓN DE COTIZACIONES VIGENTES O EN CURSO
       try {
         const historial = await cotizacionService.obtenerTodas();
         const hoy = new Date();
-        tieneVigentes.value = historial.some(c =>
-          c.presupuestoId === props.presupuestoId &&
-          c.estado === 'Emitida' &&
-          new Date(c.fechaVencimiento) >= hoy
-        );
+
+        tieneVigentes.value = historial.some(c => {
+          if (c.presupuestoId !== props.presupuestoId) return false;
+
+          // Si ya está Aceptada o hay un Borrador pendiente, lanzamos alerta
+          if (c.estado === 'Aceptada' || c.estado === 'Borrador') return true;
+
+          // Si está Emitida, validamos que aún no venza
+          if (c.estado === 'Emitida' && new Date(c.fechaVencimiento) >= hoy) return true;
+
+          return false;
+        });
       } catch (e) { }
     }
   });
@@ -115,6 +122,7 @@
       };
 
       const nuevaCotizacion = await cotizacionService.crear(request);
+
       cerrarDialogo();
       emit('generada');
 
@@ -125,21 +133,24 @@
         life: 4000
       });
 
-      confirm.require({
-        message: `¿Deseas descargar o compartir la cotización ${nuevaCotizacion.numeroCotizacion} ahora mismo?`,
-        header: 'Siguiente paso',
-        icon: 'pi pi-send',
-        acceptLabel: 'Compartir PDF',
-        rejectLabel: 'Ir al Gestor',
-        accept: async () => {
-          await cotizacionService.compartirPdf(nuevaCotizacion.id, nuevaCotizacion.numeroCotizacion, false);
-          await cotizacionService.actualizarEstado(nuevaCotizacion.id, { nuevoEstado: 'Emitida' });
-          router.push('/cotizaciones');
-        },
-        reject: () => {
-          router.push('/cotizaciones');
-        }
-      });
+      setTimeout(() => {
+        confirm.require({
+          message: `¿Deseas descargar o compartir la cotización ${nuevaCotizacion.numeroCotizacion} ahora mismo?`,
+          header: 'Siguiente paso',
+          icon: 'pi pi-send',
+          acceptLabel: 'Compartir PDF',
+          rejectLabel: 'Ir al Gestor',
+          accept: async () => {
+            confirm.close();
+            await cotizacionService.compartirPdf(nuevaCotizacion.id, nuevaCotizacion.numeroCotizacion, false);
+            router.push('/cotizaciones');
+          },
+          reject: () => {
+            confirm.close();
+            router.push('/cotizaciones');
+          }
+        });
+      }, 300);
 
     } catch (err: any) {
       errorCotizacion.value = err.message;

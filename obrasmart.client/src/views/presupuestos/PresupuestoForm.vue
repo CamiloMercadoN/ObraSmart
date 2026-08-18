@@ -466,8 +466,8 @@
       if (esEdicion.value) {
         await presupuestoService.actualizar(formulario.value.id!, formulario.value);
       } else {
-        const nuevoPresupuesto = await presupuestoService.crear(formulario.value);
-        formulario.value.id = nuevoPresupuesto.id;
+        const idNuevoPresupuesto = await presupuestoService.crear(formulario.value);
+        formulario.value.id = idNuevoPresupuesto;
       }
       return true;
     } catch (err: any) {

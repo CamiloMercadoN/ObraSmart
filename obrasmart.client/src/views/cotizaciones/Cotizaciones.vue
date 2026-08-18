@@ -87,7 +87,8 @@
 
     <VistaPreviaCotizacion v-if="cotizacionSeleccionada"
                            v-model:visible="mostrarVistaPrevia"
-                           :cotizacion="cotizacionSeleccionada" />
+                           :cotizacion="cotizacionSeleccionada"
+                           @recargar="cargarCotizaciones"/>
 
   </div>
 </template>

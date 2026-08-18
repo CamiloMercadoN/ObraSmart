@@ -32,15 +32,16 @@ export const apiClient = async (endpoint: string, options: RequestInit = {}): Pr
 
 export const manejarErrorHttp = async (response: Response) => {
   if (response.status === 400) {
+    let mensaje = "Error en la solicitud. Verifica los datos enviados.";
+
     try {
       const data = await response.json();
-      // Buscamos 'Error' o 'error' según cómo lo serialice el backend
-      const mensaje = data.Error || data.error || data.errorMessage || "Error de validación en la solicitud.";
-      throw new Error(mensaje);
+      mensaje = data?.Error || data?.error || data?.errorMessage || data?.message || "Error de validación en la solicitud.";
     } catch (e) {
-      // Si falla al parsear el JSON, lanzamos un error por defecto
-      throw new Error("Error en la solicitud. Verifica los datos enviados.");
     }
+
+    // Lanzamos el error FUERA del try-catch para que llegue al componente Vue
+    throw new Error(mensaje);
   }
 
   if (response.status === 401) throw new Error("No autorizado. Inicia sesión nuevamente.");

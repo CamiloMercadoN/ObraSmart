@@ -73,6 +73,11 @@ export const cotizacionService = {
     window.URL.revokeObjectURL(url);
   },
 
+  async obtenerPdfBlob(id: string, incluirRecursos: boolean = false): Promise<Blob> {
+    const response = await apiClient(`${BASE_URL}/${id}/pdf?incluirRecursos=${incluirRecursos}`);
+    return await response.blob();
+  },
+
   // Integración PWA - Compartir PDF nativo (WhatsApp, Correo, etc.)
   async compartirPdf(id: string, numeroCotizacion: string, incluirRecursos: boolean = false): Promise<void> {
     const response = await apiClient(`${BASE_URL}/${id}/pdf?incluirRecursos=${incluirRecursos}`);

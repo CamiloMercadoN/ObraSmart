@@ -57,8 +57,8 @@ namespace ObraSmart.Application.Services
             if (presupuesto == null)
                 return Result.Failure("Presupuesto no encontrado.", "NOT_FOUND");
 
-            if (presupuesto.Estado != "Borrador")
-                return Result.Failure("Solo se pueden editar presupuestos en estado Borrador.", "INVALID_STATE");
+            if (presupuesto.Estado != "Borrador" && presupuesto.Estado != "Rechazado")
+                return Result.Failure("Solo se pueden editar presupuestos en estado Borrador o Rechazado.", "INVALID_STATE");
 
             var usuario = await _usuarioRepository.GetByIdAsync(usuarioId);
 

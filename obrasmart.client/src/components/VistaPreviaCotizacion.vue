@@ -13,7 +13,7 @@
 
     <div v-else-if="presupuesto" class="flex flex-column gap-3">
       <!-- Switch para Insumos -->
-      <div class="flex align-items-center gap-2 bg-indigo-50 p-2 border-round">
+      <div v-if="cotizacion.estado === 'Borrador'" class="flex align-items-center gap-2 bg-indigo-50 p-2 border-round">
         <ToggleSwitch v-model="incluirRecursos" />
         <label class="text-indigo-900 font-semibold text-sm">Mostrar desglose de insumos en el documento</label>
       </div>
@@ -23,8 +23,12 @@
         <Button label="Compartir" icon="pi pi-share-alt" severity="success" class="flex-1" @click="compartirPdf" />
       </div>
 
+      <div v-if="urlPdfRenderizado" class="border-round overflow-hidden" style="border: 1px solid #e2e8f0; height: 65vh;">
+        <iframe :src="urlPdfRenderizado" class="w-full h-full border-none"></iframe>
+      </div>
+
       <!-- Documento Visual (HTML) -->
-      <div class="p-4 border-round bg-white" style="color: #333333; border: 1px solid #e2e8f0;">
+      <div v-else class="p-4 border-round bg-white" style="color: #333333; border: 1px solid #e2e8f0;">
 
         <!-- Header -->
         <div class="flex justify-content-between align-items-start pb-3 mb-3" style="border-bottom: 1px solid #cbd5e1;">
@@ -110,7 +114,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, watch } from 'vue';
+  import { ref, watch, onUnmounted } from 'vue';
   import { presupuestoService } from '../services/presupuestoService';
   import { cotizacionService } from '../services/cotizacionService';
   import { configuracionService } from '../services/configuracionService';
@@ -136,6 +140,7 @@
   const incluirRecursos = ref(false);
   const presupuesto = ref<IPresupuesto | null>(null);
   const configuracion = ref<IConfiguracionComercial | null>(null);
+  const urlPdfRenderizado = ref<string | null>(null);
 
   const cargarDatos = async () => {
     cargando.value = true;
@@ -146,8 +151,14 @@
       ]);
       presupuesto.value = presData;
       configuracion.value = configData;
+
+      // Si ya está emitida, descarga el archivo físico protegido y lo ponemos en memoria
+      if (props.cotizacion.estado !== 'Borrador') {
+        const blob = await cotizacionService.obtenerPdfBlob(props.cotizacion.id, incluirRecursos.value);
+        urlPdfRenderizado.value = URL.createObjectURL(blob);
+      }
+
     } catch (error) {
-      console.error("Error cargando vista previa", error);
     } finally {
       cargando.value = false;
     }
@@ -156,31 +167,36 @@
   watch(() => props.visible, async (nuevoValor) => {
     if (nuevoValor && props.cotizacion) {
         incluirRecursos.value = false;
+
+        // Revoca la URL anterior de la memoria del navegador para evitar fugas
+        if (urlPdfRenderizado.value) {
+          URL.revokeObjectURL(urlPdfRenderizado.value);
+        }
+        // Resetea a null para que Vue vuelva a mostrar el HTML si es borrador
+        urlPdfRenderizado.value = null;
         await cargarDatos();
     }
   }, { immediate: true });
+
+  // Limpieza de memoria para evitar fugas cuando se cierra el modal
+  onUnmounted(() => {
+    if (urlPdfRenderizado.value) URL.revokeObjectURL(urlPdfRenderizado.value);
+  });
 
   const cerrarDialogo = () => {
     emit('update:visible', false);
   };
 
-  const procesarEmision = async () => {
-    if (props.cotizacion.estado === 'Borrador') {
-      try {
-        await cotizacionService.actualizarEstado(props.cotizacion.id, { nuevoEstado: 'Emitida' });
-        emit('recargar');
-      } catch (e) { }
-    }
-  };
-
-  const descargarPdf = async () => {
+const descargarPdf = async () => {
     await cotizacionService.descargarPdf(props.cotizacion.id, props.cotizacion.numeroCotizacion, incluirRecursos.value);
-    await procesarEmision();
+    emit('recargar');
+    cerrarDialogo();
   };
 
   const compartirPdf = async () => {
     await cotizacionService.compartirPdf(props.cotizacion.id, props.cotizacion.numeroCotizacion, incluirRecursos.value);
-    await procesarEmision();
+    emit('recargar');
+    cerrarDialogo();
   };
 
   const formatearMoneda = (valor?: number) => valor === undefined ? '0' : valor.toLocaleString('es-CL');
