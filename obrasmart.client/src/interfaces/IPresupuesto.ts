@@ -25,6 +25,8 @@ export interface IPresupuesto {
   id?: string;
   clienteId?: string | null;
   clienteNombre?: string; // Solo lectura
+  clienteRut?: string; // Solo lectura
+  clienteDireccion?: string; // Solo lectura
   nombreProyecto: string;
   fechaCreacion?: string; // Solo lectura
   estado?: string; // Solo lectura

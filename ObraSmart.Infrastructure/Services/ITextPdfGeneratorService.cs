@@ -79,7 +79,7 @@ namespace ObraSmart.Infrastructure.Services
                     document.Add(new Paragraph("Datos del Cliente").SetFont(fontBold));
                     document.Add(new Paragraph($"Nombre o Razón Social: {cliente.Nombre}"));
                     document.Add(new Paragraph($"RUT: {cliente.Rut}"));
-                    if (!string.IsNullOrEmpty(cliente.Direccion)) document.Add(new Paragraph($"Dirección: {cliente.Direccion}"));
+                    if (!string.IsNullOrEmpty(cliente.Direccion)) document.Add(new Paragraph($"Dirección: {cliente.Direccion}, {cliente?.Ciudad?.Nombre}"));
                 }
                 document.Add(new Paragraph("\n"));
 

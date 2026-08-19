@@ -22,6 +22,7 @@ namespace ObraSmart.Infrastructure.Repositories
         {
             return await _context.Set<Presupuesto>()
                             .Include(p => p.Cliente)
+                                .ThenInclude(c => c!.Ciudad)
                             .Include(p => p.Items)
                                 .ThenInclude(i => i.Recursos)
                                     .ThenInclude(i => i.UnidadMedida)

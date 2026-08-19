@@ -37,7 +37,9 @@ namespace ObraSmart.Application.Mappings
             {
                 Id = entity.Id,
                 ClienteId = entity.ClienteId,
-                ClienteNombre = entity.Cliente != null ? entity.Cliente.Nombre : string.Empty,
+                ClienteNombre = entity.Cliente?.Nombre ?? string.Empty,
+                ClienteRut = entity.Cliente?.Rut ?? string.Empty,
+                ClienteDireccion = entity.Cliente?.Direccion != null ? $"{entity.Cliente?.Direccion}, {entity.Cliente?.Ciudad?.Nombre}" : string.Empty,
                 NombreProyecto = entity.NombreProyecto,
                 FechaCreacion = entity.FechaCreacion,
                 Estado = entity.Estado,

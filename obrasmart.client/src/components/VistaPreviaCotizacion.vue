@@ -49,9 +49,9 @@
         <div class="mb-4">
           <h4 class="m-0 mb-2 font-bold" style="color: #334155;">DATOS DEL CLIENTE</h4>
           <div class="text-sm line-height-2" style="color: #475569;">
-            <div>{{ presupuesto.clienteNombre }}</div>
+            <div>Nombre o Razón Social:{{ presupuesto.clienteNombre }}</div>
             <div v-if="presupuesto.clienteRut">RUT: {{ presupuesto.clienteRut }}</div>
-            <div v-if="presupuesto.clienteTelefono">Teléfono: {{ presupuesto.clienteTelefono }}</div>
+            <div v-if="presupuesto.clienteDireccion">Dirección: {{ presupuesto.clienteDireccion }}</div>
           </div>
         </div>
 

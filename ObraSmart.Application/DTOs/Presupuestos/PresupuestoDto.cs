@@ -6,6 +6,8 @@ namespace ObraSmart.Application.DTOs.Presupuestos
         public Guid Id { get; set; }
         public Guid? ClienteId { get; set; }
         public string ClienteNombre { get; set; } = string.Empty;
+        public string ClienteRut { get; set; } = string.Empty;
+        public string ClienteDireccion { get; set; } = string.Empty;
         public string NombreProyecto { get; set; } = string.Empty;
         public DateTime FechaCreacion { get; set; }
         public string Estado { get; set; } = string.Empty;
