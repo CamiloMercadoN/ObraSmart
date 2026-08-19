@@ -6,12 +6,24 @@
     <div class="app-topbar flex justify-content-between align-items-center px-4 py-3">
       <div class="flex align-items-center gap-3">
         <Button icon="pi pi-bars" text rounded aria-label="Menú" @click="menuVisible = true" />
+        <img src="/obrasmart-icon.png" alt="Logo ObraSmart" style="height: 2.2rem; width: auto;" />
         <span class="text-xl font-bold text-primary">ObraSmart</span>
       </div>
 
       <div class="flex align-items-center gap-2">
-        <Button :icon="isDark ? 'pi pi-moon' : 'pi pi-sun'" text rounded aria-label="Cambiar Tema" @click="toggleTheme" />
+        <!-- Instalar PWA -->
+        <Button v-if="canInstall"
+                icon="pi pi-download"
+                text
+                rounded
+                severity="success"
+                aria-label="Instalar App"
+                @click="instalarApp"
+                title="Instalar ObraSmart" />
 
+        <!-- Cambiar Tema -->
+        <Button :icon="isDark ? 'pi pi-moon' : 'pi pi-sun'" text rounded aria-label="Cambiar Tema" @click="toggleTheme" />
+        <!-- Cerrar Sesión -->
         <Button icon="pi pi-sign-out" text rounded severity="danger" aria-label="Cerrar Sesión" @click="cerrarSesion" />
       </div>
     </div>
@@ -28,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { ref, onMounted } from 'vue';
   import { useRouter } from 'vue-router';
   import { useAuthStore } from '../stores/authStore';
 
@@ -41,6 +53,50 @@
   const router = useRouter();
   const authStore = useAuthStore();
   const menuVisible = ref(false);
+
+  // --- LÓGICA PWA ---
+  const deferredPrompt = ref<any>(null);
+  const canInstall = ref(false);
+
+  const revisarPwa = () => {
+    // Revisamos si main.ts ya capturó el evento
+    if ((window as any).pwaPrompt) {
+      deferredPrompt.value = (window as any).pwaPrompt;
+      canInstall.value = true;
+    }
+  };
+
+  onMounted(() => {
+    revisarPwa(); // Comprobamos al cargar el componente
+
+    // Escuchamos por si el evento ocurre después de montar
+    window.addEventListener('pwa-ready', revisarPwa);
+
+    // Si se instala, limpiamos todo
+    window.addEventListener('appinstalled', () => {
+      canInstall.value = false;
+      deferredPrompt.value = null;
+      (window as any).pwaPrompt = null;
+    });
+  });
+
+  const instalarApp = async () => {
+    if (!deferredPrompt.value) return;
+
+    // Mostrar el prompt de instalación de Chrome/Edge
+    deferredPrompt.value.prompt();
+
+    // Esperar la respuesta del usuario
+    const { outcome } = await deferredPrompt.value.userChoice;
+
+    if (outcome === 'accepted') {
+      canInstall.value = false;
+    }
+
+    deferredPrompt.value = null;
+    (window as any).pwaPrompt = null;
+  };
+  // -------------------
 
     const isDark = ref(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
 

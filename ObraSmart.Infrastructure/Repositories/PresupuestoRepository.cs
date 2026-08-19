@@ -13,6 +13,7 @@ namespace ObraSmart.Infrastructure.Repositories
         {
             return await _context.Set<Presupuesto>()
                 .Include(p => p.Cliente)
+                .Include(p => p.Cotizaciones)
                 .AsNoTracking()
                 .ToListAsync();
         }

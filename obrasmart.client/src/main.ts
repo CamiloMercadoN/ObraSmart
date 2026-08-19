@@ -35,3 +35,10 @@ app.use(ConfirmationService);
 app.use(ToastService);
 
 app.mount('#app');
+
+(window as any).pwaPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault(); // Oculta el banner nativo del móvil
+  (window as any).pwaPrompt = e; // Lo guardamos globalmente
+  window.dispatchEvent(new Event('pwa-ready')); // Avisamos a Vue que está listo
+});
