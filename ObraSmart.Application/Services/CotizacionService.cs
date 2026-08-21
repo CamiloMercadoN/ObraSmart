@@ -63,13 +63,16 @@ namespace ObraSmart.Application.Services
 
             var numeroGenerado = $"COT-{usuario.UltimoNumeroCotizacion}";
 
+            var zonaChile = TimeZoneInfo.FindSystemTimeZoneById("America/Santiago");
+            var fechaLocal = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, zonaChile);
+
             // Crear Entidad
             var nuevaCotizacion = new Cotizacion
             {
                 Id = Guid.NewGuid(),
                 PresupuestoId = presupuesto.Id,
                 NumeroCotizacion = numeroGenerado,
-                FechaEmision = DateTime.UtcNow,
+                FechaEmision = fechaLocal,
                 FechaVencimiento = request.FechaVencimiento,
                 Estado = "Borrador",
                 ArchivoPdfUrl = string.Empty

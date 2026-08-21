@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, watch, onMounted } from 'vue';
+  import { ref, watch } from 'vue';
   import { useRouter } from 'vue-router';
   import { useConfirm } from 'primevue/useconfirm';
   import { useToast } from 'primevue/usetoast';
@@ -60,29 +60,29 @@
   const errorCotizacion = ref('');
   const fechaVencimiento = ref<Date>(new Date());
   const numeroCotizacionOpcional = ref<number | null>(null);
-  const diasValidezDefecto = ref(15); // Fallback inicial
+  const diasValidezDefecto = ref(15);
   const tieneVigentes = ref(false);
 
-  onMounted(async () => {
-    try {
-      const config = await configuracionService.obtener();
-      if (config && config.diasValidez) {
-        diasValidezDefecto.value = config.diasValidez ?? 15;
-      }
-    } catch (error) {
-      console.warn('No se pudo cargar la configuración comercial para la validez por defecto.');
-    }
-  });
-
-  // Resetear valores cada vez que se abre el modal, usando el valor configurado
   watch(() => props.visible, async (nuevoValor) => {
     if (nuevoValor) {
-      const fecha = new Date();
-      fecha.setDate(fecha.getDate() + diasValidezDefecto.value);
-      fechaVencimiento.value = fecha;
       numeroCotizacionOpcional.value = null;
       errorCotizacion.value = '';
       tieneVigentes.value = false;
+
+      // CARGAR CONFIGURACIÓN AL ABRIR EL MODAL
+      try {
+        const config = await configuracionService.obtener();
+        if (config && config.diasValidez) {
+          diasValidezDefecto.value = Number(config.diasValidez);
+        }
+      } catch (error) {
+        console.warn('No se pudo cargar la configuración comercial. Usando validez por defecto.');
+      }
+
+      // CALCULAR FECHA DE VENCIMIENTO
+      const fecha = new Date();
+      fecha.setDate(fecha.getDate() + diasValidezDefecto.value);
+      fechaVencimiento.value = fecha;
 
       // EVALUACIÓN DE COTIZACIONES VIGENTES O EN CURSO
       try {
@@ -102,7 +102,7 @@
         });
       } catch (e) { }
     }
-  });
+  }, { immediate: true });
 
   const cerrarDialogo = () => {
     emit('update:visible', false);

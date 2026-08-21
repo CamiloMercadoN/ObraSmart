@@ -56,40 +56,42 @@
         </div>
 
         <!-- Detalle -->
-        <table class="w-full text-sm text-left mb-4" style="border-collapse: collapse; color: #475569;">
-          <thead>
-            <tr style="border-bottom: 1px solid #cbd5e1; color: #334155;">
-              <th class="py-2">Descripción</th>
-              <th class="py-2 text-center">Cant.</th>
-              <th class="py-2 text-center">Unidad</th>
-              <th class="py-2 text-right">P. Unit</th>
-              <th class="py-2 text-right">Subtotal</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- RECORRIDO DE ITEMS E INSUMOS -->
-            <template v-for="item in presupuesto.items" :key="item.id">
-              <tr style="border-bottom: 1px solid #f1f5f9;">
-                <td class="py-2">
-                  <div class="font-bold">{{ item.descripcion }}</div>
-
-                  <!-- Desglose HTML de recursos -->
-                  <div v-if="incluirRecursos && item.recursos?.length > 0" class="mt-1 text-xs" style="color: #64748b;">
-                    <ul class="m-0 pl-3">
-                      <li v-for="rec in item.recursos" :key="rec.id">
-                        {{ rec.cantidad }} {{ rec.unidadMedidaNombre || '' }} de {{ rec.descripcionCongelada }} (${{ formatearMoneda(rec.precioUnitarioCongelado) }})
-                      </li>
-                    </ul>
-                  </div>
-                </td>
-                <td class="py-2 text-center align-top">{{ item.cantidadItem }}</td>
-                <td class="py-2 text-center align-top">{{ item.unidadMedidaNombre || '-' }}</td>
-                <td class="py-2 text-right align-top">${{ formatearMoneda(item.precioUnitarioCalculado) }}</td>
-                <td class="py-2 text-right align-top">${{ formatearMoneda(item.subtotal) }}</td>
+        <div class="overflow-x-auto mb-4">
+          <table class="w-full text-sm text-left" style="border-collapse: collapse; color: #475569; min-width: 600px;">
+            <thead>
+              <tr style="border-bottom: 1px solid #cbd5e1; color: #334155;">
+                <th class="py-2">Descripción</th>
+                <th class="py-2 text-center">Cant.</th>
+                <th class="py-2 text-center">Unidad</th>
+                <th class="py-2 text-right">P. Unit</th>
+                <th class="py-2 text-right">Subtotal</th>
               </tr>
-            </template>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <!-- RECORRIDO DE ITEMS E INSUMOS -->
+              <template v-for="item in presupuesto.items" :key="item.id">
+                <tr style="border-bottom: 1px solid #f1f5f9;">
+                  <td class="py-2 pr-3">
+                    <div class="font-bold">{{ item.descripcion }}</div>
+
+                    <!-- Desglose HTML de recursos -->
+                    <div v-if="incluirRecursos && item.recursos?.length > 0" class="mt-1 text-xs" style="color: #64748b;">
+                      <ul class="m-0 pl-3">
+                        <li v-for="rec in item.recursos" :key="rec.id">
+                          {{ rec.cantidad }} {{ rec.unidadMedidaNombre || '' }} de {{ rec.descripcionCongelada }} (${{ formatearMoneda(rec.precioUnitarioCongelado) }})
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                  <td class="py-2 px-2 text-center align-top">{{ item.cantidadItem }}</td>
+                  <td class="py-2 px-2 text-center align-top">{{ item.unidadMedidaNombre || '-' }}</td>
+                  <td class="py-2 pl-2 text-right align-top whitespace-nowrap">${{ formatearMoneda(item.precioUnitarioCalculado) }}</td>
+                  <td class="py-2 pl-2 text-right align-top whitespace-nowrap">${{ formatearMoneda(item.subtotal) }}</td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
 
         <!-- Totales -->
         <div class="flex justify-content-end" style="color: #475569;">
